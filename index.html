@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mathieu Boutinon</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: texte aligné à gauche, démo spectrale comme pièce centrale, sections sobres séparées par des filets. */
+:root{
+  --bg:#F3F7F7; --surface:#FFFFFF; --fg:#0E1A22; --muted:#46565F; --line:#D3DDE1;
+  --accent:#0A6F68; --accent-fg:#FFFFFF; --accent-soft:#DDF0EE;
+  --c1:#0A6F68; --c2:#B05F00; --c3:#B83A0A;
+  --font-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A1318; --surface:#111C23; --fg:#E6EEF1; --muted:#9DB0BA; --line:#22343E;
+    --accent:#46C9BC; --accent-fg:#04211E; --accent-soft:#12302F;
+    --c1:#46C9BC; --c2:#F0B04A; --c3:#FF8F6B; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A1318; --surface:#111C23; --fg:#E6EEF1; --muted:#9DB0BA; --line:#22343E;
+  --accent:#46C9BC; --accent-fg:#04211E; --accent-soft:#12302F;
+  --c1:#46C9BC; --c2:#F0B04A; --c3:#FF8F6B; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6;padding-inline:clamp(16px,4vw,48px);padding-block:0 48px}
+.wrap{max-width:1120px;margin-inline:auto}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--font-display);line-height:1.1;margin:0;text-wrap:balance}
+h2{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.01em}
+h3{font-size:1.15rem}
+p{margin:0}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.label{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+header.top{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center;padding-block:20px}
+.brand{font-family:var(--font-display);font-weight:700;font-size:1.15rem;color:var(--fg);text-decoration:none}
+nav{display:flex;flex-wrap:wrap;gap:4px 20px;align-items:center}
+nav a{color:var(--muted);text-decoration:none;font-size:.95rem;padding-block:4px}
+nav a:hover{color:var(--fg)}
+.lang{display:flex;gap:4px;margin-left:8px}
+.lang button{font:inherit;font-family:var(--font-mono);font-size:.8rem;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:2px 8px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+
+.hero{padding-block:48px 56px;display:flex;flex-direction:column;gap:24px;align-items:flex-start}
+.hero h1{font-size:clamp(2.3rem,6.4vw,4.4rem);letter-spacing:-.025em;max-width:16ch}
+.lead{font-size:clamp(1.05rem,2vw,1.25rem);max-width:56ch;color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;background:var(--accent-soft);color:var(--fg);padding:6px 12px;border-radius:999px}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{font:inherit;font-weight:500;padding:10px 18px;border-radius:6px;border:1px solid var(--accent);text-decoration:none;cursor:pointer;display:inline-block}
+.btn.primary{background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{background:transparent;color:var(--accent)}
+
+section{border-top:1px solid var(--line);padding-block:48px;display:flex;flex-direction:column;gap:28px}
+.intro{max-width:62ch;color:var(--muted)}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px}
+.step{border-top:2px solid var(--fg);padding-top:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.step .mono{color:var(--muted);font-size:.85rem}
+
+.demo{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:900px){.demo{grid-template-columns:minmax(0,1fr)}}
+.chartbox{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px;min-width:0}
+.chartbox svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--muted);padding:8px 4px 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:10px;height:10px;border-radius:50%;display:inline-block}
+.panel{display:flex;flex-direction:column;gap:18px;min-width:0}
+.ctrl{display:flex;flex-direction:column;gap:6px}
+.ctrl .row{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:500;color:var(--muted);font-size:.8rem}
+.note{font-size:.88rem;color:var(--muted);max-width:60ch}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card p{color:var(--muted);font-size:.96rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tags span{font-family:var(--font-mono);font-size:.74rem;border:1px solid var(--line);border-radius:4px;padding:1px 7px;color:var(--muted)}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.skills div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.skills p{color:var(--muted)}
+
+.timeline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.timeline li{display:grid;grid-template-columns:130px minmax(0,1fr);gap:16px;padding-block:14px;border-bottom:1px solid var(--line)}
+.timeline .mono{color:var(--muted);font-size:.9rem}
+@media (max-width:520px){.timeline li{grid-template-columns:minmax(0,1fr);gap:2px}}
+
+.contact{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.mail{font-family:var(--font-mono);font-size:1.1rem;word-break:break-all;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 14px;user-select:all}
+.status{min-height:1.4em;color:var(--muted);font-size:.9rem}
+footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:.85rem}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <a class="brand" href="#top">Mathieu Boutinon</a>
+  <nav aria-label="Navigation">
+    <a href="#offre" data-i18n="nav_offer"></a>
+    <a href="#demo" data-i18n="nav_demo"></a>
+    <a href="#realisations" data-i18n="nav_work"></a>
+    <a href="#parcours" data-i18n="nav_path"></a>
+    <a href="#contact" data-i18n="nav_contact"></a>
+    <span class="lang" role="group" aria-label="Langue / Language">
+      <button type="button" id="lang-fr" aria-pressed="true">FR</button>
+      <button type="button" id="lang-en" aria-pressed="false">EN</button>
+    </span>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <p class="label" data-i18n="eyebrow"></p>
+    <h1 data-i18n="h1"></h1>
+    <p class="lead" data-i18n="lead"></p>
+    <span class="chip"><i></i><span data-i18n="avail"></span></span>
+    <div class="actions">
+      <a class="btn primary" href="#demo" data-i18n="cta_demo"></a>
+      <a class="btn ghost" href="#contact" data-i18n="cta_contact"></a>
+    </div>
+  </div>
+
+  <section id="offre">
+    <h2 data-i18n="offer_h"></h2>
+    <p class="intro" data-i18n="offer_intro"></p>
+    <div class="steps">
+      <div class="step"><span class="mono">1</span><h3 data-i18n="s1_t"></h3><p data-i18n="s1_d"></p></div>
+      <div class="step"><span class="mono">2</span><h3 data-i18n="s2_t"></h3><p data-i18n="s2_d"></p></div>
+      <div class="step"><span class="mono">3</span><h3 data-i18n="s3_t"></h3><p data-i18n="s3_d"></p></div>
+    </div>
+  </section>
+
+  <section id="demo">
+    <h2 data-i18n="demo_h"></h2>
+    <p class="intro" data-i18n="demo_intro"></p>
+    <div class="demo">
+      <div class="chartbox">
+        <div id="chart"></div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="panel">
+        <div class="ctrl">
+          <div class="row"><label for="noise" data-i18n="noise_l"></label><output id="noise-o" class="mono" for="noise"></output></div>
+          <input id="noise" type="range" min="0" max="0.08" step="0.002" value="0.03">
+        </div>
+        <div class="ctrl">
+          <div class="row"><label for="lambda" data-i18n="lambda_l"></label><output id="lambda-o" class="mono" for="lambda"></output></div>
+          <input id="lambda" type="range" min="0" max="40" step="0.5" value="2">
+        </div>
+        <div><button type="button" class="btn ghost" id="reseed" data-i18n="reseed"></button></div>
+        <div class="tablewrap" aria-live="polite">
+          <table>
+            <thead><tr><th data-i18n="th_band"></th><th data-i18n="th_true"></th><th data-i18n="th_est"></th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <p class="note"><span data-i18n="rms"></span> : <span id="rms" class="mono"></span></p>
+      </div>
+    </div>
+    <p class="note" data-i18n="demo_note"></p>
+  </section>
+
+  <section id="realisations">
+    <h2 data-i18n="work_h"></h2>
+    <div class="cards">
+      <article class="card"><h3 data-i18n="w1_t"></h3><p data-i18n="w1_d"></p><div class="tags"><span>JavaScript</span><span>Python</span><span>Ridge</span><span>Dataviz</span></div></article>
+      <article class="card"><h3 data-i18n="w2_t"></h3><p data-i18n="w2_d"></p><div class="tags"><span>R&amp;D</span><span>Photolyse</span></div></article>
+      <article class="card"><h3 data-i18n="w3_t"></h3><p data-i18n="w3_d"></p><div class="tags"><span>ICP</span><span>Protocoles</span><span>Données</span></div></article>
+      <article class="card"><h3 data-i18n="w4_t"></h3><p data-i18n="w4_d"></p><div class="tags"><span>TryHackMe</span><span>Pentest</span></div></article>
+    </div>
+    <h2 data-i18n="skills_h"></h2>
+    <div class="skills">
+      <div><h3 data-i18n="k1_t"></h3><p>HTML, CSS, JavaScript, Python, SQL, PHP, C, VBA</p></div>
+      <div><h3 data-i18n="k2_t"></h3><p data-i18n="k2_d"></p></div>
+      <div><h3 data-i18n="k3_t"></h3><p data-i18n="k3_d"></p></div>
+      <div><h3 data-i18n="k4_t"></h3><p>Git, VS Code, PyCharm, Linux, Docker</p></div>
+    </div>
+  </section>
+
+  <section id="parcours">
+    <h2 data-i18n="path_h"></h2>
+    <ul class="timeline">
+      <li><span class="mono" data-i18n="p1_y"></span><span data-i18n="p1_d"></span></li>
+      <li><span class="mono" data-i18n="p2_y"></span><span data-i18n="p2_d"></span></li>
+      <li><span class="mono">2022</span><span data-i18n="p3_d"></span></li>
+      <li><span class="mono">2018</span><span data-i18n="p4_d"></span></li>
+    </ul>
+    <h2 data-i18n="beyond_h"></h2>
+    <p class="intro" data-i18n="beyond_d"></p>
+  </section>
+
+  <section id="contact">
+    <h2 data-i18n="contact_h"></h2>
+    <div class="contact">
+      <p class="intro" data-i18n="contact_p"></p>
+      <span class="mail" id="mail">mathieuboutinon972@gmail.com</span>
+      <div class="actions">
+        <button type="button" class="btn primary" id="copy" data-i18n="copy"></button>
+        <a class="btn ghost" href="mailto:mathieuboutinon972@gmail.com" data-i18n="mailto"></a>
+      </div>
+      <p class="status" id="status" role="status"></p>
+    </div>
+  </section>
+</main>
+<footer>Mathieu Boutinon · EPF Montpellier · CEA Marcoule</footer>
+</div>
+
+<script>
+const I18N = {
+  fr: {
+    nav_offer:"Offre", nav_demo:"Démo", nav_work:"Réalisations", nav_path:"Parcours", nav_contact:"Contact",
+    eyebrow:"Apprenti ingénieur · EPF Montpellier · CEA Marcoule",
+    h1:"Je crée des outils applicatifs qui simplifient le quotidien.",
+    lead:"J'écoute le besoin, je construis une interface claire et un code fiable, et je pense à la sécurité dès la conception.",
+    avail:"Disponible pour un stage de 3 mois, de janvier à août 2027",
+    cta_demo:"Essayer la démo", cta_contact:"Me contacter",
+    offer_h:"Ce que je propose", offer_intro:"Trois temps, que je reprends pour chaque outil.",
+    s1_t:"J'écoute", s1_d:"Je pars du quotidien de l'utilisateur et je reformule son besoin avant d'écrire du code.",
+    s2_t:"Je construis", s2_d:"Une interface simple en HTML, CSS et JavaScript, un moteur fiable en Python.",
+    s3_t:"Je sécurise et je transmets", s3_d:"Validation des entrées, bonnes pratiques issues de mon parcours de pentester, documentation et prise en main.",
+    demo_h:"Démo : retrouver les bandes d'un spectre",
+    demo_intro:"Le spectre mesuré (points) additionne trois bandes qui se recouvrent. La régression ridge retrouve la part de chaque bande. Les données sont synthétiques et n'ont aucun lien avec les données du CEA.",
+    noise_l:"Bruit de mesure", lambda_l:"Régularisation λ", reseed:"Nouveau bruit",
+    th_band:"Bande", th_true:"Vraie", th_est:"Estimée", rms:"Erreur résiduelle (RMS)",
+    legend_meas:"Mesure", legend_fit:"Ajustement total", band:"Bande",
+    axis_x:"Longueur d'onde (nm)", axis_y:"Absorbance (u.a.)",
+    chart_alt:"Spectre synthétique, mesure bruitée et ajustement par trois bandes",
+    demo_note:"Ici les bandes sont bien séparées : un λ proche de 0 donne le meilleur résultat. Un λ plus grand sert quand les bandes se recouvrent davantage ou que le bruit domine, mais il tire les estimations vers zéro.",
+    work_h:"Réalisations",
+    w1_t:"Logiciel d'analyse spectrale UV-Vis", w1_d:"Déconvolution et analyse de spectres au CEA Marcoule : application web en JavaScript et Python, régression ridge, visualisation interactive des résultats. Le code et les données restent internes au CEA.",
+    w2_t:"Étude sur la photolyse", w2_d:"Contribution à une étude scientifique. Une publication est en préparation.",
+    w3_t:"Méthode de dosage en solution", w3_d:"Développement d'une méthode de dosage des carbonates et hydrogénocarbonates (ICP, pH-métrie, conductimétrie), avec traitement des données et protocoles rédigés.",
+    w4_t:"Parcours pentester", w4_d:"En cours sur TryHackMe : apprendre à attaquer pour construire des outils qui résistent.",
+    skills_h:"Compétences",
+    k1_t:"Développement", k2_t:"Conception d'outils", k2_d:"Interfaces ergonomiques, visualisation de données, automatisation, modélisation de systèmes d'information.",
+    k3_t:"Sécurité", k3_d:"Parcours pentester en cours.", k4_t:"Environnement",
+    path_h:"Parcours",
+    p1_y:"2024 – aujourd'hui", p1_d:"Cycle ingénieur Systèmes d'Information et Génie Industriel à l'EPF Montpellier. Ingénieur R&D en apprentissage au CEA Marcoule (laboratoire LILA).",
+    p2_y:"2022 – 2024", p2_d:"BTS Métiers de la chimie. Technicien chimiste en apprentissage au CEA Marcoule (laboratoire LMAT).",
+    p3_d:"Baccalauréat STL, physique-chimie de laboratoire, mention Bien.",
+    p4_d:"Stage d'observation en laboratoire de recherche pluridisciplinaire.",
+    beyond_h:"Au-delà du code",
+    beyond_d:"Je préside le club d'aïkido de Marguerittes depuis 2025 et je suis instructeur BF, spécialisé jeunesse (2e dan d'aïkido et d'iaïdo). J'y ai appris à expliquer simplement et à faire progresser des débutants, ce que je retrouve quand je mets un outil entre les mains de ses utilisateurs.",
+    contact_h:"Contact",
+    contact_p:"Je cherche un stage de 3 mois entre janvier et août 2027, en Europe (Luxembourg, Belgique et Suisse en priorité). Écrivez-moi pour échanger sur vos besoins.",
+    copy:"Copier l'adresse", mailto:"Ouvrir ma messagerie",
+    copied:"Adresse copiée.", copyfail:"Copie impossible ici : l'adresse est sélectionnée, copiez-la avec Ctrl+C."
+  },
+  en: {
+    nav_offer:"Offer", nav_demo:"Demo", nav_work:"Work", nav_path:"Background", nav_contact:"Contact",
+    eyebrow:"Engineering apprentice · EPF Montpellier · CEA Marcoule",
+    h1:"I build application tools that make everyday life easier.",
+    lead:"I listen to the need, build a clear interface and reliable code, and think about security from the start.",
+    avail:"Available for a 3-month internship, January to August 2027",
+    cta_demo:"Try the demo", cta_contact:"Get in touch",
+    offer_h:"What I offer", offer_intro:"Three steps, repeated for every tool.",
+    s1_t:"I listen", s1_d:"I start from the user's daily routine and restate their need before writing any code.",
+    s2_t:"I build", s2_d:"A simple interface in HTML, CSS and JavaScript, a reliable engine in Python.",
+    s3_t:"I secure and hand over", s3_d:"Input validation, good practice from my pentester training, documentation and onboarding.",
+    demo_h:"Demo: recovering the bands of a spectrum",
+    demo_intro:"The measured spectrum (dots) is the sum of three overlapping bands. Ridge regression recovers each band's share. The data are synthetic and unrelated to CEA data.",
+    noise_l:"Measurement noise", lambda_l:"Regularisation λ", reseed:"New noise",
+    th_band:"Band", th_true:"True", th_est:"Estimated", rms:"Residual error (RMS)",
+    legend_meas:"Measured", legend_fit:"Total fit", band:"Band",
+    axis_x:"Wavelength (nm)", axis_y:"Absorbance (a.u.)",
+    chart_alt:"Synthetic spectrum, noisy measurement and fit with three bands",
+    demo_note:"Here the bands are well separated: a λ close to 0 gives the best result. A larger λ helps when bands overlap more or noise dominates, but it pulls the estimates towards zero.",
+    work_h:"Work",
+    w1_t:"UV-Vis spectral analysis software", w1_d:"Spectral deconvolution and analysis at CEA Marcoule: web application in JavaScript and Python, ridge regression, interactive visualisation of results. Code and data stay internal to CEA.",
+    w2_t:"Photolysis study", w2_d:"Contribution to a scientific study. A publication is in preparation.",
+    w3_t:"Solution assay method", w3_d:"Developed a method to measure carbonates and hydrogencarbonates (ICP, pH and conductivity), with data processing and written protocols.",
+    w4_t:"Pentester learning path", w4_d:"In progress on TryHackMe: learning to attack in order to build tools that hold up.",
+    skills_h:"Skills",
+    k1_t:"Development", k2_t:"Tool design", k2_d:"Ergonomic interfaces, data visualisation, automation, information systems modelling.",
+    k3_t:"Security", k3_d:"Pentester learning path in progress.", k4_t:"Environment",
+    path_h:"Background",
+    p1_y:"2024 – present", p1_d:"Engineering degree in Information Systems and Industrial Engineering at EPF Montpellier. R&D engineer (apprenticeship) at CEA Marcoule, LILA laboratory.",
+    p2_y:"2022 – 2024", p2_d:"BTS in Chemistry Professions. Chemistry technician (apprenticeship) at CEA Marcoule, LMAT laboratory.",
+    p3_d:"Baccalauréat in Laboratory Science and Technology (physics-chemistry), with honours.",
+    p4_d:"Observation internship in a multidisciplinary research laboratory.",
+    beyond_h:"Beyond code",
+    beyond_d:"I have been president of the Marguerittes aikido club since 2025 and I am a BF instructor specialised in youth (2nd dan aikido and iaido). It taught me to explain things simply and to help beginners progress, which I bring to putting a tool in its users' hands.",
+    contact_h:"Contact",
+    contact_p:"I am looking for a 3-month internship between January and August 2027 in Europe (Luxembourg, Belgium and Switzerland first). Write to me to talk about your needs.",
+    copy:"Copy address", mailto:"Open my mail app",
+    copied:"Address copied.", copyfail:"Copying is not available here: the address is selected, copy it with Ctrl+C."
+  }
+};
+
+let lang = "fr";
+try { const s = localStorage.getItem("lang"); if (s === "fr" || s === "en") lang = s; } catch (e) {}
+const t = k => (I18N[lang] && I18N[lang][k]) || k;
+
+/* ---------- Démo : bandes spectrales + régression ridge ---------- */
+const WL = []; for (let w = 250; w <= 600; w += 2) WL.push(w);
+const BANDS = [
+  { c: 310, s: 22, a: 0.85, color: "var(--c1)" },
+  { c: 380, s: 30, a: 0.55, color: "var(--c2)" },
+  { c: 470, s: 38, a: 0.35, color: "var(--c3)" }
+];
+const gauss = (w, c, s) => Math.exp(-0.5 * ((w - c) / s) ** 2);
+const A = WL.map(w => BANDS.map(b => gauss(w, b.c, b.s)));
+function mulberry(seed){ let a = seed >>> 0; return function(){ a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function normals(seed){ const r = mulberry(seed); return WL.map(() => Math.sqrt(-2 * Math.log(1 - r())) * Math.cos(2 * Math.PI * r())); }
+function solve(M, b){
+  const n = b.length, a = M.map((r, i) => [...r, b[i]]);
+  for (let i = 0; i < n; i++){
+    let p = i; for (let r = i + 1; r < n; r++) if (Math.abs(a[r][i]) > Math.abs(a[p][i])) p = r;
+    [a[i], a[p]] = [a[p], a[i]];
+    for (let r = i + 1; r < n; r++){ const f = a[r][i] / a[i][i]; for (let c = i; c <= n; c++) a[r][c] -= f * a[i][c]; }
+  }
+  const x = Array(n).fill(0);
+  for (let i = n - 1; i >= 0; i--){ let s = a[i][n]; for (let c = i + 1; c < n; c++) s -= a[i][c] * x[c]; x[i] = s / a[i][i]; }
+  return x;
+}
+let seed = 7, unit = normals(seed);
+const $ = id => document.getElementById(id);
+
+function compute(noise, lambda){
+  const y = WL.map((w, i) => BANDS.reduce((s, b, j) => s + b.a * A[i][j], 0) + noise * unit[i]);
+  const n = BANDS.length;
+  const M = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => A.reduce((s, r) => s + r[i] * r[j], 0) + (i === j ? lambda : 0)));
+  const bvec = Array.from({ length: n }, (_, i) => A.reduce((s, r, k) => s + r[i] * y[k], 0));
+  const est = solve(M, bvec);
+  const fit = WL.map((w, i) => est.reduce((s, e, j) => s + e * A[i][j], 0));
+  const rms = Math.sqrt(y.reduce((s, v, i) => s + (v - fit[i]) ** 2, 0) / y.length);
+  return { y, est, fit, rms };
+}
+
+function render(){
+  const noise = parseFloat($("noise").value), lambda = parseFloat($("lambda").value);
+  $("noise-o").textContent = noise.toFixed(3);
+  $("lambda-o").textContent = lambda.toFixed(1);
+  const { y, est, fit, rms } = compute(noise, lambda);
+
+  const box = $("chart");
+  const W = Math.max(280, Math.round(box.clientWidth || 640));
+  const H = Math.max(230, Math.min(340, Math.round(W * 0.55)));
+  const ML = 46, MR = 10, MT = 10, MB = 42, PW = W - ML - MR, PH = H - MT - MB;
+  const YMIN = -0.1, YMAX = 1.0;
+  const xs = w => ML + (w - 250) / 350 * PW;
+  const ys = v => MT + PH - (v - YMIN) / (YMAX - YMIN) * PH;
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t("chart_alt")}" xmlns="http://www.w3.org/2000/svg">`;
+  s += `<defs><clipPath id="plotclip"><rect x="${ML}" y="${MT}" width="${PW}" height="${PH}" fill="none"/></clipPath></defs>`;
+  [0, 0.25, 0.5, 0.75, 1.0].forEach(v => {
+    s += `<line x1="${ML}" x2="${ML + PW}" y1="${ys(v)}" y2="${ys(v)}" stroke="var(--line)" stroke-width="1"/>`;
+    s += `<text x="${ML - 6}" y="${ys(v) + 4}" text-anchor="end" font-size="11" font-family="var(--font-mono)" fill="var(--muted)">${v.toFixed(2)}</text>`;
+  });
+  for (let w = 250; w <= 600; w += 50){
+    s += `<line x1="${xs(w)}" x2="${xs(w)}" y1="${MT + PH}" y2="${MT + PH + 4}" stroke="var(--muted)" stroke-width="1"/>`;
+    s += `<text x="${xs(w)}" y="${MT + PH + 17}" text-anchor="middle" font-size="11" font-family="var(--font-mono)" fill="var(--muted)">${w}</text>`;
+  }
+  s += `<text x="${ML + PW / 2}" y="${H - 6}" text-anchor="middle" font-size="12" font-family="var(--font-body)" fill="var(--muted)">${t("axis_x")}</text>`;
+  s += `<text x="12" y="${MT + PH / 2}" text-anchor="middle" font-size="12" font-family="var(--font-body)" fill="var(--muted)" transform="rotate(-90 12 ${MT + PH / 2})">${t("axis_y")}</text>`;
+  s += `<g clip-path="url(#plotclip)">`;
+  BANDS.forEach((b, j) => {
+    let d = `M ${xs(250)} ${ys(0)}`;
+    WL.forEach((w, i) => { d += ` L ${xs(w).toFixed(1)} ${ys(est[j] * A[i][j]).toFixed(1)}`; });
+    d += ` L ${xs(600)} ${ys(0)} Z`;
+    s += `<path d="${d}" fill="${b.color}" fill-opacity="0.22" stroke="${b.color}" stroke-width="1.5"/>`;
+  });
+  WL.forEach((w, i) => { s += `<circle cx="${xs(w).toFixed(1)}" cy="${ys(y[i]).toFixed(1)}" r="1.7" fill="var(--fg)" fill-opacity="0.6"/>`; });
+  let dl = ""; WL.forEach((w, i) => { dl += (i ? " L " : "M ") + xs(w).toFixed(1) + " " + ys(fit[i]).toFixed(1); });
+  s += `<path d="${dl}" fill="none" stroke="var(--fg)" stroke-width="2"/>`;
+  s += `</g></svg>`;
+  box.innerHTML = s;
+
+  $("legend").innerHTML =
+    `<span><i class="sw" style="background:var(--fg);opacity:.6"></i>${t("legend_meas")}</span>` +
+    `<span><i class="sw" style="background:var(--fg)"></i>${t("legend_fit")}</span>` +
+    BANDS.map(b => `<span><i class="sw" style="background:${b.color}"></i>${t("band")} ${b.c} nm</span>`).join("");
+  $("rows").innerHTML = BANDS.map((b, j) =>
+    `<tr><td><i class="sw" style="background:${b.color}"></i> ${t("band")} ${b.c} nm</td><td class="mono">${b.a.toFixed(2)}</td><td class="mono">${est[j].toFixed(2)}</td></tr>`).join("");
+  $("rms").textContent = rms.toFixed(3);
+}
+
+/* ---------- Langue ---------- */
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.getAttribute("data-i18n")); });
+  $("lang-fr").setAttribute("aria-pressed", String(lang === "fr"));
+  $("lang-en").setAttribute("aria-pressed", String(lang === "en"));
+  $("status").textContent = "";
+  render();
+}
+function setLang(l){ lang = l; try { localStorage.setItem("lang", l); } catch (e) {} applyLang(); }
+$("lang-fr").addEventListener("click", () => setLang("fr"));
+$("lang-en").addEventListener("click", () => setLang("en"));
+
+$("noise").addEventListener("input", render);
+$("lambda").addEventListener("input", render);
+$("reseed").addEventListener("click", () => { seed += 1; unit = normals(seed); render(); });
+let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(render, 120); });
+
+/* ---------- Contact ---------- */
+function selectMail(){ const r = document.createRange(); r.selectNodeContents($("mail")); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+$("copy").addEventListener("click", () => {
+  const addr = $("mail").textContent.trim();
+  const fail = () => { selectMail(); $("status").textContent = t("copyfail"); };
+  try {
+    navigator.clipboard.writeText(addr).then(() => { $("status").textContent = t("copied"); }, fail);
+  } catch (e) { fail(); }
+});
+
+applyLang();
+</script>
+
+</html>
