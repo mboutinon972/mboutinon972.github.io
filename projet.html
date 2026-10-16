@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mathieu Boutinon · Gestion de projet</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: texte aligné à gauche, démo spectrale comme pièce centrale, sections sobres séparées par des filets. */
+:root{
+  --bg:#F3F7F7; --surface:#FFFFFF; --fg:#0E1A22; --muted:#46565F; --line:#D3DDE1;
+  --accent:#0A6F68; --accent-fg:#FFFFFF; --accent-soft:#DDF0EE;
+  --c1:#0A6F68; --c2:#B05F00; --c3:#B83A0A;
+  --font-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A1318; --surface:#111C23; --fg:#E6EEF1; --muted:#9DB0BA; --line:#22343E;
+    --accent:#46C9BC; --accent-fg:#04211E; --accent-soft:#12302F;
+    --c1:#46C9BC; --c2:#F0B04A; --c3:#FF8F6B; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A1318; --surface:#111C23; --fg:#E6EEF1; --muted:#9DB0BA; --line:#22343E;
+  --accent:#46C9BC; --accent-fg:#04211E; --accent-soft:#12302F;
+  --c1:#46C9BC; --c2:#F0B04A; --c3:#FF8F6B; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6;padding-inline:clamp(16px,4vw,48px);padding-block:0 48px}
+.wrap{max-width:1120px;margin-inline:auto}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--font-display);line-height:1.1;margin:0;text-wrap:balance}
+h2{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.01em}
+h3{font-size:1.15rem}
+p{margin:0}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.label{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+header.top{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center;padding-block:20px}
+.brand{font-family:var(--font-display);font-weight:700;font-size:1.15rem;color:var(--fg);text-decoration:none}
+nav{display:flex;flex-wrap:wrap;gap:4px 20px;align-items:center}
+nav a{color:var(--muted);text-decoration:none;font-size:.95rem;padding-block:4px}
+nav a:hover{color:var(--fg)}
+.lang{display:flex;gap:4px;margin-left:8px}
+.lang button{font:inherit;font-family:var(--font-mono);font-size:.8rem;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:2px 8px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+
+.hero{padding-block:48px 56px;display:flex;flex-direction:column;gap:24px;align-items:flex-start}
+.hero h1{font-size:clamp(2.3rem,6.4vw,4.4rem);letter-spacing:-.025em;max-width:16ch}
+.lead{font-size:clamp(1.05rem,2vw,1.25rem);max-width:56ch;color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;background:var(--accent-soft);color:var(--fg);padding:6px 12px;border-radius:999px}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{font:inherit;font-weight:500;padding:10px 18px;border-radius:6px;border:1px solid var(--accent);text-decoration:none;cursor:pointer;display:inline-block}
+.btn.primary{background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{background:transparent;color:var(--accent)}
+
+section{border-top:1px solid var(--line);padding-block:48px;display:flex;flex-direction:column;gap:28px}
+.intro{max-width:62ch;color:var(--muted)}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px}
+.step{border-top:2px solid var(--fg);padding-top:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.step .mono{color:var(--muted);font-size:.85rem}
+
+.demo{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:900px){.demo{grid-template-columns:minmax(0,1fr)}}
+.chartbox{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px;min-width:0}
+.chartbox svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--muted);padding:8px 4px 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:10px;height:10px;border-radius:50%;display:inline-block}
+.panel{display:flex;flex-direction:column;gap:18px;min-width:0}
+.ctrl{display:flex;flex-direction:column;gap:6px}
+.ctrl .row{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:500;color:var(--muted);font-size:.8rem}
+.note{font-size:.88rem;color:var(--muted);max-width:60ch}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card p{color:var(--muted);font-size:.96rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tags span{font-family:var(--font-mono);font-size:.74rem;border:1px solid var(--line);border-radius:4px;padding:1px 7px;color:var(--muted)}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.skills div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.skills p{color:var(--muted)}
+
+.timeline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.timeline li{display:grid;grid-template-columns:130px minmax(0,1fr);gap:16px;padding-block:14px;border-bottom:1px solid var(--line)}
+.timeline .mono{color:var(--muted);font-size:.9rem}
+@media (max-width:520px){.timeline li{grid-template-columns:minmax(0,1fr);gap:2px}}
+
+.contact{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.mail{font-family:var(--font-mono);font-size:1.1rem;word-break:break-all;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 14px;user-select:all}
+.status{min-height:1.4em;color:var(--muted);font-size:.9rem}
+footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:.85rem}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.path{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0;text-decoration:none;color:var(--fg);transition:border-color .15s}
+.path:hover{border-color:var(--accent)}
+.path h2{font-size:1.6rem}
+.path p{color:var(--muted)}
+.path .go{margin-top:auto;color:var(--accent);font-weight:500}
+.path .tags{margin-top:0}
+.facts{display:flex;flex-wrap:wrap;gap:8px 28px;color:var(--muted);font-size:.95rem}
+.hubhero{padding-block:56px 40px}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <a class="brand" href="index.html">Mathieu Boutinon</a>
+  <nav aria-label="Navigation">
+    <a href="index.html" data-i18n="nav_home"></a>
+    <a href="developpement.html" data-i18n="nav_dev"></a>
+    <a href="#realisations" data-i18n="cta_work"></a>
+    <a href="#contact" data-i18n="nav_contact"></a>
+    <span class="lang" role="group" aria-label="Langue / Language">
+      <button type="button" id="lang-fr" aria-pressed="true">FR</button>
+      <button type="button" id="lang-en" aria-pressed="false">EN</button>
+    </span>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <p class="label" data-i18n="eyebrow"></p>
+    <h1 data-i18n="h1"></h1>
+    <p class="lead" data-i18n="lead"></p>
+    <span class="chip"><i></i><span data-i18n="avail"></span></span>
+    <div class="actions">
+      <a class="btn primary" href="#realisations" data-i18n="cta_work"></a>
+      <a class="btn ghost" href="#contact" data-i18n="cta_contact"></a>
+    </div>
+  </div>
+  <section id="demarche">
+    <h2 data-i18n="method_h"></h2>
+    <p class="intro" data-i18n="method_i"></p>
+    <div class="steps">
+      <div class="step"><span class="mono">1</span><h3 data-i18n="m1_t"></h3><p data-i18n="m1_d"></p></div>
+      <div class="step"><span class="mono">2</span><h3 data-i18n="m2_t"></h3><p data-i18n="m2_d"></p></div>
+      <div class="step"><span class="mono">3</span><h3 data-i18n="m3_t"></h3><p data-i18n="m3_d"></p></div>
+      <div class="step"><span class="mono">4</span><h3 data-i18n="m4_t"></h3><p data-i18n="m4_d"></p></div>
+    </div>
+  </section>
+  <section id="realisations">
+    <h2 data-i18n="work_h"></h2>
+    <div class="cards">
+      <article class="card"><h3 data-i18n="w1_t"></h3><p data-i18n="w1_d"></p><div class="tags"><span>Besoin utilisateur</span><span>Livraison</span><span>Prise en main</span></div></article>
+      <article class="card"><h3 data-i18n="w2_t"></h3><p data-i18n="w2_d"></p><div class="tags"><span>Équipe de 5</span><span>Python</span><span>AI Act</span></div></article>
+      <article class="card"><h3 data-i18n="w3_t"></h3><p data-i18n="w3_d"></p><div class="tags"><span>Organisation</span><span>Responsabilité</span></div></article>
+    </div>
+  </section>
+  <section id="competences">
+    <h2 data-i18n="skills_h"></h2>
+    <div class="skills">
+      <div><h3 data-i18n="k1_t"></h3><p data-i18n="k1_d"></p></div>
+      <div><h3 data-i18n="k2_t"></h3><p data-i18n="k2_d"></p></div>
+      <div><h3 data-i18n="k3_t"></h3><p data-i18n="k3_d"></p></div>
+      <div><h3 data-i18n="k4_t"></h3><p data-i18n="k4_d"></p></div>
+      <div><h3 data-i18n="k5_t"></h3><p data-i18n="k5_d"></p></div>
+    </div>
+  </section>
+  <section id="parcours">
+    <h2 data-i18n="path_h"></h2>
+    <ul class="timeline">
+      <li><span class="mono" data-i18n="p1_y"></span><span data-i18n="p1_d"></span></li>
+      <li><span class="mono" data-i18n="p2_y"></span><span data-i18n="p2_d"></span></li>
+    </ul>
+  </section>
+  <section id="contact">
+    <h2 data-i18n="contact_h"></h2>
+    <div class="contact">
+      <p class="intro" data-i18n="contact_p"></p>
+      <span class="mail" id="mail">mathieuboutinon972@gmail.com</span>
+      <div class="actions">
+        <button type="button" class="btn primary" id="copy" data-i18n="copy"></button>
+        <a class="btn ghost" href="mailto:mathieuboutinon972@gmail.com" data-i18n="mailto"></a>
+      </div>
+      <p class="status" id="status" role="status"></p>
+    </div>
+  </section>
+</main>
+<footer><a href="index.html" data-i18n="nav_home"></a> · <a href="developpement.html" data-i18n="nav_dev"></a> · Mathieu Boutinon · EPF · CEA</footer>
+</div>
+<script>
+const I18N={
+ "fr": {
+  "nav_home": "Accueil",
+  "nav_dev": "Développement",
+  "nav_pm": "Gestion de projet",
+  "nav_contact": "Contact",
+  "avail": "Disponible pour un stage de 3 mois, de janvier à août 2027",
+  "contact_h": "Contact",
+  "contact_p": "Je cherche un stage de 3 mois entre janvier et août 2027, en Europe. Écrivez-moi pour échanger sur vos besoins.",
+  "copy": "Copier l'adresse",
+  "mailto": "Ouvrir ma messagerie",
+  "copied": "Adresse copiée.",
+  "copyfail": "Copie impossible ici : l'adresse est sélectionnée, copiez-la avec Ctrl+C.",
+  "eyebrow": "Apprenti ingénieur · EPF · CEA",
+  "doc_title": "Mathieu Boutinon · Gestion de projet",
+  "h1": "Je mène des projets numériques de la demande à la livraison.",
+  "lead": "J'écoute les utilisateurs, je cadre le besoin, je tiens le cap avec l'équipe et je m'assure que l'outil est réellement utilisé.",
+  "cta_work": "Voir les projets",
+  "cta_contact": "Me contacter",
+  "method_h": "Ma démarche",
+  "method_i": "Quatre temps, que je reprends pour chaque projet.",
+  "m1_t": "Cadrer",
+  "m1_d": "Je reformule le besoin avec les utilisateurs, je fixe l'objectif, le périmètre et ce qui sera considéré comme réussi.",
+  "m2_t": "Planifier",
+  "m2_d": "Je découpe le travail en lots livrables, j'estime les charges et j'identifie les risques et les dépendances.",
+  "m3_t": "Piloter",
+  "m3_d": "Points réguliers, priorités arbitrées, suivi des écarts et des risques, communication claire avec l'équipe et les utilisateurs.",
+  "m4_t": "Livrer et transmettre",
+  "m4_d": "Recette avec les utilisateurs, documentation, prise en main et retour d'expérience.",
+  "work_h": "Projets conduits",
+  "w1_t": "Photolys, un outil pour une équipe de recherche",
+  "w1_d": "Logiciel de déconvolution de spectres UV-Vis développé au CEA, en contexte nucléaire. Du recueil du besoin auprès des chercheurs à la livraison de l'outil web et à l'accompagnement de la prise en main. Le code et les données restent internes au CEA.",
+  "w2_t": "UGV-IA, projet d'école en équipe de cinq",
+  "w2_d": "Un drone terrestre piloté par IA, de la conception à la démonstration web : détection d'objets, fusion de capteurs (55 % d'erreur en moins), navigation par apprentissage par renforcement, base de données chiffrée et prise en compte de l'AI Act.",
+  "w3_t": "Présidence d'un club d'aïkido",
+  "w3_d": "Président depuis 2025 et instructeur BF jeunesse : responsabilité d'une structure associative, organisation des activités et transmission auprès de débutants.",
+  "skills_h": "Compétences",
+  "k1_t": "Gestion de projet",
+  "k1_d": "Cadrage du besoin, planification, suivi des risques, livraison.",
+  "k2_t": "Systèmes d'information",
+  "k2_d": "Analyse de processus, modélisation, outils métier, automatisation.",
+  "k3_t": "Qualité et sûreté",
+  "k3_d": "Protocoles rédigés, rigueur, environnement nucléaire et radioprotection.",
+  "k4_t": "Relation et pédagogie",
+  "k4_d": "Écoute des utilisateurs, documentation, formation à la prise en main.",
+  "k5_t": "Technique",
+  "k5_d": "HTML, CSS, JavaScript, Python, SQL, PHP, VBA. De quoi dialoguer avec les développeurs et prototyper un outil.",
+  "path_h": "Parcours",
+  "p1_y": "2024 – aujourd'hui",
+  "p1_d": "Cycle ingénieur Systèmes d'Information et Génie Industriel à l'EPF. Ingénieur R&D en apprentissage au CEA (laboratoire LILA).",
+  "p2_y": "2022 – 2024",
+  "p2_d": "BTS Métiers de la chimie. Technicien chimiste en apprentissage au CEA (laboratoire LMAT)."
+ },
+ "en": {
+  "nav_home": "Home",
+  "nav_dev": "Development",
+  "nav_pm": "Project management",
+  "nav_contact": "Contact",
+  "avail": "Available for a 3-month internship, January to August 2027",
+  "contact_h": "Contact",
+  "contact_p": "I am looking for a 3-month internship between January and August 2027 in Europe. Write to me to talk about your needs.",
+  "copy": "Copy address",
+  "mailto": "Open my mail app",
+  "copied": "Address copied.",
+  "copyfail": "Copying is not available here: the address is selected, copy it with Ctrl+C.",
+  "eyebrow": "Engineering apprentice · EPF · CEA",
+  "doc_title": "Mathieu Boutinon · Project management",
+  "h1": "I lead digital projects from request to delivery.",
+  "lead": "I listen to users, frame the need, keep the team on course and make sure the tool is actually used.",
+  "cta_work": "See the projects",
+  "cta_contact": "Get in touch",
+  "method_h": "My approach",
+  "method_i": "Four steps, repeated for every project.",
+  "m1_t": "Frame",
+  "m1_d": "I restate the need with the users and set the goal, the scope and what counts as success.",
+  "m2_t": "Plan",
+  "m2_d": "I split the work into deliverable packages, estimate effort and identify risks and dependencies.",
+  "m3_t": "Steer",
+  "m3_d": "Regular check-ins, arbitrated priorities, tracking of gaps and risks, clear communication with the team and the users.",
+  "m4_t": "Deliver and hand over",
+  "m4_d": "Acceptance with the users, documentation, onboarding and lessons learned.",
+  "work_h": "Projects led",
+  "w1_t": "Photolys, a tool for a research team",
+  "w1_d": "UV-Vis spectral deconvolution software developed at CEA in a nuclear context. From gathering needs from researchers to delivering the web tool and supporting its adoption. Code and data stay internal to CEA.",
+  "w2_t": "UGV-IA, school project in a team of five",
+  "w2_d": "An AI-piloted ground vehicle, from design to web demo: object detection, sensor fusion (55% lower error), reinforcement-learning navigation, an encrypted database and EU AI Act compliance.",
+  "w3_t": "President of an aikido club",
+  "w3_d": "President since 2025 and BF youth instructor: responsibility for an association, organising activities and teaching beginners.",
+  "skills_h": "Skills",
+  "k1_t": "Project management",
+  "k1_d": "Needs framing, planning, risk tracking, delivery.",
+  "k2_t": "Information systems",
+  "k2_d": "Process analysis, modelling, business tools, automation.",
+  "k3_t": "Quality and safety",
+  "k3_d": "Written protocols, rigour, nuclear environment and radiation protection.",
+  "k4_t": "Relationships and teaching",
+  "k4_d": "Listening to users, documentation, onboarding training.",
+  "k5_t": "Technical",
+  "k5_d": "HTML, CSS, JavaScript, Python, SQL, PHP, VBA. Enough to talk with developers and prototype a tool.",
+  "path_h": "Background",
+  "p1_y": "2024 – present",
+  "p1_d": "Engineering degree in Information Systems and Industrial Engineering at EPF. R&D engineer (apprenticeship) at CEA, LILA laboratory.",
+  "p2_y": "2022 – 2024",
+  "p2_d": "BTS in Chemistry Professions. Chemistry technician (apprenticeship) at CEA, LMAT laboratory."
+ }
+};
+let lang="fr";
+try{const s=localStorage.getItem("lang");if(s==="fr"||s==="en")lang=s;}catch(e){}
+const t=k=>(I18N[lang]&&I18N[lang][k])||k;
+function render(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-i18n]").forEach(e=>{e.textContent=t(e.dataset.i18n);});
+  document.getElementById("lang-fr").setAttribute("aria-pressed",lang==="fr");
+  document.getElementById("lang-en").setAttribute("aria-pressed",lang==="en");
+  document.title=t("doc_title");
+}
+function setLang(l){lang=l;try{localStorage.setItem("lang",l);}catch(e){}render();}
+document.getElementById("lang-fr").onclick=()=>setLang("fr");
+document.getElementById("lang-en").onclick=()=>setLang("en");
+document.getElementById("copy").onclick=async()=>{
+  const m=document.getElementById("mail"),st=document.getElementById("status");
+  try{await navigator.clipboard.writeText(m.textContent);st.textContent=t("copied");}
+  catch(e){const r=document.createRange();r.selectNodeContents(m);const s=getSelection();s.removeAllRanges();s.addRange(r);st.textContent=t("copyfail");}
+};
+render();
+</script>
+</body>
+</html>

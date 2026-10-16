@@ -103,18 +103,26 @@ th{font-weight:500;color:var(--muted);font-size:.8rem}
 .status{min-height:1.4em;color:var(--muted);font-size:.9rem}
 footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:.85rem}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.path{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0;text-decoration:none;color:var(--fg);transition:border-color .15s}
+.path:hover{border-color:var(--accent)}
+.path h2{font-size:1.6rem}
+.path p{color:var(--muted)}
+.path .go{margin-top:auto;color:var(--accent);font-weight:500}
+.path .tags{margin-top:0}
+.facts{display:flex;flex-wrap:wrap;gap:8px 28px;color:var(--muted);font-size:.95rem}
+.hubhero{padding-block:56px 40px}
+footer a{color:var(--muted)}
 </style>
 </head>
 <body>
-
 <div class="wrap">
 <header class="top">
-  <a class="brand" href="#top">Mathieu Boutinon</a>
+  <a class="brand" href="index.html">Mathieu Boutinon</a>
   <nav aria-label="Navigation">
-    <a href="#offre" data-i18n="nav_offer"></a>
-    <a href="#demo" data-i18n="nav_demo"></a>
-    <a href="#realisations" data-i18n="nav_work"></a>
-    <a href="#parcours" data-i18n="nav_path"></a>
+    <a href="developpement.html" data-i18n="nav_dev"></a>
+    <a href="projet.html" data-i18n="nav_pm"></a>
     <a href="#contact" data-i18n="nav_contact"></a>
     <span class="lang" role="group" aria-label="Langue / Language">
       <button type="button" id="lang-fr" aria-pressed="true">FR</button>
@@ -124,86 +132,20 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font
 </header>
 
 <main id="top">
-  <div class="hero">
+  <div class="hero hubhero">
     <p class="label" data-i18n="eyebrow"></p>
     <h1 data-i18n="h1"></h1>
     <p class="lead" data-i18n="lead"></p>
     <span class="chip"><i></i><span data-i18n="avail"></span></span>
-    <div class="actions">
-      <a class="btn primary" href="#demo" data-i18n="cta_demo"></a>
-      <a class="btn ghost" href="#contact" data-i18n="cta_contact"></a>
-    </div>
+    <div class="facts"><span data-i18n="f1"></span><span data-i18n="f2"></span><span data-i18n="f3"></span></div>
   </div>
-
-  <section id="offre">
-    <h2 data-i18n="offer_h"></h2>
-    <p class="intro" data-i18n="offer_intro"></p>
-    <div class="steps">
-      <div class="step"><span class="mono">1</span><h3 data-i18n="s1_t"></h3><p data-i18n="s1_d"></p></div>
-      <div class="step"><span class="mono">2</span><h3 data-i18n="s2_t"></h3><p data-i18n="s2_d"></p></div>
-      <div class="step"><span class="mono">3</span><h3 data-i18n="s3_t"></h3><p data-i18n="s3_d"></p></div>
+  <section id="profils">
+    <p class="label" data-i18n="choose"></p>
+    <div class="paths">
+      <a class="path" href="developpement.html"><h2 data-i18n="dev_t"></h2><p data-i18n="dev_d"></p><div class="tags"><span>JavaScript</span><span>Python</span><span>SQL</span><span>Sécurité</span></div><span class="go" data-i18n="dev_go"></span></a>
+      <a class="path" href="projet.html"><h2 data-i18n="pm_t"></h2><p data-i18n="pm_d"></p><div class="tags"><span>Cadrage</span><span>Planning</span><span>Risques</span><span>Livraison</span></div><span class="go" data-i18n="pm_go"></span></a>
     </div>
   </section>
-
-  <section id="demo">
-    <h2 data-i18n="demo_h"></h2>
-    <p class="intro" data-i18n="demo_intro"></p>
-    <div class="demo">
-      <div class="chartbox">
-        <div id="chart"></div>
-        <div class="legend" id="legend"></div>
-      </div>
-      <div class="panel">
-        <div class="ctrl">
-          <div class="row"><label for="noise" data-i18n="noise_l"></label><output id="noise-o" class="mono" for="noise"></output></div>
-          <input id="noise" type="range" min="0" max="0.08" step="0.002" value="0.03">
-        </div>
-        <div class="ctrl">
-          <div class="row"><label for="lambda" data-i18n="lambda_l"></label><output id="lambda-o" class="mono" for="lambda"></output></div>
-          <input id="lambda" type="range" min="0" max="40" step="0.5" value="2">
-        </div>
-        <div><button type="button" class="btn ghost" id="reseed" data-i18n="reseed"></button></div>
-        <div class="tablewrap" aria-live="polite">
-          <table>
-            <thead><tr><th data-i18n="th_band"></th><th data-i18n="th_true"></th><th data-i18n="th_est"></th></tr></thead>
-            <tbody id="rows"></tbody>
-          </table>
-        </div>
-        <p class="note"><span data-i18n="rms"></span> : <span id="rms" class="mono"></span></p>
-      </div>
-    </div>
-    <p class="note" data-i18n="demo_note"></p>
-  </section>
-
-  <section id="realisations">
-    <h2 data-i18n="work_h"></h2>
-    <div class="cards">
-      <article class="card"><h3 data-i18n="w1_t"></h3><p data-i18n="w1_d"></p><div class="tags"><span>JavaScript</span><span>Python</span><span>Ridge</span><span>Dataviz</span><span>UV-Vis</span></div></article>
-      <article class="card"><h3 data-i18n="w3_t"></h3><p data-i18n="w3_d"></p><div class="tags"><span>ICP</span><span>Protocoles</span><span>Données</span></div></article>
-      <article class="card"><h3 data-i18n="w4_t"></h3><p data-i18n="w4_d"></p><div class="tags"><span>TryHackMe</span><span>Pentest</span></div></article>
-      <article class="card"><h3 data-i18n="w5_t"></h3><p data-i18n="w5_d"></p><div class="tags"><span>Python</span><span>YOLOv8</span><span>Filtre de Kalman</span><span>PPO</span><span>SQL</span></div></article>
-    </div>
-    <h2 data-i18n="skills_h"></h2>
-    <div class="skills">
-      <div><h3 data-i18n="k1_t"></h3><p>HTML, CSS, JavaScript, Python, SQL, PHP, C, VBA</p></div>
-      <div><h3 data-i18n="k2_t"></h3><p data-i18n="k2_d"></p></div>
-      <div><h3 data-i18n="k3_t"></h3><p data-i18n="k3_d"></p></div>
-      <div><h3 data-i18n="k4_t"></h3><p>Git, VS Code, PyCharm, Linux, Docker</p></div>
-    </div>
-  </section>
-
-  <section id="parcours">
-    <h2 data-i18n="path_h"></h2>
-    <ul class="timeline">
-      <li><span class="mono" data-i18n="p1_y"></span><span data-i18n="p1_d"></span></li>
-      <li><span class="mono" data-i18n="p2_y"></span><span data-i18n="p2_d"></span></li>
-      <li><span class="mono">2022</span><span data-i18n="p3_d"></span></li>
-      <li><span class="mono">2018</span><span data-i18n="p4_d"></span></li>
-    </ul>
-    <h2 data-i18n="beyond_h"></h2>
-    <p class="intro" data-i18n="beyond_d"></p>
-  </section>
-
   <section id="contact">
     <h2 data-i18n="contact_h"></h2>
     <div class="contact">
@@ -219,205 +161,82 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font
 </main>
 <footer>Mathieu Boutinon · EPF · CEA</footer>
 </div>
-
 <script>
-const I18N = {
-  fr: {
-    nav_offer:"Offre", nav_demo:"Démo", nav_work:"Réalisations", nav_path:"Parcours", nav_contact:"Contact",
-    eyebrow:"Apprenti ingénieur · EPF · CEA",
-    h1:"Je crée des outils applicatifs qui simplifient le quotidien.",
-    lead:"J'écoute le besoin, je construis une interface claire et un code fiable, et je pense à la sécurité dès la conception.",
-    avail:"Disponible pour un stage de 3 mois, de janvier à août 2027",
-    cta_demo:"Essayer la démo", cta_contact:"Me contacter",
-    offer_h:"Ce que je propose", offer_intro:"Trois temps, que je reprends pour chaque outil.",
-    s1_t:"J'écoute", s1_d:"Je pars du quotidien de l'utilisateur et je reformule son besoin avant d'écrire du code.",
-    s2_t:"Je construis", s2_d:"Une interface simple en HTML, CSS et JavaScript, un moteur fiable en Python.",
-    s3_t:"Je sécurise et je transmets", s3_d:"Validation des entrées, bonnes pratiques issues de mon parcours de pentester, documentation et prise en main.",
-    demo_h:"Démo : retrouver les bandes d'un spectre",
-    demo_intro:"Le spectre mesuré (points) additionne trois bandes qui se recouvrent. La régression ridge retrouve la part de chaque bande. Les données sont synthétiques et n'ont aucun lien avec les données du CEA.",
-    noise_l:"Bruit de mesure", lambda_l:"Régularisation λ", reseed:"Nouveau bruit",
-    th_band:"Bande", th_true:"Vraie", th_est:"Estimée", rms:"Erreur résiduelle (RMS)",
-    legend_meas:"Mesure", legend_fit:"Ajustement total", band:"Bande",
-    axis_x:"Longueur d'onde (nm)", axis_y:"Absorbance (u.a.)",
-    chart_alt:"Spectre synthétique, mesure bruitée et ajustement par trois bandes",
-    demo_note:"Ici les bandes sont bien séparées : un λ proche de 0 donne le meilleur résultat. Un λ plus grand sert quand les bandes se recouvrent davantage ou que le bruit domine, mais il tire les estimations vers zéro.",
-    work_h:"Réalisations",
-    w1_t:"Photolys : déconvolution de spectres UV-Vis", w1_d:"Logiciel développé au CEA pour déconvoluer des spectres UV-Vis en chimie, dans un contexte nucléaire : application web en JavaScript et Python, régression ridge, visualisation interactive des résultats. Le code et les données restent internes au CEA.",
-    w3_t:"Méthode de dosage en solution", w3_d:"Développement d'une méthode de dosage des carbonates et hydrogénocarbonates (ICP, pH-métrie, conductimétrie), avec traitement des données et protocoles rédigés.",
-    w4_t:"Parcours pentester", w4_d:"En cours sur TryHackMe : apprendre à attaquer pour construire des outils qui résistent.",
-    w5_t:"UGV-IA : drone terrestre autonome", w5_d:"Projet d'école en équipe de cinq : drone terrestre piloté par IA. Briques codées et mesurées en Python : détection YOLOv8, fusion de capteurs par filtre de Kalman (55 % d'erreur en moins), navigation par apprentissage par renforcement et base SQL chiffrée. Démo web et analyse de conformité (AI Act).",
-    skills_h:"Compétences",
-    k1_t:"Développement", k2_t:"Conception d'outils", k2_d:"Interfaces ergonomiques, visualisation de données, automatisation, modélisation de systèmes d'information.",
-    k3_t:"Sécurité", k3_d:"Parcours pentester en cours.", k4_t:"Environnement",
-    path_h:"Parcours",
-    p1_y:"2024 – aujourd'hui", p1_d:"Cycle ingénieur Systèmes d'Information et Génie Industriel à l'EPF. Ingénieur R&D en apprentissage au CEA (laboratoire LILA).",
-    p2_y:"2022 – 2024", p2_d:"BTS Métiers de la chimie. Technicien chimiste en apprentissage au CEA (laboratoire LMAT).",
-    p3_d:"Baccalauréat STL, physique-chimie de laboratoire, mention Bien.",
-    p4_d:"Stage d'observation en laboratoire de recherche pluridisciplinaire.",
-    beyond_h:"Au-delà du code",
-    beyond_d:"Je préside un club d'aïkido depuis 2025 et je suis instructeur BF, spécialisé jeunesse (2e dan d'aïkido et d'iaïdo). J'y ai appris à expliquer simplement et à faire progresser des débutants, ce que je retrouve quand je mets un outil entre les mains de ses utilisateurs.",
-    contact_h:"Contact",
-    contact_p:"Je cherche un stage de 3 mois entre janvier et août 2027, en Europe. Écrivez-moi pour échanger sur vos besoins.",
-    copy:"Copier l'adresse", mailto:"Ouvrir ma messagerie",
-    copied:"Adresse copiée.", copyfail:"Copie impossible ici : l'adresse est sélectionnée, copiez-la avec Ctrl+C."
-  },
-  en: {
-    nav_offer:"Offer", nav_demo:"Demo", nav_work:"Work", nav_path:"Background", nav_contact:"Contact",
-    eyebrow:"Engineering apprentice · EPF · CEA",
-    h1:"I build application tools that make everyday life easier.",
-    lead:"I listen to the need, build a clear interface and reliable code, and think about security from the start.",
-    avail:"Available for a 3-month internship, January to August 2027",
-    cta_demo:"Try the demo", cta_contact:"Get in touch",
-    offer_h:"What I offer", offer_intro:"Three steps, repeated for every tool.",
-    s1_t:"I listen", s1_d:"I start from the user's daily routine and restate their need before writing any code.",
-    s2_t:"I build", s2_d:"A simple interface in HTML, CSS and JavaScript, a reliable engine in Python.",
-    s3_t:"I secure and hand over", s3_d:"Input validation, good practice from my pentester training, documentation and onboarding.",
-    demo_h:"Demo: recovering the bands of a spectrum",
-    demo_intro:"The measured spectrum (dots) is the sum of three overlapping bands. Ridge regression recovers each band's share. The data are synthetic and unrelated to CEA data.",
-    noise_l:"Measurement noise", lambda_l:"Regularisation λ", reseed:"New noise",
-    th_band:"Band", th_true:"True", th_est:"Estimated", rms:"Residual error (RMS)",
-    legend_meas:"Measured", legend_fit:"Total fit", band:"Band",
-    axis_x:"Wavelength (nm)", axis_y:"Absorbance (a.u.)",
-    chart_alt:"Synthetic spectrum, noisy measurement and fit with three bands",
-    demo_note:"Here the bands are well separated: a λ close to 0 gives the best result. A larger λ helps when bands overlap more or noise dominates, but it pulls the estimates towards zero.",
-    work_h:"Work",
-    w1_t:"Photolys: UV-Vis spectral deconvolution", w1_d:"Software developed at CEA to deconvolve UV-Vis spectra for chemistry in a nuclear context: web application in JavaScript and Python, ridge regression, interactive visualisation of results. Code and data stay internal to CEA.",
-    w3_t:"Solution assay method", w3_d:"Developed a method to measure carbonates and hydrogencarbonates (ICP, pH and conductivity), with data processing and written protocols.",
-    w4_t:"Pentester learning path", w4_d:"In progress on TryHackMe: learning to attack in order to build tools that hold up.",
-    w5_t:"UGV-IA: autonomous ground vehicle", w5_d:"Team school project (five students): an AI-piloted ground vehicle. Components coded and measured in Python: YOLOv8 detection, extended Kalman filter sensor fusion (55% lower error), reinforcement-learning navigation and an encrypted SQL database. Web demo and compliance analysis (AI Act).",
-    skills_h:"Skills",
-    k1_t:"Development", k2_t:"Tool design", k2_d:"Ergonomic interfaces, data visualisation, automation, information systems modelling.",
-    k3_t:"Security", k3_d:"Pentester learning path in progress.", k4_t:"Environment",
-    path_h:"Background",
-    p1_y:"2024 – present", p1_d:"Engineering degree in Information Systems and Industrial Engineering at EPF. R&D engineer (apprenticeship) at CEA, LILA laboratory.",
-    p2_y:"2022 – 2024", p2_d:"BTS in Chemistry Professions. Chemistry technician (apprenticeship) at CEA, LMAT laboratory.",
-    p3_d:"Baccalauréat in Laboratory Science and Technology (physics-chemistry), with honours.",
-    p4_d:"Observation internship in a multidisciplinary research laboratory.",
-    beyond_h:"Beyond code",
-    beyond_d:"I have been president of an aikido club since 2025 and I am a BF instructor specialised in youth (2nd dan aikido and iaido). It taught me to explain things simply and to help beginners progress, which I bring to putting a tool in its users' hands.",
-    contact_h:"Contact",
-    contact_p:"I am looking for a 3-month internship between January and August 2027 in Europe. Write to me to talk about your needs.",
-    copy:"Copy address", mailto:"Open my mail app",
-    copied:"Address copied.", copyfail:"Copying is not available here: the address is selected, copy it with Ctrl+C."
-  }
+const I18N={
+ "fr": {
+  "nav_home": "Accueil",
+  "nav_dev": "Développement",
+  "nav_pm": "Gestion de projet",
+  "nav_contact": "Contact",
+  "avail": "Disponible pour un stage de 3 mois, de janvier à août 2027",
+  "contact_h": "Contact",
+  "contact_p": "Je cherche un stage de 3 mois entre janvier et août 2027, en Europe. Écrivez-moi pour échanger sur vos besoins.",
+  "copy": "Copier l'adresse",
+  "mailto": "Ouvrir ma messagerie",
+  "copied": "Adresse copiée.",
+  "copyfail": "Copie impossible ici : l'adresse est sélectionnée, copiez-la avec Ctrl+C.",
+  "eyebrow": "Apprenti ingénieur · EPF · CEA",
+  "doc_title": "Mathieu Boutinon",
+  "h1": "Bonjour, je suis Mathieu.",
+  "lead": "Futur ingénieur en systèmes d'information et génie industriel. Selon votre besoin, découvrez le profil qui vous convient.",
+  "choose": "Choisissez un profil",
+  "dev_t": "Développement d'outils",
+  "dev_d": "Je conçois des applications web pour des utilisateurs non informaticiens : interface claire, code fiable, sécurité dès la conception. Avec une démo interactive.",
+  "dev_go": "Voir le profil développement →",
+  "pm_t": "Gestion de projet",
+  "pm_d": "Je mène des projets numériques de la demande à la livraison : cadrage du besoin, planification, suivi des risques, accompagnement des utilisateurs.",
+  "pm_go": "Voir le profil gestion de projet →",
+  "f1": "EPF, cycle ingénieur SIGI",
+  "f2": "Apprenti au CEA",
+  "f3": "Stage de 3 mois en Europe, janvier à août 2027"
+ },
+ "en": {
+  "nav_home": "Home",
+  "nav_dev": "Development",
+  "nav_pm": "Project management",
+  "nav_contact": "Contact",
+  "avail": "Available for a 3-month internship, January to August 2027",
+  "contact_h": "Contact",
+  "contact_p": "I am looking for a 3-month internship between January and August 2027 in Europe. Write to me to talk about your needs.",
+  "copy": "Copy address",
+  "mailto": "Open my mail app",
+  "copied": "Address copied.",
+  "copyfail": "Copying is not available here: the address is selected, copy it with Ctrl+C.",
+  "eyebrow": "Engineering apprentice · EPF · CEA",
+  "doc_title": "Mathieu Boutinon",
+  "h1": "Hello, I'm Mathieu.",
+  "lead": "Future engineer in information systems and industrial engineering. Pick the profile that fits your need.",
+  "choose": "Choose a profile",
+  "dev_t": "Tool development",
+  "dev_d": "I build web applications for non-technical users: clear interface, reliable code, security from the start. With an interactive demo.",
+  "dev_go": "See the development profile →",
+  "pm_t": "Project management",
+  "pm_d": "I lead digital projects from request to delivery: framing the need, planning, tracking risks, supporting users.",
+  "pm_go": "See the project management profile →",
+  "f1": "EPF, SIGI engineering degree",
+  "f2": "Apprentice at CEA",
+  "f3": "3-month internship in Europe, January to August 2027"
+ }
 };
-
-let lang = "fr";
-try { const s = localStorage.getItem("lang"); if (s === "fr" || s === "en") lang = s; } catch (e) {}
-const t = k => (I18N[lang] && I18N[lang][k]) || k;
-
-/* ---------- Démo : bandes spectrales + régression ridge ---------- */
-const WL = []; for (let w = 250; w <= 600; w += 2) WL.push(w);
-const BANDS = [
-  { c: 310, s: 22, a: 0.85, color: "var(--c1)" },
-  { c: 380, s: 30, a: 0.55, color: "var(--c2)" },
-  { c: 470, s: 38, a: 0.35, color: "var(--c3)" }
-];
-const gauss = (w, c, s) => Math.exp(-0.5 * ((w - c) / s) ** 2);
-const A = WL.map(w => BANDS.map(b => gauss(w, b.c, b.s)));
-function mulberry(seed){ let a = seed >>> 0; return function(){ a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-function normals(seed){ const r = mulberry(seed); return WL.map(() => Math.sqrt(-2 * Math.log(1 - r())) * Math.cos(2 * Math.PI * r())); }
-function solve(M, b){
-  const n = b.length, a = M.map((r, i) => [...r, b[i]]);
-  for (let i = 0; i < n; i++){
-    let p = i; for (let r = i + 1; r < n; r++) if (Math.abs(a[r][i]) > Math.abs(a[p][i])) p = r;
-    [a[i], a[p]] = [a[p], a[i]];
-    for (let r = i + 1; r < n; r++){ const f = a[r][i] / a[i][i]; for (let c = i; c <= n; c++) a[r][c] -= f * a[i][c]; }
-  }
-  const x = Array(n).fill(0);
-  for (let i = n - 1; i >= 0; i--){ let s = a[i][n]; for (let c = i + 1; c < n; c++) s -= a[i][c] * x[c]; x[i] = s / a[i][i]; }
-  return x;
-}
-let seed = 7, unit = normals(seed);
-const $ = id => document.getElementById(id);
-
-function compute(noise, lambda){
-  const y = WL.map((w, i) => BANDS.reduce((s, b, j) => s + b.a * A[i][j], 0) + noise * unit[i]);
-  const n = BANDS.length;
-  const M = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => A.reduce((s, r) => s + r[i] * r[j], 0) + (i === j ? lambda : 0)));
-  const bvec = Array.from({ length: n }, (_, i) => A.reduce((s, r, k) => s + r[i] * y[k], 0));
-  const est = solve(M, bvec);
-  const fit = WL.map((w, i) => est.reduce((s, e, j) => s + e * A[i][j], 0));
-  const rms = Math.sqrt(y.reduce((s, v, i) => s + (v - fit[i]) ** 2, 0) / y.length);
-  return { y, est, fit, rms };
-}
-
+let lang="fr";
+try{const s=localStorage.getItem("lang");if(s==="fr"||s==="en")lang=s;}catch(e){}
+const t=k=>(I18N[lang]&&I18N[lang][k])||k;
 function render(){
-  const noise = parseFloat($("noise").value), lambda = parseFloat($("lambda").value);
-  $("noise-o").textContent = noise.toFixed(3);
-  $("lambda-o").textContent = lambda.toFixed(1);
-  const { y, est, fit, rms } = compute(noise, lambda);
-
-  const box = $("chart");
-  const W = Math.max(280, Math.round(box.clientWidth || 640));
-  const H = Math.max(230, Math.min(340, Math.round(W * 0.55)));
-  const ML = 46, MR = 10, MT = 10, MB = 42, PW = W - ML - MR, PH = H - MT - MB;
-  const YMIN = -0.1, YMAX = 1.0;
-  const xs = w => ML + (w - 250) / 350 * PW;
-  const ys = v => MT + PH - (v - YMIN) / (YMAX - YMIN) * PH;
-  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t("chart_alt")}" xmlns="http://www.w3.org/2000/svg">`;
-  s += `<defs><clipPath id="plotclip"><rect x="${ML}" y="${MT}" width="${PW}" height="${PH}" fill="none"/></clipPath></defs>`;
-  [0, 0.25, 0.5, 0.75, 1.0].forEach(v => {
-    s += `<line x1="${ML}" x2="${ML + PW}" y1="${ys(v)}" y2="${ys(v)}" stroke="var(--line)" stroke-width="1"/>`;
-    s += `<text x="${ML - 6}" y="${ys(v) + 4}" text-anchor="end" font-size="11" font-family="var(--font-mono)" fill="var(--muted)">${v.toFixed(2)}</text>`;
-  });
-  for (let w = 250; w <= 600; w += 50){
-    s += `<line x1="${xs(w)}" x2="${xs(w)}" y1="${MT + PH}" y2="${MT + PH + 4}" stroke="var(--muted)" stroke-width="1"/>`;
-    s += `<text x="${xs(w)}" y="${MT + PH + 17}" text-anchor="middle" font-size="11" font-family="var(--font-mono)" fill="var(--muted)">${w}</text>`;
-  }
-  s += `<text x="${ML + PW / 2}" y="${H - 6}" text-anchor="middle" font-size="12" font-family="var(--font-body)" fill="var(--muted)">${t("axis_x")}</text>`;
-  s += `<text x="12" y="${MT + PH / 2}" text-anchor="middle" font-size="12" font-family="var(--font-body)" fill="var(--muted)" transform="rotate(-90 12 ${MT + PH / 2})">${t("axis_y")}</text>`;
-  s += `<g clip-path="url(#plotclip)">`;
-  BANDS.forEach((b, j) => {
-    let d = `M ${xs(250)} ${ys(0)}`;
-    WL.forEach((w, i) => { d += ` L ${xs(w).toFixed(1)} ${ys(est[j] * A[i][j]).toFixed(1)}`; });
-    d += ` L ${xs(600)} ${ys(0)} Z`;
-    s += `<path d="${d}" fill="${b.color}" fill-opacity="0.22" stroke="${b.color}" stroke-width="1.5"/>`;
-  });
-  WL.forEach((w, i) => { s += `<circle cx="${xs(w).toFixed(1)}" cy="${ys(y[i]).toFixed(1)}" r="1.7" fill="var(--fg)" fill-opacity="0.6"/>`; });
-  let dl = ""; WL.forEach((w, i) => { dl += (i ? " L " : "M ") + xs(w).toFixed(1) + " " + ys(fit[i]).toFixed(1); });
-  s += `<path d="${dl}" fill="none" stroke="var(--fg)" stroke-width="2"/>`;
-  s += `</g></svg>`;
-  box.innerHTML = s;
-
-  $("legend").innerHTML =
-    `<span><i class="sw" style="background:var(--fg);opacity:.6"></i>${t("legend_meas")}</span>` +
-    `<span><i class="sw" style="background:var(--fg)"></i>${t("legend_fit")}</span>` +
-    BANDS.map(b => `<span><i class="sw" style="background:${b.color}"></i>${t("band")} ${b.c} nm</span>`).join("");
-  $("rows").innerHTML = BANDS.map((b, j) =>
-    `<tr><td><i class="sw" style="background:${b.color}"></i> ${t("band")} ${b.c} nm</td><td class="mono">${b.a.toFixed(2)}</td><td class="mono">${est[j].toFixed(2)}</td></tr>`).join("");
-  $("rms").textContent = rms.toFixed(3);
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-i18n]").forEach(e=>{e.textContent=t(e.dataset.i18n);});
+  document.getElementById("lang-fr").setAttribute("aria-pressed",lang==="fr");
+  document.getElementById("lang-en").setAttribute("aria-pressed",lang==="en");
+  document.title=t("doc_title");
 }
-
-/* ---------- Langue ---------- */
-function applyLang(){
-  document.documentElement.lang = lang;
-  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.getAttribute("data-i18n")); });
-  $("lang-fr").setAttribute("aria-pressed", String(lang === "fr"));
-  $("lang-en").setAttribute("aria-pressed", String(lang === "en"));
-  $("status").textContent = "";
-  render();
-}
-function setLang(l){ lang = l; try { localStorage.setItem("lang", l); } catch (e) {} applyLang(); }
-$("lang-fr").addEventListener("click", () => setLang("fr"));
-$("lang-en").addEventListener("click", () => setLang("en"));
-
-$("noise").addEventListener("input", render);
-$("lambda").addEventListener("input", render);
-$("reseed").addEventListener("click", () => { seed += 1; unit = normals(seed); render(); });
-let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(render, 120); });
-
-/* ---------- Contact ---------- */
-function selectMail(){ const r = document.createRange(); r.selectNodeContents($("mail")); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }
-$("copy").addEventListener("click", () => {
-  const addr = $("mail").textContent.trim();
-  const fail = () => { selectMail(); $("status").textContent = t("copyfail"); };
-  try {
-    navigator.clipboard.writeText(addr).then(() => { $("status").textContent = t("copied"); }, fail);
-  } catch (e) { fail(); }
-});
-
-applyLang();
+function setLang(l){lang=l;try{localStorage.setItem("lang",l);}catch(e){}render();}
+document.getElementById("lang-fr").onclick=()=>setLang("fr");
+document.getElementById("lang-en").onclick=()=>setLang("en");
+document.getElementById("copy").onclick=async()=>{
+  const m=document.getElementById("mail"),st=document.getElementById("status");
+  try{await navigator.clipboard.writeText(m.textContent);st.textContent=t("copied");}
+  catch(e){const r=document.createRange();r.selectNodeContents(m);const s=getSelection();s.removeAllRanges();s.addRange(r);st.textContent=t("copyfail");}
+};
+render();
 </script>
 </body>
 </html>
