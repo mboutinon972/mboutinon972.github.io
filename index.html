@@ -419,7 +419,7 @@ if(p.fs)h.style.fontSize=p.fs+"%";
     <div class="block"><dl><dt data-i18n="cb1"></dt><dd data-i18n="cv1"></dd><dt data-i18n="cb2"></dt><dd data-i18n="cv2"></dd><dt data-i18n="cb3"></dt><dd data-i18n="cv3"></dd><dt data-i18n="cb4"></dt><dd data-i18n="cv4"></dd><dt data-i18n="cb5"></dt><dd data-i18n="cv5"></dd><dt data-i18n="cb6"></dt><dd data-i18n="cv6"></dd></dl></div>
   </figure>
   <section id="chiffres" class="proofsec" aria-label="Chiffres">
-    <p class="label" data-i18n="proof_h"></p>
+    <h2 data-i18n="proof_h"></h2>
     <div class="proof">
       <div><span class="num n1" data-i18n="n1"></span><small data-i18n="l1"></small></div>
       <div><span class="num n2" data-i18n="n2"></span><small data-i18n="l2"></small></div>
@@ -428,7 +428,7 @@ if(p.fs)h.style.fontSize=p.fs+"%";
     </div>
   </section>
   <section id="profils">
-    <p class="label" data-i18n="choose"></p>
+    <h2 data-i18n="choose"></h2>
     <div class="paths">
       <a class="path dev" href="developpement.html"><h2 data-i18n="dev_t"></h2><p data-i18n="dev_d"></p><div class="tags"><span>JavaScript</span><span>Python</span><span>SQL</span><span>Sécurité</span></div><span class="go" data-i18n="dev_go"></span></a>
       <a class="path pm" href="projet.html"><h2 data-i18n="pm_t"></h2><p data-i18n="pm_d"></p><div class="tags"><span>Cadrage</span><span>Planning</span><span>Risques</span><span>Livraison</span></div><span class="go" data-i18n="pm_go"></span></a>
@@ -754,7 +754,7 @@ tocP[0].onclick=function(){toggle(tocP,axP);};axP[0].onclick=function(){toggle(a
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){[tocP,axP].forEach(function(x){if(!x[1].hidden){close(x);x[0].focus();}});}});
 document.addEventListener("click",function(e){var path=e.composedPath?e.composedPath():[];[tocP,axP].forEach(function(x){if(!x[1].hidden&&path.indexOf(x[1])<0&&path.indexOf(x[0])<0)close(x);});});
 var io,currentId="top";
-function dimOthers(id){document.querySelectorAll("main > section[id]").forEach(function(s){s.classList.toggle("dim",prefs.focus&&id!=="top"&&s.id!==id);});}
+function dimOthers(id){document.querySelectorAll("main > section[id]").forEach(function(s){s.classList.toggle("dim",!!(prefs.focus&&id!=="top"&&s.id!==id));});}
 function spy(){
   if(io)io.disconnect();
   if(!("IntersectionObserver" in window))return;
