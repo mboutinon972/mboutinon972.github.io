@@ -114,6 +114,36 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font
 .facts{display:flex;flex-wrap:wrap;gap:8px 28px;color:var(--muted);font-size:.95rem}
 .hubhero{padding-block:56px 40px}
 footer a{color:var(--muted)}
+
+/* Signature : trois bandes spectrales (teal, ambre, vermillon) reprises partout */
+.bandline{height:4px;width:96px;border-radius:2px;background:linear-gradient(90deg,var(--c1) 0 33.3%,var(--c2) 33.3% 66.6%,var(--c3) 66.6%)}
+.hero2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:48px 56px}
+@media (max-width:900px){.hero2{grid-template-columns:minmax(0,1fr)}}
+.hero2 .txt{display:flex;flex-direction:column;gap:22px;align-items:flex-start;min-width:0}
+.hero2 h1{font-size:clamp(2.4rem,6vw,4.2rem);letter-spacing:-.03em}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
+.fig svg{display:block;width:100%;height:auto}
+.fig figcaption,.figcap{font-size:.85rem;color:var(--muted);padding:10px 4px 0}
+.fig text,svg text{font-family:var(--font-body)}
+.t-muted{fill:var(--muted)}.t-fg{fill:var(--fg)}.t-mono{font-family:var(--font-mono)}
+.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;border-block:1px solid var(--line);padding-block:0}
+.proof div{padding:22px 20px 22px 0;display:flex;flex-direction:column;gap:4px;min-width:0}
+.proof .num{font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,4.6vw,3rem);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.proof .n1{color:var(--c1)}.proof .n2{color:var(--c2)}.proof .n3{color:var(--c3)}
+.proof small{color:var(--muted);font-size:.9rem;line-height:1.4}
+section.proofsec{padding-block:0;border-top:none}
+.path.dev{border-top:4px solid var(--c1)}.path.pm{border-top:4px solid var(--c2)}
+.path .mini{margin-block:2px}
+.figs{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+.out{font-family:var(--font-mono);font-size:.78rem;color:var(--muted);margin-top:auto;padding-top:8px;border-top:1px dashed var(--line)}
+.step .out{margin-top:6px}
+.legend2{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--muted);padding:8px 4px 0}
+.legend2 span{display:inline-flex;align-items:center;gap:6px}
+@media (prefers-reduced-motion:no-preference){
+ .draw path.band{stroke-dasharray:900;stroke-dashoffset:900;animation:dr 1.6s ease-out forwards}
+ .draw path.b2{animation-delay:.25s}.draw path.b3{animation-delay:.5s}.draw path.sum{animation-delay:.8s}
+ @keyframes dr{to{stroke-dashoffset:0}}
+}
 </style>
 </head>
 <body>
@@ -134,6 +164,7 @@ footer a{color:var(--muted)}
 
 <main id="top">
   <div class="hero">
+    <div class="bandline" aria-hidden="true"></div>
     <p class="label" data-i18n="eyebrow"></p>
     <h1 data-i18n="h1"></h1>
     <p class="lead" data-i18n="lead"></p>
@@ -143,15 +174,31 @@ footer a{color:var(--muted)}
       <a class="btn ghost" href="#contact" data-i18n="cta_contact"></a>
     </div>
   </div>
+  <section class="proofsec" aria-label="Chiffres">
+    <p class="label" data-i18n="proof_h"></p>
+    <div class="proof">
+      <div><span class="num n1" data-i18n="n1"></span><small data-i18n="l1"></small></div>
+      <div><span class="num n2" data-i18n="n2"></span><small data-i18n="l2"></small></div>
+      <div><span class="num n3" data-i18n="n3"></span><small data-i18n="l3"></small></div>
+      <div><span class="num n1" data-i18n="n4"></span><small data-i18n="l4"></small></div>
+    </div>
+  </section>
+  
   <section id="demarche">
     <h2 data-i18n="method_h"></h2>
     <p class="intro" data-i18n="method_i"></p>
     <div class="steps">
-      <div class="step"><span class="mono">1</span><h3 data-i18n="m1_t"></h3><p data-i18n="m1_d"></p></div>
-      <div class="step"><span class="mono">2</span><h3 data-i18n="m2_t"></h3><p data-i18n="m2_d"></p></div>
-      <div class="step"><span class="mono">3</span><h3 data-i18n="m3_t"></h3><p data-i18n="m3_d"></p></div>
-      <div class="step"><span class="mono">4</span><h3 data-i18n="m4_t"></h3><p data-i18n="m4_d"></p></div>
+      <div class="step"><span class="mono">1</span><h3 data-i18n="m1_t"></h3><p data-i18n="m1_d"></p><span class="out" data-i18n="o1"></span></div>
+      <div class="step"><span class="mono">2</span><h3 data-i18n="m2_t"></h3><p data-i18n="m2_d"></p><span class="out" data-i18n="o2"></span></div>
+      <div class="step"><span class="mono">3</span><h3 data-i18n="m3_t"></h3><p data-i18n="m3_d"></p><span class="out" data-i18n="o3"></span></div>
+      <div class="step"><span class="mono">4</span><h3 data-i18n="m4_t"></h3><p data-i18n="m4_d"></p><span class="out" data-i18n="o4"></span></div>
     </div>
+  </section>
+  <section id="planning">
+    <h2 data-i18n="gantt_h"></h2>
+    <p class="intro" data-i18n="gantt_i"></p>
+    <figure class="fig" style="margin:0"><div style="overflow-x:auto"><div style="min-width:620px"><svg viewBox="0 0 760 330" role="img" aria-labelledby="gt"><title id="gt" data-i18n="fig_gantt_t"></title><line x1="190.0" x2="190.0" y1="36" y2="262" stroke="var(--line)"/><line x1="236.2" x2="236.2" y1="36" y2="262" stroke="var(--line)"/><line x1="282.3" x2="282.3" y1="36" y2="262" stroke="var(--line)"/><line x1="328.5" x2="328.5" y1="36" y2="262" stroke="var(--line)"/><line x1="374.7" x2="374.7" y1="36" y2="262" stroke="var(--line)"/><line x1="420.8" x2="420.8" y1="36" y2="262" stroke="var(--line)"/><line x1="467.0" x2="467.0" y1="36" y2="262" stroke="var(--line)"/><line x1="513.2" x2="513.2" y1="36" y2="262" stroke="var(--line)"/><line x1="559.3" x2="559.3" y1="36" y2="262" stroke="var(--line)"/><line x1="605.5" x2="605.5" y1="36" y2="262" stroke="var(--line)"/><line x1="651.7" x2="651.7" y1="36" y2="262" stroke="var(--line)"/><line x1="697.8" x2="697.8" y1="36" y2="262" stroke="var(--line)"/><line x1="744.0" x2="744.0" y1="36" y2="262" stroke="var(--line)"/><text x="213.1" y="28" text-anchor="middle" font-size="11" class="t-muted t-mono">1</text><text x="259.2" y="28" text-anchor="middle" font-size="11" class="t-muted t-mono">2</text><text x="305.4" y="28" text-anchor="middle" font-size="11" class="t-muted t-mono">3</text><text x="351.6" y="28" text-anchor="middle" font-size="11" class="t-muted t-mono">4</text><text x="397.7" y="28" text-anchor="middle" font-size="11" class="t-muted t-mono">5</text><text x="443.9" y="28" text-anchor="middle" font-size="11" class="t-muted t-mono">6</text><text x="490.1" y="28" text-anchor="middle" font-size="11" class="t-muted t-mono">7</text><text x="536.2" y="28" text-anchor="middle" font-size="11" class="t-muted t-mono">8</text><text x="582.4" y="28" text-anchor="middle" font-size="11" class="t-muted t-mono">9</text><text x="628.6" y="28" text-anchor="middle" font-size="11" class="t-muted t-mono">10</text><text x="674.8" y="28" text-anchor="middle" font-size="11" class="t-muted t-mono">11</text><text x="720.9" y="28" text-anchor="middle" font-size="11" class="t-muted t-mono">12</text><text x="8" y="28" font-size="11" class="t-muted t-mono" data-i18n="g_week"></text><text x="8" y="60" font-size="12.5" class="t-fg" data-i18n="g_frame"></text><rect x="191.0" y="47" width="90.3" height="20" rx="4" fill="var(--c1)"/><text x="8" y="90" font-size="12.5" class="t-fg" data-i18n="g_plan"></text><rect x="237.2" y="77" width="90.3" height="20" rx="4" fill="var(--c1)"/><text x="8" y="120" font-size="12.5" class="t-fg" data-i18n="g_lot1"></text><rect x="283.3" y="107" width="136.5" height="20" rx="4" fill="var(--c2)"/><text x="8" y="150" font-size="12.5" class="t-fg" data-i18n="g_lot2"></text><rect x="375.7" y="137" width="182.7" height="20" rx="4" fill="var(--c2)"/><text x="8" y="180" font-size="12.5" class="t-fg" data-i18n="g_lot3"></text><rect x="514.2" y="167" width="136.5" height="20" rx="4" fill="var(--c2)"/><text x="8" y="210" font-size="12.5" class="t-fg" data-i18n="g_accept"></text><rect x="606.5" y="197" width="90.3" height="20" rx="4" fill="var(--c3)"/><text x="8" y="240" font-size="12.5" class="t-fg" data-i18n="g_hand"></text><rect x="652.7" y="227" width="90.3" height="20" rx="4" fill="var(--c3)"/><path d="M282.3,268 l7,8 l-7,8 l-7,-8 z" fill="var(--fg)"/><text x="282.3" y="302" text-anchor="middle" font-size="11.5" class="t-fg" data-i18n="g_m1"></text><path d="M559.3,268 l7,8 l-7,8 l-7,-8 z" fill="var(--fg)"/><text x="559.3" y="302" text-anchor="middle" font-size="11.5" class="t-fg" data-i18n="g_m2"></text><path d="M744.0,268 l7,8 l-7,8 l-7,-8 z" fill="var(--fg)"/><text x="744.0" y="302" text-anchor="end" font-size="11.5" class="t-fg" data-i18n="g_m3"></text></svg></div></div>
+    <div class="legend2"><span><i class="sw" style="background:var(--c1)"></i><span data-i18n="lg1"></span></span><span><i class="sw" style="background:var(--c2)"></i><span data-i18n="lg2"></span></span><span><i class="sw" style="background:var(--c3)"></i><span data-i18n="lg3"></span></span></div></figure>
   </section>
   <section id="realisations">
     <h2 data-i18n="work_h"></h2>
@@ -245,7 +292,37 @@ const I18N={
   "p1_y": "2024 – aujourd'hui",
   "p1_d": "Cycle ingénieur Systèmes d'Information et Génie Industriel à l'EPF. Ingénieur R&D en apprentissage au CEA (laboratoire LILA).",
   "p2_y": "2022 – 2024",
-  "p2_d": "BTS Métiers de la chimie. Technicien chimiste en apprentissage au CEA (laboratoire LMAT)."
+  "p2_d": "BTS Métiers de la chimie. Technicien chimiste en apprentissage au CEA (laboratoire LMAT).",
+  "proof_h": "Repères",
+  "n1": "5",
+  "l1": "personnes dans l'équipe du projet UGV-IA, de la conception à la démonstration",
+  "n2": "−55 %",
+  "l2": "d'erreur d'estimation par fusion de capteurs sur ce projet",
+  "n3": "2",
+  "l3": "laboratoires du CEA, en alternance depuis 2022",
+  "n4": "1",
+  "l4": "outil livré aux utilisateurs : Photolys, pour une équipe de recherche",
+  "o1": "Livrable : besoin reformulé, périmètre, critères de réussite",
+  "o2": "Livrable : lots, planning, registre des risques",
+  "o3": "Livrable : points réguliers, tableau de suivi",
+  "o4": "Livrable : recette, documentation, retour d'expérience",
+  "gantt_h": "À quoi ressemble un projet",
+  "gantt_i": "Planning type d'un projet d'outil de 12 semaines. Schéma illustratif de ma façon de découper et de jalonner, pas le calendrier d'un projet réel.",
+  "fig_gantt_t": "Planning type de 12 semaines",
+  "g_week": "Semaine",
+  "g_frame": "Cadrer",
+  "g_plan": "Planifier",
+  "g_lot1": "Lot 1 : socle",
+  "g_lot2": "Lot 2 : fonctions",
+  "g_lot3": "Lot 3 : finitions",
+  "g_accept": "Recette utilisateurs",
+  "g_hand": "Documentation et prise en main",
+  "g_m1": "Besoin validé",
+  "g_m2": "Version utilisable",
+  "g_m3": "Livraison",
+  "lg1": "Cadrage et planification",
+  "lg2": "Réalisation par lots",
+  "lg3": "Recette et transmission"
  },
  "en": {
   "nav_home": "Home",
@@ -297,7 +374,37 @@ const I18N={
   "p1_y": "2024 – present",
   "p1_d": "Engineering degree in Information Systems and Industrial Engineering at EPF. R&D engineer (apprenticeship) at CEA, LILA laboratory.",
   "p2_y": "2022 – 2024",
-  "p2_d": "BTS in Chemistry Professions. Chemistry technician (apprenticeship) at CEA, LMAT laboratory."
+  "p2_d": "BTS in Chemistry Professions. Chemistry technician (apprenticeship) at CEA, LMAT laboratory.",
+  "proof_h": "Key points",
+  "n1": "5",
+  "l1": "people in the UGV-IA project team, from design to demo",
+  "n2": "−55%",
+  "l2": "estimation error through sensor fusion on that project",
+  "n3": "2",
+  "l3": "CEA laboratories, work-study since 2022",
+  "n4": "1",
+  "l4": "tool delivered to its users: Photolys, for a research team",
+  "o1": "Output: restated need, scope, success criteria",
+  "o2": "Output: work packages, schedule, risk register",
+  "o3": "Output: regular check-ins, tracking board",
+  "o4": "Output: acceptance, documentation, lessons learned",
+  "gantt_h": "What a project looks like",
+  "gantt_i": "Typical schedule of a 12-week tool project. An illustrative diagram of how I split and set milestones, not the calendar of a real project.",
+  "fig_gantt_t": "Typical 12-week schedule",
+  "g_week": "Week",
+  "g_frame": "Frame",
+  "g_plan": "Plan",
+  "g_lot1": "Package 1: foundation",
+  "g_lot2": "Package 2: features",
+  "g_lot3": "Package 3: finishing",
+  "g_accept": "User acceptance",
+  "g_hand": "Documentation and onboarding",
+  "g_m1": "Need validated",
+  "g_m2": "Usable version",
+  "g_m3": "Delivery",
+  "lg1": "Framing and planning",
+  "lg2": "Delivery in packages",
+  "lg3": "Acceptance and handover"
  }
 };
 let lang="fr";

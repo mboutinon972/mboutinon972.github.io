@@ -114,6 +114,36 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font
 .facts{display:flex;flex-wrap:wrap;gap:8px 28px;color:var(--muted);font-size:.95rem}
 .hubhero{padding-block:56px 40px}
 footer a{color:var(--muted)}
+
+/* Signature : trois bandes spectrales (teal, ambre, vermillon) reprises partout */
+.bandline{height:4px;width:96px;border-radius:2px;background:linear-gradient(90deg,var(--c1) 0 33.3%,var(--c2) 33.3% 66.6%,var(--c3) 66.6%)}
+.hero2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:48px 56px}
+@media (max-width:900px){.hero2{grid-template-columns:minmax(0,1fr)}}
+.hero2 .txt{display:flex;flex-direction:column;gap:22px;align-items:flex-start;min-width:0}
+.hero2 h1{font-size:clamp(2.4rem,6vw,4.2rem);letter-spacing:-.03em}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
+.fig svg{display:block;width:100%;height:auto}
+.fig figcaption,.figcap{font-size:.85rem;color:var(--muted);padding:10px 4px 0}
+.fig text,svg text{font-family:var(--font-body)}
+.t-muted{fill:var(--muted)}.t-fg{fill:var(--fg)}.t-mono{font-family:var(--font-mono)}
+.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;border-block:1px solid var(--line);padding-block:0}
+.proof div{padding:22px 20px 22px 0;display:flex;flex-direction:column;gap:4px;min-width:0}
+.proof .num{font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,4.6vw,3rem);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.proof .n1{color:var(--c1)}.proof .n2{color:var(--c2)}.proof .n3{color:var(--c3)}
+.proof small{color:var(--muted);font-size:.9rem;line-height:1.4}
+section.proofsec{padding-block:0;border-top:none}
+.path.dev{border-top:4px solid var(--c1)}.path.pm{border-top:4px solid var(--c2)}
+.path .mini{margin-block:2px}
+.figs{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+.out{font-family:var(--font-mono);font-size:.78rem;color:var(--muted);margin-top:auto;padding-top:8px;border-top:1px dashed var(--line)}
+.step .out{margin-top:6px}
+.legend2{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--muted);padding:8px 4px 0}
+.legend2 span{display:inline-flex;align-items:center;gap:6px}
+@media (prefers-reduced-motion:no-preference){
+ .draw path.band{stroke-dasharray:900;stroke-dashoffset:900;animation:dr 1.6s ease-out forwards}
+ .draw path.b2{animation-delay:.25s}.draw path.b3{animation-delay:.5s}.draw path.sum{animation-delay:.8s}
+ @keyframes dr{to{stroke-dashoffset:0}}
+}
 </style>
 </head>
 <body>
@@ -132,18 +162,31 @@ footer a{color:var(--muted)}
 </header>
 
 <main id="top">
-  <div class="hero hubhero">
-    <p class="label" data-i18n="eyebrow"></p>
-    <h1 data-i18n="h1"></h1>
-    <p class="lead" data-i18n="lead"></p>
-    <span class="chip"><i></i><span data-i18n="avail"></span></span>
-    <div class="facts"><span data-i18n="f1"></span><span data-i18n="f2"></span><span data-i18n="f3"></span></div>
+  <div class="hero2">
+    <div class="txt">
+      <p class="label" data-i18n="eyebrow"></p>
+      <div class="bandline" aria-hidden="true"></div>
+      <h1 data-i18n="h1"></h1>
+      <p class="lead" data-i18n="lead"></p>
+      <span class="chip"><i></i><span data-i18n="avail"></span></span>
+      <div class="facts"><span data-i18n="f1"></span><span data-i18n="f2"></span><span data-i18n="f3"></span></div>
+    </div>
+    <figure class="fig" style="margin:0"><svg viewBox="0 0 560 300" role="img" aria-labelledby="spt spd"><title id="spt" data-i18n="fig_spec_t"></title><desc id="spd" data-i18n="fig_spec_d"></desc><g class="draw"><line x1="44" x2="548" y1="256.0" y2="256.0" stroke="var(--line)"/><text x="36" y="260.0" text-anchor="end" font-size="11" class="t-muted t-mono">0</text><line x1="44" x2="548" y1="136.0" y2="136.0" stroke="var(--line)"/><text x="36" y="140.0" text-anchor="end" font-size="11" class="t-muted t-mono">0.5</text><line x1="44" x2="548" y1="16.0" y2="16.0" stroke="var(--line)"/><text x="36" y="20.0" text-anchor="end" font-size="11" class="t-muted t-mono">1</text><text x="44.0" y="274" text-anchor="middle" font-size="11" class="t-muted t-mono">250</text><text x="116.0" y="274" text-anchor="middle" font-size="11" class="t-muted t-mono">300</text><text x="260.0" y="274" text-anchor="middle" font-size="11" class="t-muted t-mono">400</text><text x="404.0" y="274" text-anchor="middle" font-size="11" class="t-muted t-mono">500</text><text x="548.0" y="274" text-anchor="middle" font-size="11" class="t-muted t-mono">600</text><text x="296.0" y="292" text-anchor="middle" font-size="12" class="t-muted" data-i18n="axis_x"></text><path d="M44.0,251.1 L49.8,248.0 L55.5,243.5 L61.3,237.1 L67.0,228.4 L72.8,216.9 L78.6,202.5 L84.3,185.2 L90.1,165.2 L95.8,143.5 L101.6,121.1 L107.4,99.4 L113.1,80.2 L118.9,65.1 L124.6,55.3 L130.4,52.0 L136.2,55.3 L141.9,65.1 L147.7,80.2 L153.4,99.4 L159.2,121.1 L165.0,143.5 L170.7,165.2 L176.5,185.2 L182.2,202.5 L188.0,216.9 L193.8,228.4 L199.5,237.1 L205.3,243.5 L211.0,248.0 L216.8,251.1 L222.6,253.0 L228.3,254.3 L234.1,255.0 L239.8,255.5 L245.6,255.7 L251.4,255.9 L257.1,255.9 L262.9,256.0 L268.6,256.0 L274.4,256.0 L280.2,256.0 L285.9,256.0 L291.7,256.0 L297.4,256.0 L303.2,256.0 L309.0,256.0 L314.7,256.0 L320.5,256.0 L326.2,256.0 L332.0,256.0 L337.8,256.0 L343.5,256.0 L349.3,256.0 L355.0,256.0 L360.8,256.0 L366.6,256.0 L372.3,256.0 L378.1,256.0 L383.8,256.0 L389.6,256.0 L395.4,256.0 L401.1,256.0 L406.9,256.0 L412.6,256.0 L418.4,256.0 L424.2,256.0 L429.9,256.0 L435.7,256.0 L441.4,256.0 L447.2,256.0 L453.0,256.0 L458.7,256.0 L464.5,256.0 L470.2,256.0 L476.0,256.0 L481.8,256.0 L487.5,256.0 L493.3,256.0 L499.0,256.0 L504.8,256.0 L510.6,256.0 L516.3,256.0 L522.1,256.0 L527.8,256.0 L533.6,256.0 L539.4,256.0 L545.1,256.0 L548.0,256 L44.0,256 Z" fill="var(--c1)" opacity=".14"/><path class="band b1" d="M44.0,251.1 L49.8,248.0 L55.5,243.5 L61.3,237.1 L67.0,228.4 L72.8,216.9 L78.6,202.5 L84.3,185.2 L90.1,165.2 L95.8,143.5 L101.6,121.1 L107.4,99.4 L113.1,80.2 L118.9,65.1 L124.6,55.3 L130.4,52.0 L136.2,55.3 L141.9,65.1 L147.7,80.2 L153.4,99.4 L159.2,121.1 L165.0,143.5 L170.7,165.2 L176.5,185.2 L182.2,202.5 L188.0,216.9 L193.8,228.4 L199.5,237.1 L205.3,243.5 L211.0,248.0 L216.8,251.1 L222.6,253.0 L228.3,254.3 L234.1,255.0 L239.8,255.5 L245.6,255.7 L251.4,255.9 L257.1,255.9 L262.9,256.0 L268.6,256.0 L274.4,256.0 L280.2,256.0 L285.9,256.0 L291.7,256.0 L297.4,256.0 L303.2,256.0 L309.0,256.0 L314.7,256.0 L320.5,256.0 L326.2,256.0 L332.0,256.0 L337.8,256.0 L343.5,256.0 L349.3,256.0 L355.0,256.0 L360.8,256.0 L366.6,256.0 L372.3,256.0 L378.1,256.0 L383.8,256.0 L389.6,256.0 L395.4,256.0 L401.1,256.0 L406.9,256.0 L412.6,256.0 L418.4,256.0 L424.2,256.0 L429.9,256.0 L435.7,256.0 L441.4,256.0 L447.2,256.0 L453.0,256.0 L458.7,256.0 L464.5,256.0 L470.2,256.0 L476.0,256.0 L481.8,256.0 L487.5,256.0 L493.3,256.0 L499.0,256.0 L504.8,256.0 L510.6,256.0 L516.3,256.0 L522.1,256.0 L527.8,256.0 L533.6,256.0 L539.4,256.0 L545.1,256.0" fill="none" stroke="var(--c1)" stroke-width="2.2"/><path d="M44.0,256.0 L49.8,256.0 L55.5,256.0 L61.3,255.9 L67.0,255.9 L72.8,255.8 L78.6,255.7 L84.3,255.6 L90.1,255.4 L95.8,255.0 L101.6,254.5 L107.4,253.8 L113.1,252.9 L118.9,251.5 L124.6,249.7 L130.4,247.3 L136.2,244.3 L141.9,240.4 L147.7,235.6 L153.4,229.9 L159.2,223.1 L165.0,215.3 L170.7,206.5 L176.5,196.8 L182.2,186.6 L188.0,175.9 L193.8,165.3 L199.5,155.1 L205.3,145.7 L211.0,137.6 L216.8,131.1 L222.6,126.6 L228.3,124.3 L234.1,124.3 L239.8,126.6 L245.6,131.1 L251.4,137.6 L257.1,145.7 L262.9,155.1 L268.6,165.3 L274.4,175.9 L280.2,186.6 L285.9,196.8 L291.7,206.5 L297.4,215.3 L303.2,223.1 L309.0,229.9 L314.7,235.6 L320.5,240.4 L326.2,244.3 L332.0,247.3 L337.8,249.7 L343.5,251.5 L349.3,252.9 L355.0,253.8 L360.8,254.5 L366.6,255.0 L372.3,255.4 L378.1,255.6 L383.8,255.7 L389.6,255.8 L395.4,255.9 L401.1,255.9 L406.9,256.0 L412.6,256.0 L418.4,256.0 L424.2,256.0 L429.9,256.0 L435.7,256.0 L441.4,256.0 L447.2,256.0 L453.0,256.0 L458.7,256.0 L464.5,256.0 L470.2,256.0 L476.0,256.0 L481.8,256.0 L487.5,256.0 L493.3,256.0 L499.0,256.0 L504.8,256.0 L510.6,256.0 L516.3,256.0 L522.1,256.0 L527.8,256.0 L533.6,256.0 L539.4,256.0 L545.1,256.0 L548.0,256 L44.0,256 Z" fill="var(--c2)" opacity=".14"/><path class="band b2" d="M44.0,256.0 L49.8,256.0 L55.5,256.0 L61.3,255.9 L67.0,255.9 L72.8,255.8 L78.6,255.7 L84.3,255.6 L90.1,255.4 L95.8,255.0 L101.6,254.5 L107.4,253.8 L113.1,252.9 L118.9,251.5 L124.6,249.7 L130.4,247.3 L136.2,244.3 L141.9,240.4 L147.7,235.6 L153.4,229.9 L159.2,223.1 L165.0,215.3 L170.7,206.5 L176.5,196.8 L182.2,186.6 L188.0,175.9 L193.8,165.3 L199.5,155.1 L205.3,145.7 L211.0,137.6 L216.8,131.1 L222.6,126.6 L228.3,124.3 L234.1,124.3 L239.8,126.6 L245.6,131.1 L251.4,137.6 L257.1,145.7 L262.9,155.1 L268.6,165.3 L274.4,175.9 L280.2,186.6 L285.9,196.8 L291.7,206.5 L297.4,215.3 L303.2,223.1 L309.0,229.9 L314.7,235.6 L320.5,240.4 L326.2,244.3 L332.0,247.3 L337.8,249.7 L343.5,251.5 L349.3,252.9 L355.0,253.8 L360.8,254.5 L366.6,255.0 L372.3,255.4 L378.1,255.6 L383.8,255.7 L389.6,255.8 L395.4,255.9 L401.1,255.9 L406.9,256.0 L412.6,256.0 L418.4,256.0 L424.2,256.0 L429.9,256.0 L435.7,256.0 L441.4,256.0 L447.2,256.0 L453.0,256.0 L458.7,256.0 L464.5,256.0 L470.2,256.0 L476.0,256.0 L481.8,256.0 L487.5,256.0 L493.3,256.0 L499.0,256.0 L504.8,256.0 L510.6,256.0 L516.3,256.0 L522.1,256.0 L527.8,256.0 L533.6,256.0 L539.4,256.0 L545.1,256.0" fill="none" stroke="var(--c2)" stroke-width="2.2"/><path d="M44.0,256.0 L49.8,256.0 L55.5,256.0 L61.3,256.0 L67.0,256.0 L72.8,256.0 L78.6,256.0 L84.3,256.0 L90.1,256.0 L95.8,256.0 L101.6,256.0 L107.4,256.0 L113.1,256.0 L118.9,256.0 L124.6,256.0 L130.4,256.0 L136.2,256.0 L141.9,256.0 L147.7,256.0 L153.4,255.9 L159.2,255.9 L165.0,255.9 L170.7,255.8 L176.5,255.7 L182.2,255.6 L188.0,255.4 L193.8,255.2 L199.5,254.9 L205.3,254.5 L211.0,254.0 L216.8,253.4 L222.6,252.5 L228.3,251.5 L234.1,250.2 L239.8,248.7 L245.6,246.8 L251.4,244.6 L257.1,242.0 L262.9,239.1 L268.6,235.7 L274.4,231.9 L280.2,227.6 L285.9,223.1 L291.7,218.2 L297.4,213.0 L303.2,207.7 L309.0,202.4 L314.7,197.1 L320.5,192.0 L326.2,187.2 L332.0,182.9 L337.8,179.1 L343.5,176.1 L349.3,173.8 L355.0,172.5 L360.8,172.0 L366.6,172.5 L372.3,173.8 L378.1,176.1 L383.8,179.1 L389.6,182.9 L395.4,187.2 L401.1,192.0 L406.9,197.1 L412.6,202.4 L418.4,207.7 L424.2,213.0 L429.9,218.2 L435.7,223.1 L441.4,227.6 L447.2,231.9 L453.0,235.7 L458.7,239.1 L464.5,242.0 L470.2,244.6 L476.0,246.8 L481.8,248.7 L487.5,250.2 L493.3,251.5 L499.0,252.5 L504.8,253.4 L510.6,254.0 L516.3,254.5 L522.1,254.9 L527.8,255.2 L533.6,255.4 L539.4,255.6 L545.1,255.7 L548.0,256 L44.0,256 Z" fill="var(--c3)" opacity=".14"/><path class="band b3" d="M44.0,256.0 L49.8,256.0 L55.5,256.0 L61.3,256.0 L67.0,256.0 L72.8,256.0 L78.6,256.0 L84.3,256.0 L90.1,256.0 L95.8,256.0 L101.6,256.0 L107.4,256.0 L113.1,256.0 L118.9,256.0 L124.6,256.0 L130.4,256.0 L136.2,256.0 L141.9,256.0 L147.7,256.0 L153.4,255.9 L159.2,255.9 L165.0,255.9 L170.7,255.8 L176.5,255.7 L182.2,255.6 L188.0,255.4 L193.8,255.2 L199.5,254.9 L205.3,254.5 L211.0,254.0 L216.8,253.4 L222.6,252.5 L228.3,251.5 L234.1,250.2 L239.8,248.7 L245.6,246.8 L251.4,244.6 L257.1,242.0 L262.9,239.1 L268.6,235.7 L274.4,231.9 L280.2,227.6 L285.9,223.1 L291.7,218.2 L297.4,213.0 L303.2,207.7 L309.0,202.4 L314.7,197.1 L320.5,192.0 L326.2,187.2 L332.0,182.9 L337.8,179.1 L343.5,176.1 L349.3,173.8 L355.0,172.5 L360.8,172.0 L366.6,172.5 L372.3,173.8 L378.1,176.1 L383.8,179.1 L389.6,182.9 L395.4,187.2 L401.1,192.0 L406.9,197.1 L412.6,202.4 L418.4,207.7 L424.2,213.0 L429.9,218.2 L435.7,223.1 L441.4,227.6 L447.2,231.9 L453.0,235.7 L458.7,239.1 L464.5,242.0 L470.2,244.6 L476.0,246.8 L481.8,248.7 L487.5,250.2 L493.3,251.5 L499.0,252.5 L504.8,253.4 L510.6,254.0 L516.3,254.5 L522.1,254.9 L527.8,255.2 L533.6,255.4 L539.4,255.6 L545.1,255.7" fill="none" stroke="var(--c3)" stroke-width="2.2"/><path class="band sum" d="M44.0,251.0 L49.8,248.0 L55.5,243.5 L61.3,237.1 L67.0,228.3 L72.8,216.8 L78.6,202.3 L84.3,184.8 L90.1,164.6 L95.8,142.5 L101.6,119.6 L107.4,97.2 L113.1,77.0 L118.9,60.6 L124.6,49.0 L130.4,43.3 L136.2,43.6 L141.9,49.4 L147.7,59.8 L153.4,73.2 L159.2,88.0 L165.0,102.6 L170.7,115.5 L176.5,125.7 L182.2,132.7 L188.0,136.3 L193.8,136.9 L199.5,135.2 L205.3,131.8 L211.0,127.6 L216.8,123.6 L222.6,120.2 L228.3,118.1 L234.1,117.6 L239.8,118.8 L245.6,121.7 L251.4,126.1 L257.1,131.7 L262.9,138.1 L268.6,145.0 L274.4,151.8 L280.2,158.2 L285.9,163.9 L291.7,168.6 L297.4,172.3 L303.2,174.8 L309.0,176.2 L314.7,176.7 L320.5,176.4 L326.2,175.5 L332.0,174.2 L337.8,172.8 L343.5,171.6 L349.3,170.7 L355.0,170.3 L360.8,170.5 L366.6,171.5 L372.3,173.2 L378.1,175.7 L383.8,178.9 L389.6,182.7 L395.4,187.1 L401.1,191.9 L406.9,197.0 L412.6,202.4 L418.4,207.7 L424.2,213.0 L429.9,218.2 L435.7,223.1 L441.4,227.6 L447.2,231.8 L453.0,235.7 L458.7,239.1 L464.5,242.0 L470.2,244.6 L476.0,246.8 L481.8,248.7 L487.5,250.2 L493.3,251.5 L499.0,252.5 L504.8,253.4 L510.6,254.0 L516.3,254.5 L522.1,254.9 L527.8,255.2 L533.6,255.4 L539.4,255.6 L545.1,255.7" fill="none" stroke="var(--fg)" stroke-width="2.6"/></g></svg><figcaption data-i18n="fig_cap"></figcaption></figure>
   </div>
+  <section class="proofsec" aria-label="Chiffres">
+    <p class="label" data-i18n="proof_h"></p>
+    <div class="proof">
+      <div><span class="num n1" data-i18n="n1"></span><small data-i18n="l1"></small></div>
+      <div><span class="num n2" data-i18n="n2"></span><small data-i18n="l2"></small></div>
+      <div><span class="num n3" data-i18n="n3"></span><small data-i18n="l3"></small></div>
+      <div><span class="num n1" data-i18n="n4"></span><small data-i18n="l4"></small></div>
+    </div>
+  </section>
   <section id="profils">
     <p class="label" data-i18n="choose"></p>
     <div class="paths">
-      <a class="path" href="developpement.html"><h2 data-i18n="dev_t"></h2><p data-i18n="dev_d"></p><div class="tags"><span>JavaScript</span><span>Python</span><span>SQL</span><span>Sécurité</span></div><span class="go" data-i18n="dev_go"></span></a>
-      <a class="path" href="projet.html"><h2 data-i18n="pm_t"></h2><p data-i18n="pm_d"></p><div class="tags"><span>Cadrage</span><span>Planning</span><span>Risques</span><span>Livraison</span></div><span class="go" data-i18n="pm_go"></span></a>
+      <a class="path dev" href="developpement.html"><h2 data-i18n="dev_t"></h2><p data-i18n="dev_d"></p><div class="tags"><span>JavaScript</span><span>Python</span><span>SQL</span><span>Sécurité</span></div><span class="go" data-i18n="dev_go"></span></a>
+      <a class="path pm" href="projet.html"><h2 data-i18n="pm_t"></h2><p data-i18n="pm_d"></p><div class="tags"><span>Cadrage</span><span>Planning</span><span>Risques</span><span>Livraison</span></div><span class="go" data-i18n="pm_go"></span></a>
     </div>
   </section>
   <section id="contact">
@@ -178,7 +221,7 @@ const I18N={
   "eyebrow": "Apprenti ingénieur · EPF · CEA",
   "doc_title": "Mathieu Boutinon",
   "h1": "Bonjour, je suis Mathieu.",
-  "lead": "Futur ingénieur en systèmes d'information et génie industriel. Selon votre besoin, découvrez le profil qui vous convient.",
+  "lead": "Futur ingénieur en systèmes d'information et génie industriel. Je transforme un besoin en outil qui fonctionne, avec rigueur et sens de l'écoute.",
   "choose": "Choisissez un profil",
   "dev_t": "Développement d'outils",
   "dev_d": "Je conçois des applications web pour des utilisateurs non informaticiens : interface claire, code fiable, sécurité dès la conception. Avec une démo interactive.",
@@ -188,7 +231,20 @@ const I18N={
   "pm_go": "Voir le profil gestion de projet →",
   "f1": "EPF, cycle ingénieur SIGI",
   "f2": "Apprenti au CEA",
-  "f3": "Stage de 3 mois en Europe, janvier à août 2027"
+  "f3": "Stage de 3 mois en Europe, janvier à août 2027",
+  "fig_spec_t": "Spectre synthétique décomposé en trois bandes",
+  "fig_spec_d": "Trois bandes colorées qui se recouvrent et leur somme en noir",
+  "axis_x": "Longueur d'onde (nm)",
+  "fig_cap": "Un spectre mesuré est la somme de plusieurs bandes. Retrouver chaque bande, c'est la déconvolution : le cœur de Photolys.",
+  "proof_h": "En quelques chiffres",
+  "n1": "−55 %",
+  "l1": "d'erreur d'estimation grâce à la fusion de capteurs (filtre de Kalman), projet UGV-IA",
+  "n2": "88,2 %",
+  "l2": "de confiance moyenne de détection d'objets (YOLOv8)",
+  "n3": "35 pas",
+  "l3": "pour atteindre l'objectif avec l'agent entraîné, contre 151 pour un agent aléatoire",
+  "n4": "2",
+  "l4": "laboratoires du CEA, en alternance depuis 2022"
  },
  "en": {
   "nav_home": "Home",
@@ -205,7 +261,7 @@ const I18N={
   "eyebrow": "Engineering apprentice · EPF · CEA",
   "doc_title": "Mathieu Boutinon",
   "h1": "Hello, I'm Mathieu.",
-  "lead": "Future engineer in information systems and industrial engineering. Pick the profile that fits your need.",
+  "lead": "Future engineer in information systems and industrial engineering. I turn a need into a tool that works, with rigour and a listening ear.",
   "choose": "Choose a profile",
   "dev_t": "Tool development",
   "dev_d": "I build web applications for non-technical users: clear interface, reliable code, security from the start. With an interactive demo.",
@@ -215,7 +271,20 @@ const I18N={
   "pm_go": "See the project management profile →",
   "f1": "EPF, SIGI engineering degree",
   "f2": "Apprentice at CEA",
-  "f3": "3-month internship in Europe, January to August 2027"
+  "f3": "3-month internship in Europe, January to August 2027",
+  "fig_spec_t": "Synthetic spectrum split into three bands",
+  "fig_spec_d": "Three overlapping coloured bands and their sum in black",
+  "axis_x": "Wavelength (nm)",
+  "fig_cap": "A measured spectrum is the sum of several bands. Recovering each band is deconvolution: the core of Photolys.",
+  "proof_h": "In a few figures",
+  "n1": "−55%",
+  "l1": "estimation error through sensor fusion (Kalman filter), UGV-IA project",
+  "n2": "88.2%",
+  "l2": "average confidence in object detection (YOLOv8)",
+  "n3": "35 steps",
+  "l3": "to reach the goal with the trained agent, versus 151 for a random agent",
+  "n4": "2",
+  "l4": "CEA laboratories, work-study since 2022"
  }
 };
 let lang="fr";

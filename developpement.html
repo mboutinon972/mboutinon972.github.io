@@ -103,6 +103,36 @@ th{font-weight:500;color:var(--muted);font-size:.8rem}
 .status{min-height:1.4em;color:var(--muted);font-size:.9rem}
 footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:.85rem}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Signature : trois bandes spectrales (teal, ambre, vermillon) reprises partout */
+.bandline{height:4px;width:96px;border-radius:2px;background:linear-gradient(90deg,var(--c1) 0 33.3%,var(--c2) 33.3% 66.6%,var(--c3) 66.6%)}
+.hero2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:48px 56px}
+@media (max-width:900px){.hero2{grid-template-columns:minmax(0,1fr)}}
+.hero2 .txt{display:flex;flex-direction:column;gap:22px;align-items:flex-start;min-width:0}
+.hero2 h1{font-size:clamp(2.4rem,6vw,4.2rem);letter-spacing:-.03em}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
+.fig svg{display:block;width:100%;height:auto}
+.fig figcaption,.figcap{font-size:.85rem;color:var(--muted);padding:10px 4px 0}
+.fig text,svg text{font-family:var(--font-body)}
+.t-muted{fill:var(--muted)}.t-fg{fill:var(--fg)}.t-mono{font-family:var(--font-mono)}
+.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;border-block:1px solid var(--line);padding-block:0}
+.proof div{padding:22px 20px 22px 0;display:flex;flex-direction:column;gap:4px;min-width:0}
+.proof .num{font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,4.6vw,3rem);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.proof .n1{color:var(--c1)}.proof .n2{color:var(--c2)}.proof .n3{color:var(--c3)}
+.proof small{color:var(--muted);font-size:.9rem;line-height:1.4}
+section.proofsec{padding-block:0;border-top:none}
+.path.dev{border-top:4px solid var(--c1)}.path.pm{border-top:4px solid var(--c2)}
+.path .mini{margin-block:2px}
+.figs{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+.out{font-family:var(--font-mono);font-size:.78rem;color:var(--muted);margin-top:auto;padding-top:8px;border-top:1px dashed var(--line)}
+.step .out{margin-top:6px}
+.legend2{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--muted);padding:8px 4px 0}
+.legend2 span{display:inline-flex;align-items:center;gap:6px}
+@media (prefers-reduced-motion:no-preference){
+ .draw path.band{stroke-dasharray:900;stroke-dashoffset:900;animation:dr 1.6s ease-out forwards}
+ .draw path.b2{animation-delay:.25s}.draw path.b3{animation-delay:.5s}.draw path.sum{animation-delay:.8s}
+ @keyframes dr{to{stroke-dashoffset:0}}
+}
 </style>
 </head>
 <body>
@@ -126,6 +156,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font
 
 <main id="top">
   <div class="hero">
+    <div class="bandline" aria-hidden="true"></div>
     <p class="label" data-i18n="eyebrow"></p>
     <h1 data-i18n="h1"></h1>
     <p class="lead" data-i18n="lead"></p>
@@ -136,6 +167,16 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font
     </div>
   </div>
 
+  <section class="proofsec" aria-label="Chiffres">
+    <p class="label" data-i18n="proof_h"></p>
+    <div class="proof">
+      <div><span class="num n1" data-i18n="n1"></span><small data-i18n="l1"></small></div>
+      <div><span class="num n2" data-i18n="n2"></span><small data-i18n="l2"></small></div>
+      <div><span class="num n3" data-i18n="n3"></span><small data-i18n="l3"></small></div>
+      <div><span class="num n1" data-i18n="n4"></span><small data-i18n="l4"></small></div>
+    </div>
+  </section>
+  
   <section id="offre">
     <h2 data-i18n="offer_h"></h2>
     <p class="intro" data-i18n="offer_intro"></p>
@@ -176,6 +217,14 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font
     <p class="note" data-i18n="demo_note"></p>
   </section>
 
+  <section id="sous-le-capot">
+    <h2 data-i18n="inside_h"></h2>
+    <p class="intro" data-i18n="inside_i"></p>
+    <div class="figs">
+      <figure class="fig" style="margin:0"><svg viewBox="0 0 560 140" role="img" aria-labelledby="plt"><title id="plt" data-i18n="fig_pipe_t"></title><defs><marker id="ah1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs><rect x="8" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="60.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp1"></text><text x="60.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp1s"></text><rect x="118" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="170.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp2"></text><text x="170.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp2s"></text><rect x="228" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c2)" stroke-width="1.6"/><text x="280.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp3"></text><text x="280.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp3s"></text><rect x="338" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c2)" stroke-width="1.6"/><text x="390.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp4"></text><text x="390.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp4s"></text><rect x="448" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c3)" stroke-width="1.6"/><text x="500.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp5"></text><text x="500.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp5s"></text><line x1="112" y1="72" x2="118" y2="72" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah1)"/><line x1="222" y1="72" x2="228" y2="72" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah1)"/><line x1="332" y1="72" x2="338" y2="72" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah1)"/><line x1="442" y1="72" x2="448" y2="72" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah1)"/><text x="8" y="26" font-size="11" class="t-muted t-mono" data-i18n="pp_in"></text><text x="552" y="26" text-anchor="end" font-size="11" class="t-muted t-mono" data-i18n="pp_out"></text><text x="8" y="132" font-size="11" class="t-muted" data-i18n="pp_note"></text></svg></figure>
+      <figure class="fig" style="margin:0"><svg viewBox="0 0 560 220" role="img" aria-labelledby="ugt"><title id="ugt" data-i18n="fig_ugv_t"></title><defs><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs><rect x="8" y="20" width="120" height="52" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="68.0" y="50.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_cam"></text><rect x="8" y="84" width="120" height="52" rx="6" fill="var(--surface)" stroke="var(--c2)" stroke-width="1.6"/><text x="68.0" y="114.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_imu"></text><rect x="8" y="148" width="120" height="52" rx="6" fill="var(--surface)" stroke="var(--c3)" stroke-width="1.6"/><text x="68.0" y="178.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_goal"></text><rect x="190" y="20" width="150" height="52" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="265.0" y="43.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_yolo"></text><text x="265.0" y="59.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="u_yolo_s"></text><rect x="190" y="84" width="150" height="52" rx="6" fill="var(--surface)" stroke="var(--c2)" stroke-width="1.6"/><text x="265.0" y="107.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_kal"></text><text x="265.0" y="123.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="u_kal_s"></text><rect x="190" y="148" width="150" height="52" rx="6" fill="var(--surface)" stroke="var(--c3)" stroke-width="1.6"/><text x="265.0" y="171.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_ppo"></text><text x="265.0" y="187.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="u_ppo_s"></text><line x1="128" y1="46" x2="188" y2="46" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><line x1="128" y1="110" x2="188" y2="110" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><line x1="128" y1="174" x2="188" y2="174" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><rect x="402" y="70" width="150" height="80" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="477.0" y="107.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_sys"></text><text x="477.0" y="123.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="u_sys_s"></text><line x1="340" y1="46" x2="400" y2="96" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><line x1="340" y1="110" x2="400" y2="110" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><line x1="340" y1="174" x2="400" y2="124" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/></svg></figure>
+    </div>
+  </section>
   <section id="realisations">
     <h2 data-i18n="work_h"></h2>
     <div class="cards">
@@ -224,7 +273,11 @@ footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font
 <script>
 const I18N = {
   fr: {
-    nav_home:"Accueil", nav_pm:"Profil gestion de projet", nav_offer:"Offre", nav_demo:"Démo", nav_work:"Réalisations", nav_path:"Parcours", nav_contact:"Contact",
+    nav_home:"Accueil", proof_h:"En quelques chiffres", n1:"−55 %", l1:"d'erreur d'estimation par fusion de capteurs (filtre de Kalman), projet UGV-IA", n2:"88,2 %", l2:"de confiance moyenne de détection d'objets (YOLOv8)", n3:"35 pas", l3:"pour atteindre l'objectif avec l'agent entraîné, contre 151 pour un agent aléatoire", n4:"8", l4:"langages pratiqués, de HTML et JavaScript à Python, SQL et C",
+    inside_h:"Sous le capot", inside_i:"Deux schémas pour comprendre comment je structure un outil : la chaîne de traitement d'un outil d'analyse, et l'architecture du projet UGV-IA.",
+    fig_pipe_t:"Chaîne de traitement type d'un outil d'analyse spectrale", pp_in:"Entrée", pp_out:"Sortie", pp1:"Import", pp1s:"fichier de spectre", pp2:"Validation", pp2s:"entrées contrôlées", pp3:"Calcul", pp3s:"régression ridge", pp4:"Visualisation", pp4s:"graphique", pp5:"Résultat", pp5s:"part des bandes", pp_note:"Chaque étape est testable séparément, et les entrées sont validées avant tout calcul.",
+    fig_ugv_t:"Architecture du projet UGV-IA", u_cam:"Caméra", u_imu:"Capteurs", u_goal:"Objectif", u_yolo:"Détection", u_yolo_s:"YOLOv8", u_kal:"Estimation", u_kal_s:"filtre de Kalman", u_ppo:"Navigation", u_ppo_s:"renforcement (PPO)", u_sys:"Véhicule", u_sys_s:"SQL chiffrée, démo web",
+ nav_pm:"Profil gestion de projet", nav_offer:"Offre", nav_demo:"Démo", nav_work:"Réalisations", nav_path:"Parcours", nav_contact:"Contact",
     eyebrow:"Apprenti ingénieur · EPF · CEA",
     h1:"Je crée des outils applicatifs qui simplifient le quotidien.",
     lead:"J'écoute le besoin, je construis une interface claire et un code fiable, et je pense à la sécurité dès la conception.",
@@ -263,7 +316,11 @@ const I18N = {
     copied:"Adresse copiée.", copyfail:"Copie impossible ici : l'adresse est sélectionnée, copiez-la avec Ctrl+C."
   },
   en: {
-    nav_home:"Home", nav_pm:"Project management profile", nav_offer:"Offer", nav_demo:"Demo", nav_work:"Work", nav_path:"Background", nav_contact:"Contact",
+    nav_home:"Home", proof_h:"In a few figures", n1:"−55%", l1:"estimation error through sensor fusion (Kalman filter), UGV-IA project", n2:"88.2%", l2:"average confidence in object detection (YOLOv8)", n3:"35 steps", l3:"to reach the goal with the trained agent, versus 151 for a random agent", n4:"8", l4:"languages in use, from HTML and JavaScript to Python, SQL and C",
+    inside_h:"Under the hood", inside_i:"Two diagrams showing how I structure a tool: the processing chain of an analysis tool, and the architecture of the UGV-IA project.",
+    fig_pipe_t:"Typical processing chain of a spectral analysis tool", pp_in:"Input", pp_out:"Output", pp1:"Import", pp1s:"spectrum file", pp2:"Validation", pp2s:"inputs checked", pp3:"Computation", pp3s:"ridge regression", pp4:"Visualisation", pp4s:"chart", pp5:"Result", pp5s:"band shares", pp_note:"Each step can be tested on its own, and inputs are validated before any computation.",
+    fig_ugv_t:"UGV-IA project architecture", u_cam:"Camera", u_imu:"Sensors", u_goal:"Goal", u_yolo:"Detection", u_yolo_s:"YOLOv8", u_kal:"Estimation", u_kal_s:"Kalman filter", u_ppo:"Navigation", u_ppo_s:"RL (PPO)", u_sys:"Vehicle", u_sys_s:"encrypted SQL, web demo",
+ nav_pm:"Project management profile", nav_offer:"Offer", nav_demo:"Demo", nav_work:"Work", nav_path:"Background", nav_contact:"Contact",
     eyebrow:"Engineering apprentice · EPF · CEA",
     h1:"I build application tools that make everyday life easier.",
     lead:"I listen to the need, build a clear interface and reliable code, and think about security from the start.",
