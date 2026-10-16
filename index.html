@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mathieu Boutinon</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Shippori+Mincho+B1:wght@700;800&display=swap">
 <style>
 /* Layout: texte aligné à gauche, démo spectrale comme pièce centrale, sections sobres séparées par des filets. */
 :root{
@@ -145,6 +145,151 @@ section.proofsec{padding-block:0;border-top:none}
  @keyframes dr{to{stroke-dashoffset:0}}
 }
 
+/* ===== Identité : feuille de mesure d'ingénieur (papier millimétré, encre marine, trois bandes) ===== */
+:root{
+  --bg:#F2F5FB; --surface:#FFFFFF; --fg:#0E1B3D; --muted:#44506E; --line:#C5CDE0; --grid:rgba(35,56,216,.075);
+  --accent:#2338D8; --accent-fg:#FFFFFF; --accent-soft:#E1E6FB;
+  --c1:#2338D8; --c2:#E5490B; --c3:#0B8A62;
+  --font-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",Impact,sans-serif;
+  --font-body:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;
+  --font-mono:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A1230; --surface:#101C48; --fg:#E8EDFF; --muted:#AAB6DD; --line:#2B3B7A; --grid:rgba(142,162,255,.09);
+  --accent:#8EA2FF; --accent-fg:#0A1230; --accent-soft:#17265E; --c1:#8EA2FF; --c2:#FF8A4C; --c3:#3DD6A7;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1230; --surface:#101C48; --fg:#E8EDFF; --muted:#AAB6DD; --line:#2B3B7A; --grid:rgba(142,162,255,.09);
+  --accent:#8EA2FF; --accent-fg:#0A1230; --accent-soft:#17265E; --c1:#8EA2FF; --c2:#FF8A4C; --c3:#3DD6A7;color-scheme:dark}
+body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.6;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;background-position:-1px -1px}
+h1,h2,h3{font-family:var(--font-display);font-weight:800;text-transform:uppercase;letter-spacing:.005em;line-height:.95}
+h1{font-size:clamp(3.4rem,11vw,9rem);letter-spacing:-.005em}
+h2{font-size:clamp(2rem,4.4vw,3.2rem)}
+h3{font-size:1.45rem;line-height:1.05}
+.lead{font-size:clamp(1.15rem,2.2vw,1.45rem);line-height:1.5;color:var(--fg);max-width:34em}
+.label{font-family:var(--font-body);font-size:1rem;font-weight:700;letter-spacing:0;text-transform:none;color:var(--fg)}
+.mono{font-variant-numeric:tabular-nums}
+/* en-tête */
+header.top{border-bottom:3px solid var(--fg)}
+.brand{display:inline-flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:800;font-size:1.5rem;text-transform:uppercase;letter-spacing:.02em}
+.brand::before{content:"";width:22px;height:22px;background:linear-gradient(var(--c1) 0 30%,transparent 30% 35%,var(--c2) 35% 65%,transparent 65% 70%,var(--c3) 70%);display:inline-block}
+nav a{font-weight:600;color:var(--fg);text-decoration:none;border-bottom:2px solid transparent}
+nav a:hover{border-bottom-color:var(--c2)}
+.lang button,.dockbtn,.seg button,.tog,.btn,.panel2,.chartbox,.card,.fig,.chip,.mail,.brief,.path,.totop{border-radius:0}
+.lang button{color:var(--fg);border:2px solid var(--fg);font-family:var(--font-body);font-weight:700}
+.lang button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn{border:2px solid var(--fg);font-weight:700;color:var(--fg)}
+.btn.primary{background:var(--fg);color:var(--bg)}
+.btn.ghost{background:transparent;color:var(--fg)}
+.btn:hover{background:var(--c2);border-color:var(--c2);color:#fff}
+.chip{background:transparent;border:2px solid var(--fg);padding:6px 14px;font-weight:600}
+.chip i{border-radius:0;background:var(--c2)}
+.bandline{height:10px;width:132px;border-radius:0}
+/* sections : titre à gauche, contenu à droite */
+section{border-top:3px solid var(--fg);padding-block:44px 64px;display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:980px){
+  section{grid-template-columns:minmax(190px,.26fr) minmax(0,1fr);column-gap:48px}
+  section>h2,section>p.label{grid-column:1}
+  section>*:not(h2):not(p.label){grid-column:2}
+  section>p.label{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(2rem,3vw,2.6rem);line-height:.95}
+}
+section.proofsec{border-top:3px solid var(--fg);padding-block:44px 64px}
+body header.top{border-bottom:3px solid var(--fg)}
+.intro{color:var(--muted);max-width:56ch}
+/* fiches */
+.card{background:var(--surface);border:2px solid var(--fg);padding:22px}
+.card h3{padding-bottom:10px;border-bottom:2px solid var(--c2);margin-bottom:2px}
+.cards{gap:18px}
+.tags span{border:none;border-radius:0;background:var(--accent-soft);color:var(--fg);font-family:var(--font-body);font-weight:600;font-size:.82rem;padding:2px 9px}
+.steps{gap:0;border:2px solid var(--fg);background:var(--surface)}
+.steps{gap:2px;background:var(--fg)}
+.step{border-top:none;padding:20px;background:var(--surface)}
+.steps:has(>:nth-child(4)){grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:640px){.steps:has(>:nth-child(4)){grid-template-columns:minmax(0,1fr)}}
+.step .mono{font-family:var(--font-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--c2)}
+.out{font-family:var(--font-body);font-size:.85rem;border-top:2px solid var(--line)}
+.skills{gap:0;border-top:2px solid var(--fg)}
+.skills>div{padding:16px 20px 16px 0;border-bottom:2px solid var(--line)}
+.timeline li{grid-template-columns:150px minmax(0,1fr);border-bottom:2px solid var(--line)}
+.timeline .mono{font-family:var(--font-display);font-weight:800;font-size:1.35rem;color:var(--fg)}
+.chartbox,.fig{background:var(--surface);border:2px solid var(--fg);padding:14px}
+.legend,.legend2{color:var(--fg)}
+table{font-size:.95rem}th,td{border-bottom:2px solid var(--line)}
+th{color:var(--fg);font-weight:700}
+.mail{background:var(--surface);border:2px solid var(--fg);font-family:var(--font-display);font-weight:800;font-size:clamp(1.05rem,5vw,2.4rem);letter-spacing:.01em;padding:12px 18px}
+footer{border-top:3px solid var(--fg);color:var(--fg)}
+/* chiffres */
+.proof{border-block:none;gap:16px 24px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.proof div{padding:6px 24px 6px 0}
+.proof .num{font-family:var(--font-display);font-weight:800;font-size:clamp(2.8rem,5vw,4.2rem);line-height:.9;color:var(--fg);letter-spacing:0;white-space:nowrap}
+.proof .n1,.proof .n2,.proof .n3{color:var(--fg)}
+.proof div:first-child .num{color:var(--c2)}
+.proof small{color:var(--muted);font-size:.95rem}
+/* accueil */
+.hubtop{padding-block:44px 28px;display:flex;flex-direction:column;gap:24px;align-items:flex-start}
+.hubtop h1{max-width:9ch}
+.sheet{margin:0;background:var(--surface);border:2px solid var(--fg);display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,310px);grid-template-areas:"chart block" "cap block"}
+.sheet .chartwrap{grid-area:chart;padding:14px 14px 0;min-width:0}
+.sheet .chartwrap{overflow-x:auto}
+.sheet svg{display:block;width:100%;min-width:620px;height:auto}
+.sheet figcaption{grid-area:cap;padding:14px 18px;font-size:.95rem;color:var(--muted);align-self:end;border-top:2px solid var(--fg)}
+.block{grid-area:block;border-left:2px solid var(--fg);margin:0;font-size:.92rem;display:flex;flex-direction:column;justify-content:flex-end}
+.block dl{display:grid;grid-template-columns:auto 1fr;grid-auto-rows:1fr;margin:0;flex:1}
+.block dt,.block dd{margin:0;padding:6px 10px;display:flex;align-items:center;border-bottom:1px solid var(--line)}
+.block dt{font-weight:700;border-right:1px solid var(--line)}
+.block dl>*:nth-last-child(-n+2){border-bottom:none}
+@media (max-width:860px){.sheet{grid-template-columns:minmax(0,1fr);grid-template-areas:"chart" "cap" "block"}.block{border-left:none;border-top:2px solid var(--fg)}}
+.paths{gap:0;border:2px solid var(--fg);align-items:stretch}
+.path{border:none;border-radius:0;padding:32px;min-height:280px;gap:16px}
+.path.dev{background:var(--c1);color:var(--accent-fg);border-top:none}
+.path.pm{background:var(--c2);color:#14100C;border-top:none}
+html[data-theme="dark"] .path.pm,html:not([data-theme="light"]) .path.pm{color:#14100C}
+.path h2{font-size:clamp(1.7rem,3vw,2.7rem);overflow-wrap:anywhere}
+.path p{color:inherit;max-width:30em}
+.path .tags span{background:transparent;border:2px solid currentColor;color:inherit}
+.path .go{border-top:2px solid currentColor;padding-top:12px;color:inherit;font-weight:700;margin-top:auto}
+.path:hover{filter:brightness(1.07);border-color:transparent}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .path.dev{color:#0A1230}}
+/* lisibilité : désactiver le décor quand une aide est active */
+html[data-tint] body,html[data-contrast] body,html[data-calm] body,html[data-focus] body,html[data-font] body,html[data-space] body{background-image:none}
+html[data-font] h1,html[data-font] h2,html[data-font] h3,html[data-calm] h1,html[data-calm] h2,html[data-calm] h3,html[data-space] h1,html[data-space] h2,html[data-space] h3,html[data-big] .brand,html[data-font] .brand{text-transform:none;letter-spacing:0;line-height:1.1}
+html[data-font] .proof .num,html[data-calm] .proof .num{line-height:1.1}
+header.top .panel2{border:2px solid var(--fg);border-radius:0;box-shadow:none}
+header.top .dockbtn{border:2px solid var(--fg);border-radius:0;font-weight:600}
+header.top .panel2 .seg button,header.top .panel2 .tog{border:2px solid var(--fg);border-radius:0;font-weight:600}
+body .totop{border-radius:0}
+header.top .panel2 a.tl{border-radius:0}
+.panel2 h2{font-size:1.4rem}
+@media (min-width:980px){.proof{grid-template-columns:repeat(2,minmax(0,1fr))}
+  section{grid-template-columns:minmax(220px,.3fr) minmax(0,1fr)}
+  section>h2,section>p.label{font-size:clamp(1.7rem,2.4vw,2.3rem);overflow-wrap:anywhere;hyphens:auto;min-width:0}}
+section>h2,section>p.label{min-width:0}
+.cards:has(>:nth-child(4)){grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:640px){.cards:has(>:nth-child(4)){grid-template-columns:minmax(0,1fr)}}
+
+/* ===== Touches japonaises : sceau (hanko) d'approbation, ensō, kanji ===== */
+:root{--font-jp:"Shippori Mincho B1","Yu Mincho","Hiragino Mincho ProN","Noto Serif CJK JP","Noto Serif JP",serif;--shu:#C8200E}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--shu:#FF6B4A}}
+:root[data-theme="dark"]{--shu:#FF6B4A}
+[lang="ja"]{font-family:var(--font-jp)}
+.chartwrap{position:relative}
+.hanko{position:absolute;top:14px;right:18px;width:76px;height:76px;border:4px solid var(--shu);color:var(--shu);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--font-jp);font-weight:800;font-size:2.15rem;line-height:1;transform:rotate(-5deg);mix-blend-mode:multiply;background:transparent;pointer-events:none;box-shadow:inset 0 0 0 2px transparent}
+.hanko span{display:block}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hanko{mix-blend-mode:normal}}
+:root[data-theme="dark"] .hanko{mix-blend-mode:normal}
+@media (prefers-reduced-motion:no-preference){.hanko{animation:stamp .5s cubic-bezier(.2,.9,.3,1.2) .9s backwards}@keyframes stamp{from{transform:rotate(-12deg) scale(1.7);opacity:0}to{transform:rotate(-5deg) scale(1);opacity:1}}}
+html[data-focus] .hanko{display:none}
+@media (max-width:860px){.hanko{width:60px;height:60px;font-size:1.7rem;border-width:3px}}
+.dojo{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,220px);gap:32px;align-items:center}
+@media (max-width:760px){.dojo{grid-template-columns:minmax(0,1fr)}.dojo .enso{max-width:180px}}
+.dojo p{max-width:56ch}
+.dojo dl{display:grid;grid-template-columns:auto 1fr;margin:20px 0 0;border-top:2px solid var(--fg)}
+.dojo dt,.dojo dd{margin:0;padding:8px 14px 8px 0;border-bottom:2px solid var(--line)}
+.dojo dt{font-weight:700;padding-right:24px}
+.enso{width:100%;height:auto;color:var(--fg)}
+.enso .kanji{font-family:var(--font-jp);font-weight:800;fill:var(--shu)}
+.rei{font-family:var(--font-jp);font-weight:800;color:var(--shu);margin-right:8px;font-size:1.2rem}
+
 /* ===== Ergonomie et accessibilité ===== */
 html{scroll-behavior:smooth}
 body{font-size:1rem}
@@ -263,17 +408,16 @@ if(p.fs)h.style.fontSize=p.fs+"%";
 </header>
 
 <main id="top">
-  <div class="hero2">
-    <div class="txt">
-      <p class="label" data-i18n="eyebrow"></p>
-      <div class="bandline" aria-hidden="true"></div>
-      <h1 data-i18n="h1"></h1>
-      <p class="lead" data-i18n="lead"></p>
-      <span class="chip"><i></i><span data-i18n="avail"></span></span>
-      <div class="facts"><span data-i18n="f1"></span><span data-i18n="f2"></span><span data-i18n="f3"></span></div>
-    </div>
-    <figure class="fig" style="margin:0"><svg viewBox="0 0 560 300" role="img" aria-labelledby="spt spd"><title id="spt" data-i18n="fig_spec_t"></title><desc id="spd" data-i18n="fig_spec_d"></desc><g class="draw"><line x1="44" x2="548" y1="256.0" y2="256.0" stroke="var(--line)"/><text x="36" y="260.0" text-anchor="end" font-size="11" class="t-muted t-mono">0</text><line x1="44" x2="548" y1="136.0" y2="136.0" stroke="var(--line)"/><text x="36" y="140.0" text-anchor="end" font-size="11" class="t-muted t-mono">0.5</text><line x1="44" x2="548" y1="16.0" y2="16.0" stroke="var(--line)"/><text x="36" y="20.0" text-anchor="end" font-size="11" class="t-muted t-mono">1</text><text x="44.0" y="274" text-anchor="middle" font-size="11" class="t-muted t-mono">250</text><text x="116.0" y="274" text-anchor="middle" font-size="11" class="t-muted t-mono">300</text><text x="260.0" y="274" text-anchor="middle" font-size="11" class="t-muted t-mono">400</text><text x="404.0" y="274" text-anchor="middle" font-size="11" class="t-muted t-mono">500</text><text x="548.0" y="274" text-anchor="middle" font-size="11" class="t-muted t-mono">600</text><text x="296.0" y="292" text-anchor="middle" font-size="12" class="t-muted" data-i18n="axis_x"></text><path d="M44.0,251.1 L49.8,248.0 L55.5,243.5 L61.3,237.1 L67.0,228.4 L72.8,216.9 L78.6,202.5 L84.3,185.2 L90.1,165.2 L95.8,143.5 L101.6,121.1 L107.4,99.4 L113.1,80.2 L118.9,65.1 L124.6,55.3 L130.4,52.0 L136.2,55.3 L141.9,65.1 L147.7,80.2 L153.4,99.4 L159.2,121.1 L165.0,143.5 L170.7,165.2 L176.5,185.2 L182.2,202.5 L188.0,216.9 L193.8,228.4 L199.5,237.1 L205.3,243.5 L211.0,248.0 L216.8,251.1 L222.6,253.0 L228.3,254.3 L234.1,255.0 L239.8,255.5 L245.6,255.7 L251.4,255.9 L257.1,255.9 L262.9,256.0 L268.6,256.0 L274.4,256.0 L280.2,256.0 L285.9,256.0 L291.7,256.0 L297.4,256.0 L303.2,256.0 L309.0,256.0 L314.7,256.0 L320.5,256.0 L326.2,256.0 L332.0,256.0 L337.8,256.0 L343.5,256.0 L349.3,256.0 L355.0,256.0 L360.8,256.0 L366.6,256.0 L372.3,256.0 L378.1,256.0 L383.8,256.0 L389.6,256.0 L395.4,256.0 L401.1,256.0 L406.9,256.0 L412.6,256.0 L418.4,256.0 L424.2,256.0 L429.9,256.0 L435.7,256.0 L441.4,256.0 L447.2,256.0 L453.0,256.0 L458.7,256.0 L464.5,256.0 L470.2,256.0 L476.0,256.0 L481.8,256.0 L487.5,256.0 L493.3,256.0 L499.0,256.0 L504.8,256.0 L510.6,256.0 L516.3,256.0 L522.1,256.0 L527.8,256.0 L533.6,256.0 L539.4,256.0 L545.1,256.0 L548.0,256 L44.0,256 Z" fill="var(--c1)" opacity=".14"/><path class="band b1" d="M44.0,251.1 L49.8,248.0 L55.5,243.5 L61.3,237.1 L67.0,228.4 L72.8,216.9 L78.6,202.5 L84.3,185.2 L90.1,165.2 L95.8,143.5 L101.6,121.1 L107.4,99.4 L113.1,80.2 L118.9,65.1 L124.6,55.3 L130.4,52.0 L136.2,55.3 L141.9,65.1 L147.7,80.2 L153.4,99.4 L159.2,121.1 L165.0,143.5 L170.7,165.2 L176.5,185.2 L182.2,202.5 L188.0,216.9 L193.8,228.4 L199.5,237.1 L205.3,243.5 L211.0,248.0 L216.8,251.1 L222.6,253.0 L228.3,254.3 L234.1,255.0 L239.8,255.5 L245.6,255.7 L251.4,255.9 L257.1,255.9 L262.9,256.0 L268.6,256.0 L274.4,256.0 L280.2,256.0 L285.9,256.0 L291.7,256.0 L297.4,256.0 L303.2,256.0 L309.0,256.0 L314.7,256.0 L320.5,256.0 L326.2,256.0 L332.0,256.0 L337.8,256.0 L343.5,256.0 L349.3,256.0 L355.0,256.0 L360.8,256.0 L366.6,256.0 L372.3,256.0 L378.1,256.0 L383.8,256.0 L389.6,256.0 L395.4,256.0 L401.1,256.0 L406.9,256.0 L412.6,256.0 L418.4,256.0 L424.2,256.0 L429.9,256.0 L435.7,256.0 L441.4,256.0 L447.2,256.0 L453.0,256.0 L458.7,256.0 L464.5,256.0 L470.2,256.0 L476.0,256.0 L481.8,256.0 L487.5,256.0 L493.3,256.0 L499.0,256.0 L504.8,256.0 L510.6,256.0 L516.3,256.0 L522.1,256.0 L527.8,256.0 L533.6,256.0 L539.4,256.0 L545.1,256.0" fill="none" stroke="var(--c1)" stroke-width="2.2"/><path d="M44.0,256.0 L49.8,256.0 L55.5,256.0 L61.3,255.9 L67.0,255.9 L72.8,255.8 L78.6,255.7 L84.3,255.6 L90.1,255.4 L95.8,255.0 L101.6,254.5 L107.4,253.8 L113.1,252.9 L118.9,251.5 L124.6,249.7 L130.4,247.3 L136.2,244.3 L141.9,240.4 L147.7,235.6 L153.4,229.9 L159.2,223.1 L165.0,215.3 L170.7,206.5 L176.5,196.8 L182.2,186.6 L188.0,175.9 L193.8,165.3 L199.5,155.1 L205.3,145.7 L211.0,137.6 L216.8,131.1 L222.6,126.6 L228.3,124.3 L234.1,124.3 L239.8,126.6 L245.6,131.1 L251.4,137.6 L257.1,145.7 L262.9,155.1 L268.6,165.3 L274.4,175.9 L280.2,186.6 L285.9,196.8 L291.7,206.5 L297.4,215.3 L303.2,223.1 L309.0,229.9 L314.7,235.6 L320.5,240.4 L326.2,244.3 L332.0,247.3 L337.8,249.7 L343.5,251.5 L349.3,252.9 L355.0,253.8 L360.8,254.5 L366.6,255.0 L372.3,255.4 L378.1,255.6 L383.8,255.7 L389.6,255.8 L395.4,255.9 L401.1,255.9 L406.9,256.0 L412.6,256.0 L418.4,256.0 L424.2,256.0 L429.9,256.0 L435.7,256.0 L441.4,256.0 L447.2,256.0 L453.0,256.0 L458.7,256.0 L464.5,256.0 L470.2,256.0 L476.0,256.0 L481.8,256.0 L487.5,256.0 L493.3,256.0 L499.0,256.0 L504.8,256.0 L510.6,256.0 L516.3,256.0 L522.1,256.0 L527.8,256.0 L533.6,256.0 L539.4,256.0 L545.1,256.0 L548.0,256 L44.0,256 Z" fill="var(--c2)" opacity=".14"/><path class="band b2" d="M44.0,256.0 L49.8,256.0 L55.5,256.0 L61.3,255.9 L67.0,255.9 L72.8,255.8 L78.6,255.7 L84.3,255.6 L90.1,255.4 L95.8,255.0 L101.6,254.5 L107.4,253.8 L113.1,252.9 L118.9,251.5 L124.6,249.7 L130.4,247.3 L136.2,244.3 L141.9,240.4 L147.7,235.6 L153.4,229.9 L159.2,223.1 L165.0,215.3 L170.7,206.5 L176.5,196.8 L182.2,186.6 L188.0,175.9 L193.8,165.3 L199.5,155.1 L205.3,145.7 L211.0,137.6 L216.8,131.1 L222.6,126.6 L228.3,124.3 L234.1,124.3 L239.8,126.6 L245.6,131.1 L251.4,137.6 L257.1,145.7 L262.9,155.1 L268.6,165.3 L274.4,175.9 L280.2,186.6 L285.9,196.8 L291.7,206.5 L297.4,215.3 L303.2,223.1 L309.0,229.9 L314.7,235.6 L320.5,240.4 L326.2,244.3 L332.0,247.3 L337.8,249.7 L343.5,251.5 L349.3,252.9 L355.0,253.8 L360.8,254.5 L366.6,255.0 L372.3,255.4 L378.1,255.6 L383.8,255.7 L389.6,255.8 L395.4,255.9 L401.1,255.9 L406.9,256.0 L412.6,256.0 L418.4,256.0 L424.2,256.0 L429.9,256.0 L435.7,256.0 L441.4,256.0 L447.2,256.0 L453.0,256.0 L458.7,256.0 L464.5,256.0 L470.2,256.0 L476.0,256.0 L481.8,256.0 L487.5,256.0 L493.3,256.0 L499.0,256.0 L504.8,256.0 L510.6,256.0 L516.3,256.0 L522.1,256.0 L527.8,256.0 L533.6,256.0 L539.4,256.0 L545.1,256.0" fill="none" stroke="var(--c2)" stroke-width="2.2"/><path d="M44.0,256.0 L49.8,256.0 L55.5,256.0 L61.3,256.0 L67.0,256.0 L72.8,256.0 L78.6,256.0 L84.3,256.0 L90.1,256.0 L95.8,256.0 L101.6,256.0 L107.4,256.0 L113.1,256.0 L118.9,256.0 L124.6,256.0 L130.4,256.0 L136.2,256.0 L141.9,256.0 L147.7,256.0 L153.4,255.9 L159.2,255.9 L165.0,255.9 L170.7,255.8 L176.5,255.7 L182.2,255.6 L188.0,255.4 L193.8,255.2 L199.5,254.9 L205.3,254.5 L211.0,254.0 L216.8,253.4 L222.6,252.5 L228.3,251.5 L234.1,250.2 L239.8,248.7 L245.6,246.8 L251.4,244.6 L257.1,242.0 L262.9,239.1 L268.6,235.7 L274.4,231.9 L280.2,227.6 L285.9,223.1 L291.7,218.2 L297.4,213.0 L303.2,207.7 L309.0,202.4 L314.7,197.1 L320.5,192.0 L326.2,187.2 L332.0,182.9 L337.8,179.1 L343.5,176.1 L349.3,173.8 L355.0,172.5 L360.8,172.0 L366.6,172.5 L372.3,173.8 L378.1,176.1 L383.8,179.1 L389.6,182.9 L395.4,187.2 L401.1,192.0 L406.9,197.1 L412.6,202.4 L418.4,207.7 L424.2,213.0 L429.9,218.2 L435.7,223.1 L441.4,227.6 L447.2,231.9 L453.0,235.7 L458.7,239.1 L464.5,242.0 L470.2,244.6 L476.0,246.8 L481.8,248.7 L487.5,250.2 L493.3,251.5 L499.0,252.5 L504.8,253.4 L510.6,254.0 L516.3,254.5 L522.1,254.9 L527.8,255.2 L533.6,255.4 L539.4,255.6 L545.1,255.7 L548.0,256 L44.0,256 Z" fill="var(--c3)" opacity=".14"/><path class="band b3" d="M44.0,256.0 L49.8,256.0 L55.5,256.0 L61.3,256.0 L67.0,256.0 L72.8,256.0 L78.6,256.0 L84.3,256.0 L90.1,256.0 L95.8,256.0 L101.6,256.0 L107.4,256.0 L113.1,256.0 L118.9,256.0 L124.6,256.0 L130.4,256.0 L136.2,256.0 L141.9,256.0 L147.7,256.0 L153.4,255.9 L159.2,255.9 L165.0,255.9 L170.7,255.8 L176.5,255.7 L182.2,255.6 L188.0,255.4 L193.8,255.2 L199.5,254.9 L205.3,254.5 L211.0,254.0 L216.8,253.4 L222.6,252.5 L228.3,251.5 L234.1,250.2 L239.8,248.7 L245.6,246.8 L251.4,244.6 L257.1,242.0 L262.9,239.1 L268.6,235.7 L274.4,231.9 L280.2,227.6 L285.9,223.1 L291.7,218.2 L297.4,213.0 L303.2,207.7 L309.0,202.4 L314.7,197.1 L320.5,192.0 L326.2,187.2 L332.0,182.9 L337.8,179.1 L343.5,176.1 L349.3,173.8 L355.0,172.5 L360.8,172.0 L366.6,172.5 L372.3,173.8 L378.1,176.1 L383.8,179.1 L389.6,182.9 L395.4,187.2 L401.1,192.0 L406.9,197.1 L412.6,202.4 L418.4,207.7 L424.2,213.0 L429.9,218.2 L435.7,223.1 L441.4,227.6 L447.2,231.9 L453.0,235.7 L458.7,239.1 L464.5,242.0 L470.2,244.6 L476.0,246.8 L481.8,248.7 L487.5,250.2 L493.3,251.5 L499.0,252.5 L504.8,253.4 L510.6,254.0 L516.3,254.5 L522.1,254.9 L527.8,255.2 L533.6,255.4 L539.4,255.6 L545.1,255.7" fill="none" stroke="var(--c3)" stroke-width="2.2"/><path class="band sum" d="M44.0,251.0 L49.8,248.0 L55.5,243.5 L61.3,237.1 L67.0,228.3 L72.8,216.8 L78.6,202.3 L84.3,184.8 L90.1,164.6 L95.8,142.5 L101.6,119.6 L107.4,97.2 L113.1,77.0 L118.9,60.6 L124.6,49.0 L130.4,43.3 L136.2,43.6 L141.9,49.4 L147.7,59.8 L153.4,73.2 L159.2,88.0 L165.0,102.6 L170.7,115.5 L176.5,125.7 L182.2,132.7 L188.0,136.3 L193.8,136.9 L199.5,135.2 L205.3,131.8 L211.0,127.6 L216.8,123.6 L222.6,120.2 L228.3,118.1 L234.1,117.6 L239.8,118.8 L245.6,121.7 L251.4,126.1 L257.1,131.7 L262.9,138.1 L268.6,145.0 L274.4,151.8 L280.2,158.2 L285.9,163.9 L291.7,168.6 L297.4,172.3 L303.2,174.8 L309.0,176.2 L314.7,176.7 L320.5,176.4 L326.2,175.5 L332.0,174.2 L337.8,172.8 L343.5,171.6 L349.3,170.7 L355.0,170.3 L360.8,170.5 L366.6,171.5 L372.3,173.2 L378.1,175.7 L383.8,178.9 L389.6,182.7 L395.4,187.1 L401.1,191.9 L406.9,197.0 L412.6,202.4 L418.4,207.7 L424.2,213.0 L429.9,218.2 L435.7,223.1 L441.4,227.6 L447.2,231.8 L453.0,235.7 L458.7,239.1 L464.5,242.0 L470.2,244.6 L476.0,246.8 L481.8,248.7 L487.5,250.2 L493.3,251.5 L499.0,252.5 L504.8,253.4 L510.6,254.0 L516.3,254.5 L522.1,254.9 L527.8,255.2 L533.6,255.4 L539.4,255.6 L545.1,255.7" fill="none" stroke="var(--fg)" stroke-width="2.6"/></g></svg><figcaption data-i18n="fig_cap"></figcaption></figure>
+  <div class="hubtop">
+    <p class="label" data-i18n="eyebrow"></p>
+    <h1 data-i18n="h1"></h1>
+    <p class="lead" data-i18n="lead"></p>
   </div>
+  <figure class="sheet">
+    <div class="chartwrap"><svg viewBox="0 0 1000 340" role="img" aria-labelledby="spt spd"><title id="spt" data-i18n="fig_spec_t"></title><desc id="spd" data-i18n="fig_spec_d"></desc><g class="draw"><line x1="46" x2="984" y1="294.0" y2="294.0" stroke="var(--line)" stroke-width="1"/><text x="38" y="298.0" text-anchor="end" font-size="12" class="t-muted">0</text><line x1="46" x2="984" y1="233.0" y2="233.0" stroke="var(--line)" stroke-width="1"/><text x="38" y="237.0" text-anchor="end" font-size="12" class="t-muted">0.25</text><line x1="46" x2="984" y1="172.0" y2="172.0" stroke="var(--line)" stroke-width="1"/><text x="38" y="176.0" text-anchor="end" font-size="12" class="t-muted">0.5</text><line x1="46" x2="984" y1="111.0" y2="111.0" stroke="var(--line)" stroke-width="1"/><text x="38" y="115.0" text-anchor="end" font-size="12" class="t-muted">0.75</text><line x1="46" x2="984" y1="50.0" y2="50.0" stroke="var(--line)" stroke-width="1"/><text x="38" y="54.0" text-anchor="end" font-size="12" class="t-muted">1</text><line x1="46.0" x2="46.0" y1="294" y2="300" stroke="var(--fg)" stroke-width="1.5"/><text x="46.0" y="316" text-anchor="middle" font-size="12" class="t-muted">250</text><line x1="180.0" x2="180.0" y1="294" y2="300" stroke="var(--fg)" stroke-width="1.5"/><text x="180.0" y="316" text-anchor="middle" font-size="12" class="t-muted">300</text><line x1="314.0" x2="314.0" y1="294" y2="300" stroke="var(--fg)" stroke-width="1.5"/><text x="314.0" y="316" text-anchor="middle" font-size="12" class="t-muted">350</text><line x1="448.0" x2="448.0" y1="294" y2="300" stroke="var(--fg)" stroke-width="1.5"/><text x="448.0" y="316" text-anchor="middle" font-size="12" class="t-muted">400</text><line x1="582.0" x2="582.0" y1="294" y2="300" stroke="var(--fg)" stroke-width="1.5"/><text x="582.0" y="316" text-anchor="middle" font-size="12" class="t-muted">450</text><line x1="716.0" x2="716.0" y1="294" y2="300" stroke="var(--fg)" stroke-width="1.5"/><text x="716.0" y="316" text-anchor="middle" font-size="12" class="t-muted">500</text><line x1="850.0" x2="850.0" y1="294" y2="300" stroke="var(--fg)" stroke-width="1.5"/><text x="850.0" y="316" text-anchor="middle" font-size="12" class="t-muted">550</text><line x1="984.0" x2="984.0" y1="294" y2="300" stroke="var(--fg)" stroke-width="1.5"/><text x="984.0" y="316" text-anchor="middle" font-size="12" class="t-muted">600</text><line x1="46" x2="984" y1="294" y2="294" stroke="var(--fg)" stroke-width="2"/><text x="984" y="334" text-anchor="end" font-size="12.5" class="t-fg" font-weight="600" data-i18n="axis_x"></text><path d="M46.0,289.0 L51.4,287.6 L56.7,285.9 L62.1,283.8 L67.4,281.3 L72.8,278.3 L78.2,274.8 L83.5,270.7 L88.9,265.9 L94.2,260.5 L99.6,254.3 L105.0,247.3 L110.3,239.6 L115.7,231.2 L121.0,222.0 L126.4,212.1 L131.8,201.7 L137.1,190.8 L142.5,179.6 L147.8,168.2 L153.2,156.8 L158.6,145.6 L163.9,134.8 L169.3,124.6 L174.6,115.3 L180.0,107.0 L185.4,99.9 L190.7,94.2 L196.1,90.0 L201.4,87.5 L206.8,86.6 L212.2,87.5 L217.5,90.0 L222.9,94.2 L228.2,99.9 L233.6,107.0 L239.0,115.3 L244.3,124.6 L249.7,134.8 L255.0,145.6 L260.4,156.8 L265.8,168.2 L271.1,179.6 L276.5,190.8 L281.8,201.7 L287.2,212.1 L292.6,222.0 L297.9,231.2 L303.3,239.6 L308.6,247.3 L314.0,254.3 L319.4,260.5 L324.7,265.9 L330.1,270.7 L335.4,274.8 L340.8,278.3 L346.2,281.3 L351.5,283.8 L356.9,285.9 L362.2,287.6 L367.6,289.0 L373.0,290.1 L378.3,291.0 L383.7,291.7 L389.0,292.3 L394.4,292.7 L399.8,293.0 L405.1,293.3 L410.5,293.5 L415.8,293.6 L421.2,293.7 L426.6,293.8 L431.9,293.9 L437.3,293.9 L442.6,293.9 L448.0,294.0 L453.4,294.0 L458.7,294.0 L464.1,294.0 L469.4,294.0 L474.8,294.0 L480.2,294.0 L485.5,294.0 L490.9,294.0 L496.2,294.0 L501.6,294.0 L507.0,294.0 L512.3,294.0 L517.7,294.0 L523.0,294.0 L528.4,294.0 L533.8,294.0 L539.1,294.0 L544.5,294.0 L549.8,294.0 L555.2,294.0 L560.6,294.0 L565.9,294.0 L571.3,294.0 L576.6,294.0 L582.0,294.0 L587.4,294.0 L592.7,294.0 L598.1,294.0 L603.4,294.0 L608.8,294.0 L614.2,294.0 L619.5,294.0 L624.9,294.0 L630.2,294.0 L635.6,294.0 L641.0,294.0 L646.3,294.0 L651.7,294.0 L657.0,294.0 L662.4,294.0 L667.8,294.0 L673.1,294.0 L678.5,294.0 L683.8,294.0 L689.2,294.0 L694.6,294.0 L699.9,294.0 L705.3,294.0 L710.6,294.0 L716.0,294.0 L721.4,294.0 L726.7,294.0 L732.1,294.0 L737.4,294.0 L742.8,294.0 L748.2,294.0 L753.5,294.0 L758.9,294.0 L764.2,294.0 L769.6,294.0 L775.0,294.0 L780.3,294.0 L785.7,294.0 L791.0,294.0 L796.4,294.0 L801.8,294.0 L807.1,294.0 L812.5,294.0 L817.8,294.0 L823.2,294.0 L828.6,294.0 L833.9,294.0 L839.3,294.0 L844.6,294.0 L850.0,294.0 L855.4,294.0 L860.7,294.0 L866.1,294.0 L871.4,294.0 L876.8,294.0 L882.2,294.0 L887.5,294.0 L892.9,294.0 L898.2,294.0 L903.6,294.0 L909.0,294.0 L914.3,294.0 L919.7,294.0 L925.0,294.0 L930.4,294.0 L935.8,294.0 L941.1,294.0 L946.5,294.0 L951.8,294.0 L957.2,294.0 L962.6,294.0 L967.9,294.0 L973.3,294.0 L978.6,294.0 L984.0,294.0 L984.0,294 L46.0,294 Z" fill="var(--c1)" opacity=".16"/><path class="band b1" d="M46.0,289.0 L51.4,287.6 L56.7,285.9 L62.1,283.8 L67.4,281.3 L72.8,278.3 L78.2,274.8 L83.5,270.7 L88.9,265.9 L94.2,260.5 L99.6,254.3 L105.0,247.3 L110.3,239.6 L115.7,231.2 L121.0,222.0 L126.4,212.1 L131.8,201.7 L137.1,190.8 L142.5,179.6 L147.8,168.2 L153.2,156.8 L158.6,145.6 L163.9,134.8 L169.3,124.6 L174.6,115.3 L180.0,107.0 L185.4,99.9 L190.7,94.2 L196.1,90.0 L201.4,87.5 L206.8,86.6 L212.2,87.5 L217.5,90.0 L222.9,94.2 L228.2,99.9 L233.6,107.0 L239.0,115.3 L244.3,124.6 L249.7,134.8 L255.0,145.6 L260.4,156.8 L265.8,168.2 L271.1,179.6 L276.5,190.8 L281.8,201.7 L287.2,212.1 L292.6,222.0 L297.9,231.2 L303.3,239.6 L308.6,247.3 L314.0,254.3 L319.4,260.5 L324.7,265.9 L330.1,270.7 L335.4,274.8 L340.8,278.3 L346.2,281.3 L351.5,283.8 L356.9,285.9 L362.2,287.6 L367.6,289.0 L373.0,290.1 L378.3,291.0 L383.7,291.7 L389.0,292.3 L394.4,292.7 L399.8,293.0 L405.1,293.3 L410.5,293.5 L415.8,293.6 L421.2,293.7 L426.6,293.8 L431.9,293.9 L437.3,293.9 L442.6,293.9 L448.0,294.0 L453.4,294.0 L458.7,294.0 L464.1,294.0 L469.4,294.0 L474.8,294.0 L480.2,294.0 L485.5,294.0 L490.9,294.0 L496.2,294.0 L501.6,294.0 L507.0,294.0 L512.3,294.0 L517.7,294.0 L523.0,294.0 L528.4,294.0 L533.8,294.0 L539.1,294.0 L544.5,294.0 L549.8,294.0 L555.2,294.0 L560.6,294.0 L565.9,294.0 L571.3,294.0 L576.6,294.0 L582.0,294.0 L587.4,294.0 L592.7,294.0 L598.1,294.0 L603.4,294.0 L608.8,294.0 L614.2,294.0 L619.5,294.0 L624.9,294.0 L630.2,294.0 L635.6,294.0 L641.0,294.0 L646.3,294.0 L651.7,294.0 L657.0,294.0 L662.4,294.0 L667.8,294.0 L673.1,294.0 L678.5,294.0 L683.8,294.0 L689.2,294.0 L694.6,294.0 L699.9,294.0 L705.3,294.0 L710.6,294.0 L716.0,294.0 L721.4,294.0 L726.7,294.0 L732.1,294.0 L737.4,294.0 L742.8,294.0 L748.2,294.0 L753.5,294.0 L758.9,294.0 L764.2,294.0 L769.6,294.0 L775.0,294.0 L780.3,294.0 L785.7,294.0 L791.0,294.0 L796.4,294.0 L801.8,294.0 L807.1,294.0 L812.5,294.0 L817.8,294.0 L823.2,294.0 L828.6,294.0 L833.9,294.0 L839.3,294.0 L844.6,294.0 L850.0,294.0 L855.4,294.0 L860.7,294.0 L866.1,294.0 L871.4,294.0 L876.8,294.0 L882.2,294.0 L887.5,294.0 L892.9,294.0 L898.2,294.0 L903.6,294.0 L909.0,294.0 L914.3,294.0 L919.7,294.0 L925.0,294.0 L930.4,294.0 L935.8,294.0 L941.1,294.0 L946.5,294.0 L951.8,294.0 L957.2,294.0 L962.6,294.0 L967.9,294.0 L973.3,294.0 L978.6,294.0 L984.0,294.0" fill="none" stroke="var(--c1)" stroke-width="3"/><line x1="206.8" x2="206.8" y1="80.6" y2="60.6" stroke="var(--fg)" stroke-width="1.5"/><text x="206.8" y="54.6" text-anchor="middle" font-size="14" font-weight="700" class="t-fg">310 nm</text><path d="M46.0,294.0 L51.4,294.0 L56.7,294.0 L62.1,294.0 L67.4,294.0 L72.8,294.0 L78.2,293.9 L83.5,293.9 L88.9,293.9 L94.2,293.9 L99.6,293.8 L105.0,293.8 L110.3,293.7 L115.7,293.7 L121.0,293.6 L126.4,293.5 L131.8,293.4 L137.1,293.2 L142.5,293.0 L147.8,292.8 L153.2,292.5 L158.6,292.2 L163.9,291.8 L169.3,291.3 L174.6,290.8 L180.0,290.2 L185.4,289.4 L190.7,288.6 L196.1,287.6 L201.4,286.5 L206.8,285.2 L212.2,283.7 L217.5,282.1 L222.9,280.2 L228.2,278.1 L233.6,275.8 L239.0,273.3 L244.3,270.5 L249.7,267.4 L255.0,264.1 L260.4,260.5 L265.8,256.7 L271.1,252.6 L276.5,248.2 L281.8,243.6 L287.2,238.8 L292.6,233.8 L297.9,228.7 L303.3,223.4 L308.6,218.0 L314.0,212.6 L319.4,207.2 L324.7,201.8 L330.1,196.6 L335.4,191.4 L340.8,186.5 L346.2,181.9 L351.5,177.6 L356.9,173.6 L362.2,170.1 L367.6,167.1 L373.0,164.5 L378.3,162.5 L383.7,161.0 L389.0,160.1 L394.4,159.8 L399.8,160.1 L405.1,161.0 L410.5,162.5 L415.8,164.5 L421.2,167.1 L426.6,170.1 L431.9,173.6 L437.3,177.6 L442.6,181.9 L448.0,186.5 L453.4,191.4 L458.7,196.6 L464.1,201.8 L469.4,207.2 L474.8,212.6 L480.2,218.0 L485.5,223.4 L490.9,228.7 L496.2,233.8 L501.6,238.8 L507.0,243.6 L512.3,248.2 L517.7,252.6 L523.0,256.7 L528.4,260.5 L533.8,264.1 L539.1,267.4 L544.5,270.5 L549.8,273.3 L555.2,275.8 L560.6,278.1 L565.9,280.2 L571.3,282.1 L576.6,283.7 L582.0,285.2 L587.4,286.5 L592.7,287.6 L598.1,288.6 L603.4,289.4 L608.8,290.2 L614.2,290.8 L619.5,291.3 L624.9,291.8 L630.2,292.2 L635.6,292.5 L641.0,292.8 L646.3,293.0 L651.7,293.2 L657.0,293.4 L662.4,293.5 L667.8,293.6 L673.1,293.7 L678.5,293.7 L683.8,293.8 L689.2,293.8 L694.6,293.9 L699.9,293.9 L705.3,293.9 L710.6,293.9 L716.0,294.0 L721.4,294.0 L726.7,294.0 L732.1,294.0 L737.4,294.0 L742.8,294.0 L748.2,294.0 L753.5,294.0 L758.9,294.0 L764.2,294.0 L769.6,294.0 L775.0,294.0 L780.3,294.0 L785.7,294.0 L791.0,294.0 L796.4,294.0 L801.8,294.0 L807.1,294.0 L812.5,294.0 L817.8,294.0 L823.2,294.0 L828.6,294.0 L833.9,294.0 L839.3,294.0 L844.6,294.0 L850.0,294.0 L855.4,294.0 L860.7,294.0 L866.1,294.0 L871.4,294.0 L876.8,294.0 L882.2,294.0 L887.5,294.0 L892.9,294.0 L898.2,294.0 L903.6,294.0 L909.0,294.0 L914.3,294.0 L919.7,294.0 L925.0,294.0 L930.4,294.0 L935.8,294.0 L941.1,294.0 L946.5,294.0 L951.8,294.0 L957.2,294.0 L962.6,294.0 L967.9,294.0 L973.3,294.0 L978.6,294.0 L984.0,294.0 L984.0,294 L46.0,294 Z" fill="var(--c2)" opacity=".16"/><path class="band b2" d="M46.0,294.0 L51.4,294.0 L56.7,294.0 L62.1,294.0 L67.4,294.0 L72.8,294.0 L78.2,293.9 L83.5,293.9 L88.9,293.9 L94.2,293.9 L99.6,293.8 L105.0,293.8 L110.3,293.7 L115.7,293.7 L121.0,293.6 L126.4,293.5 L131.8,293.4 L137.1,293.2 L142.5,293.0 L147.8,292.8 L153.2,292.5 L158.6,292.2 L163.9,291.8 L169.3,291.3 L174.6,290.8 L180.0,290.2 L185.4,289.4 L190.7,288.6 L196.1,287.6 L201.4,286.5 L206.8,285.2 L212.2,283.7 L217.5,282.1 L222.9,280.2 L228.2,278.1 L233.6,275.8 L239.0,273.3 L244.3,270.5 L249.7,267.4 L255.0,264.1 L260.4,260.5 L265.8,256.7 L271.1,252.6 L276.5,248.2 L281.8,243.6 L287.2,238.8 L292.6,233.8 L297.9,228.7 L303.3,223.4 L308.6,218.0 L314.0,212.6 L319.4,207.2 L324.7,201.8 L330.1,196.6 L335.4,191.4 L340.8,186.5 L346.2,181.9 L351.5,177.6 L356.9,173.6 L362.2,170.1 L367.6,167.1 L373.0,164.5 L378.3,162.5 L383.7,161.0 L389.0,160.1 L394.4,159.8 L399.8,160.1 L405.1,161.0 L410.5,162.5 L415.8,164.5 L421.2,167.1 L426.6,170.1 L431.9,173.6 L437.3,177.6 L442.6,181.9 L448.0,186.5 L453.4,191.4 L458.7,196.6 L464.1,201.8 L469.4,207.2 L474.8,212.6 L480.2,218.0 L485.5,223.4 L490.9,228.7 L496.2,233.8 L501.6,238.8 L507.0,243.6 L512.3,248.2 L517.7,252.6 L523.0,256.7 L528.4,260.5 L533.8,264.1 L539.1,267.4 L544.5,270.5 L549.8,273.3 L555.2,275.8 L560.6,278.1 L565.9,280.2 L571.3,282.1 L576.6,283.7 L582.0,285.2 L587.4,286.5 L592.7,287.6 L598.1,288.6 L603.4,289.4 L608.8,290.2 L614.2,290.8 L619.5,291.3 L624.9,291.8 L630.2,292.2 L635.6,292.5 L641.0,292.8 L646.3,293.0 L651.7,293.2 L657.0,293.4 L662.4,293.5 L667.8,293.6 L673.1,293.7 L678.5,293.7 L683.8,293.8 L689.2,293.8 L694.6,293.9 L699.9,293.9 L705.3,293.9 L710.6,293.9 L716.0,294.0 L721.4,294.0 L726.7,294.0 L732.1,294.0 L737.4,294.0 L742.8,294.0 L748.2,294.0 L753.5,294.0 L758.9,294.0 L764.2,294.0 L769.6,294.0 L775.0,294.0 L780.3,294.0 L785.7,294.0 L791.0,294.0 L796.4,294.0 L801.8,294.0 L807.1,294.0 L812.5,294.0 L817.8,294.0 L823.2,294.0 L828.6,294.0 L833.9,294.0 L839.3,294.0 L844.6,294.0 L850.0,294.0 L855.4,294.0 L860.7,294.0 L866.1,294.0 L871.4,294.0 L876.8,294.0 L882.2,294.0 L887.5,294.0 L892.9,294.0 L898.2,294.0 L903.6,294.0 L909.0,294.0 L914.3,294.0 L919.7,294.0 L925.0,294.0 L930.4,294.0 L935.8,294.0 L941.1,294.0 L946.5,294.0 L951.8,294.0 L957.2,294.0 L962.6,294.0 L967.9,294.0 L973.3,294.0 L978.6,294.0 L984.0,294.0" fill="none" stroke="var(--c2)" stroke-width="3"/><line x1="394.4" x2="394.4" y1="153.8" y2="133.8" stroke="var(--fg)" stroke-width="1.5"/><text x="394.4" y="127.8" text-anchor="middle" font-size="14" font-weight="700" class="t-fg">380 nm</text><path d="M46.0,294.0 L51.4,294.0 L56.7,294.0 L62.1,294.0 L67.4,294.0 L72.8,294.0 L78.2,294.0 L83.5,294.0 L88.9,294.0 L94.2,294.0 L99.6,294.0 L105.0,294.0 L110.3,294.0 L115.7,294.0 L121.0,294.0 L126.4,294.0 L131.8,294.0 L137.1,294.0 L142.5,294.0 L147.8,294.0 L153.2,294.0 L158.6,294.0 L163.9,294.0 L169.3,294.0 L174.6,294.0 L180.0,294.0 L185.4,294.0 L190.7,294.0 L196.1,294.0 L201.4,294.0 L206.8,294.0 L212.2,294.0 L217.5,294.0 L222.9,294.0 L228.2,294.0 L233.6,294.0 L239.0,294.0 L244.3,293.9 L249.7,293.9 L255.0,293.9 L260.4,293.9 L265.8,293.9 L271.1,293.9 L276.5,293.8 L281.8,293.8 L287.2,293.8 L292.6,293.7 L297.9,293.7 L303.3,293.6 L308.6,293.5 L314.0,293.4 L319.4,293.3 L324.7,293.2 L330.1,293.1 L335.4,292.9 L340.8,292.7 L346.2,292.5 L351.5,292.3 L356.9,292.0 L362.2,291.7 L367.6,291.3 L373.0,290.9 L378.3,290.5 L383.7,290.0 L389.0,289.4 L394.4,288.8 L399.8,288.2 L405.1,287.4 L410.5,286.6 L415.8,285.7 L421.2,284.7 L426.6,283.6 L431.9,282.4 L437.3,281.2 L442.6,279.8 L448.0,278.3 L453.4,276.8 L458.7,275.1 L464.1,273.3 L469.4,271.4 L474.8,269.4 L480.2,267.4 L485.5,265.2 L490.9,262.9 L496.2,260.5 L501.6,258.1 L507.0,255.5 L512.3,253.0 L517.7,250.3 L523.0,247.6 L528.4,244.9 L533.8,242.2 L539.1,239.5 L544.5,236.8 L549.8,234.1 L555.2,231.5 L560.6,228.9 L565.9,226.4 L571.3,224.0 L576.6,221.8 L582.0,219.6 L587.4,217.7 L592.7,215.8 L598.1,214.2 L603.4,212.8 L608.8,211.5 L614.2,210.5 L619.5,209.7 L624.9,209.1 L630.2,208.7 L635.6,208.6 L641.0,208.7 L646.3,209.1 L651.7,209.7 L657.0,210.5 L662.4,211.5 L667.8,212.8 L673.1,214.2 L678.5,215.8 L683.8,217.7 L689.2,219.6 L694.6,221.8 L699.9,224.0 L705.3,226.4 L710.6,228.9 L716.0,231.5 L721.4,234.1 L726.7,236.8 L732.1,239.5 L737.4,242.2 L742.8,244.9 L748.2,247.6 L753.5,250.3 L758.9,253.0 L764.2,255.5 L769.6,258.1 L775.0,260.5 L780.3,262.9 L785.7,265.2 L791.0,267.4 L796.4,269.4 L801.8,271.4 L807.1,273.3 L812.5,275.1 L817.8,276.8 L823.2,278.3 L828.6,279.8 L833.9,281.2 L839.3,282.4 L844.6,283.6 L850.0,284.7 L855.4,285.7 L860.7,286.6 L866.1,287.4 L871.4,288.2 L876.8,288.8 L882.2,289.4 L887.5,290.0 L892.9,290.5 L898.2,290.9 L903.6,291.3 L909.0,291.7 L914.3,292.0 L919.7,292.3 L925.0,292.5 L930.4,292.7 L935.8,292.9 L941.1,293.1 L946.5,293.2 L951.8,293.3 L957.2,293.4 L962.6,293.5 L967.9,293.6 L973.3,293.7 L978.6,293.7 L984.0,293.8 L984.0,294 L46.0,294 Z" fill="var(--c3)" opacity=".16"/><path class="band b3" d="M46.0,294.0 L51.4,294.0 L56.7,294.0 L62.1,294.0 L67.4,294.0 L72.8,294.0 L78.2,294.0 L83.5,294.0 L88.9,294.0 L94.2,294.0 L99.6,294.0 L105.0,294.0 L110.3,294.0 L115.7,294.0 L121.0,294.0 L126.4,294.0 L131.8,294.0 L137.1,294.0 L142.5,294.0 L147.8,294.0 L153.2,294.0 L158.6,294.0 L163.9,294.0 L169.3,294.0 L174.6,294.0 L180.0,294.0 L185.4,294.0 L190.7,294.0 L196.1,294.0 L201.4,294.0 L206.8,294.0 L212.2,294.0 L217.5,294.0 L222.9,294.0 L228.2,294.0 L233.6,294.0 L239.0,294.0 L244.3,293.9 L249.7,293.9 L255.0,293.9 L260.4,293.9 L265.8,293.9 L271.1,293.9 L276.5,293.8 L281.8,293.8 L287.2,293.8 L292.6,293.7 L297.9,293.7 L303.3,293.6 L308.6,293.5 L314.0,293.4 L319.4,293.3 L324.7,293.2 L330.1,293.1 L335.4,292.9 L340.8,292.7 L346.2,292.5 L351.5,292.3 L356.9,292.0 L362.2,291.7 L367.6,291.3 L373.0,290.9 L378.3,290.5 L383.7,290.0 L389.0,289.4 L394.4,288.8 L399.8,288.2 L405.1,287.4 L410.5,286.6 L415.8,285.7 L421.2,284.7 L426.6,283.6 L431.9,282.4 L437.3,281.2 L442.6,279.8 L448.0,278.3 L453.4,276.8 L458.7,275.1 L464.1,273.3 L469.4,271.4 L474.8,269.4 L480.2,267.4 L485.5,265.2 L490.9,262.9 L496.2,260.5 L501.6,258.1 L507.0,255.5 L512.3,253.0 L517.7,250.3 L523.0,247.6 L528.4,244.9 L533.8,242.2 L539.1,239.5 L544.5,236.8 L549.8,234.1 L555.2,231.5 L560.6,228.9 L565.9,226.4 L571.3,224.0 L576.6,221.8 L582.0,219.6 L587.4,217.7 L592.7,215.8 L598.1,214.2 L603.4,212.8 L608.8,211.5 L614.2,210.5 L619.5,209.7 L624.9,209.1 L630.2,208.7 L635.6,208.6 L641.0,208.7 L646.3,209.1 L651.7,209.7 L657.0,210.5 L662.4,211.5 L667.8,212.8 L673.1,214.2 L678.5,215.8 L683.8,217.7 L689.2,219.6 L694.6,221.8 L699.9,224.0 L705.3,226.4 L710.6,228.9 L716.0,231.5 L721.4,234.1 L726.7,236.8 L732.1,239.5 L737.4,242.2 L742.8,244.9 L748.2,247.6 L753.5,250.3 L758.9,253.0 L764.2,255.5 L769.6,258.1 L775.0,260.5 L780.3,262.9 L785.7,265.2 L791.0,267.4 L796.4,269.4 L801.8,271.4 L807.1,273.3 L812.5,275.1 L817.8,276.8 L823.2,278.3 L828.6,279.8 L833.9,281.2 L839.3,282.4 L844.6,283.6 L850.0,284.7 L855.4,285.7 L860.7,286.6 L866.1,287.4 L871.4,288.2 L876.8,288.8 L882.2,289.4 L887.5,290.0 L892.9,290.5 L898.2,290.9 L903.6,291.3 L909.0,291.7 L914.3,292.0 L919.7,292.3 L925.0,292.5 L930.4,292.7 L935.8,292.9 L941.1,293.1 L946.5,293.2 L951.8,293.3 L957.2,293.4 L962.6,293.5 L967.9,293.6 L973.3,293.7 L978.6,293.7 L984.0,293.8" fill="none" stroke="var(--c3)" stroke-width="3"/><line x1="635.6" x2="635.6" y1="202.6" y2="182.6" stroke="var(--fg)" stroke-width="1.5"/><text x="635.6" y="176.6" text-anchor="middle" font-size="14" font-weight="700" class="t-fg">470 nm</text><path class="band sum" d="M46.0,289.0 L51.4,287.6 L56.7,285.9 L62.1,283.8 L67.4,281.3 L72.8,278.3 L78.2,274.7 L83.5,270.6 L88.9,265.8 L94.2,260.3 L99.6,254.1 L105.0,247.1 L110.3,239.4 L115.7,230.8 L121.0,221.6 L126.4,211.6 L131.8,201.1 L137.1,190.0 L142.5,178.6 L147.8,167.0 L153.2,155.3 L158.6,143.8 L163.9,132.6 L169.3,122.0 L174.6,112.1 L180.0,103.1 L185.4,95.3 L190.7,88.7 L196.1,83.6 L201.4,79.9 L206.8,77.8 L212.2,77.2 L217.5,78.0 L222.9,80.4 L228.2,84.0 L233.6,88.8 L239.0,94.5 L244.3,101.1 L249.7,108.2 L255.0,115.6 L260.4,123.2 L265.8,130.8 L271.1,138.0 L276.5,144.9 L281.8,151.2 L287.2,156.7 L292.6,161.5 L297.9,165.5 L303.3,168.6 L308.6,170.9 L314.0,172.3 L319.4,173.0 L324.7,172.9 L330.1,172.3 L335.4,171.1 L340.8,169.6 L346.2,167.7 L351.5,165.6 L356.9,163.5 L362.2,161.4 L367.6,159.3 L373.0,157.5 L378.3,155.9 L383.7,154.7 L389.0,153.8 L394.4,153.3 L399.8,153.3 L405.1,153.7 L410.5,154.5 L415.8,155.8 L421.2,157.5 L426.6,159.5 L431.9,161.9 L437.3,164.7 L442.6,167.7 L448.0,170.8 L453.4,174.2 L458.7,177.6 L464.1,181.1 L469.4,184.6 L474.8,188.0 L480.2,191.4 L485.5,194.6 L490.9,197.6 L496.2,200.3 L501.6,202.9 L507.0,205.2 L512.3,207.2 L517.7,208.9 L523.0,210.3 L528.4,211.5 L533.8,212.3 L539.1,212.9 L544.5,213.3 L549.8,213.4 L555.2,213.3 L560.6,213.0 L565.9,212.6 L571.3,212.1 L576.6,211.5 L582.0,210.8 L587.4,210.1 L592.7,209.4 L598.1,208.8 L603.4,208.2 L608.8,207.7 L614.2,207.3 L619.5,207.0 L624.9,206.9 L630.2,206.9 L635.6,207.1 L641.0,207.5 L646.3,208.1 L651.7,208.9 L657.0,209.8 L662.4,211.0 L667.8,212.3 L673.1,213.9 L678.5,215.6 L683.8,217.5 L689.2,219.5 L694.6,221.7 L699.9,223.9 L705.3,226.3 L710.6,228.8 L716.0,231.4 L721.4,234.1 L726.7,236.7 L732.1,239.5 L737.4,242.2 L742.8,244.9 L748.2,247.6 L753.5,250.3 L758.9,253.0 L764.2,255.5 L769.6,258.1 L775.0,260.5 L780.3,262.9 L785.7,265.2 L791.0,267.4 L796.4,269.4 L801.8,271.4 L807.1,273.3 L812.5,275.1 L817.8,276.8 L823.2,278.3 L828.6,279.8 L833.9,281.2 L839.3,282.4 L844.6,283.6 L850.0,284.7 L855.4,285.7 L860.7,286.6 L866.1,287.4 L871.4,288.2 L876.8,288.8 L882.2,289.4 L887.5,290.0 L892.9,290.5 L898.2,290.9 L903.6,291.3 L909.0,291.7 L914.3,292.0 L919.7,292.3 L925.0,292.5 L930.4,292.7 L935.8,292.9 L941.1,293.1 L946.5,293.2 L951.8,293.3 L957.2,293.4 L962.6,293.5 L967.9,293.6 L973.3,293.7 L978.6,293.7 L984.0,293.8" fill="none" stroke="var(--fg)" stroke-width="3.6"/></g></svg><div class="hanko" aria-hidden="true" lang="ja"><span>合</span><span>気</span></div></div>
+    <figcaption data-i18n="fig_cap"></figcaption>
+    <div class="block"><dl><dt data-i18n="cb1"></dt><dd data-i18n="cv1"></dd><dt data-i18n="cb2"></dt><dd data-i18n="cv2"></dd><dt data-i18n="cb3"></dt><dd data-i18n="cv3"></dd><dt data-i18n="cb4"></dt><dd data-i18n="cv4"></dd><dt data-i18n="cb5"></dt><dd data-i18n="cv5"></dd><dt data-i18n="cb6"></dt><dd data-i18n="cv6"></dd></dl></div>
+  </figure>
   <section id="chiffres" class="proofsec" aria-label="Chiffres">
     <p class="label" data-i18n="proof_h"></p>
     <div class="proof">
@@ -290,6 +434,21 @@ if(p.fs)h.style.fontSize=p.fs+"%";
       <a class="path pm" href="projet.html"><h2 data-i18n="pm_t"></h2><p data-i18n="pm_d"></p><div class="tags"><span>Cadrage</span><span>Planning</span><span>Risques</span><span>Livraison</span></div><span class="go" data-i18n="pm_go"></span></a>
     </div>
   </section>
+  <section id="hors-ecran">
+    <h2 data-i18n="ik_h"></h2>
+    <div class="dojo">
+      <div>
+        <p data-i18n="ik_p1"></p>
+        <p data-i18n="ik_p2" style="margin-top:12px"></p>
+        <dl><dt><span data-i18n="ik_t1"></span> <span lang="ja">合気道</span></dt><dd data-i18n="ik_v1"></dd><dt><span data-i18n="ik_t2"></span> <span lang="ja">居合道</span></dt><dd data-i18n="ik_v2"></dd><dt data-i18n="ik_t3"></dt><dd data-i18n="ik_v3"></dd><dt data-i18n="ik_t4"></dt><dd data-i18n="ik_v4"></dd></dl>
+      </div>
+      <svg class="enso" viewBox="0 0 200 200" role="img" aria-labelledby="enst"><title id="enst" data-i18n="ik_alt"></title>
+        <path d="M150 38 C112 8 52 20 34 70 C16 120 46 176 104 180 C150 183 182 148 180 104" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="round"/>
+        <path d="M150 38 C112 12 56 24 40 72 C24 118 52 168 104 172" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+        <text class="kanji" x="100" y="128" text-anchor="middle" font-size="84" lang="ja" aria-hidden="true">道</text>
+      </svg>
+    </div>
+  </section>
   <section id="contact">
     <h2 data-i18n="contact_h"></h2>
     <div class="contact">
@@ -303,7 +462,7 @@ if(p.fs)h.style.fontSize=p.fs+"%";
     </div>
   </section>
 </main>
-<footer>Mathieu Boutinon · EPF · CEA</footer>
+<footer><span class="rei" lang="ja" aria-hidden="true">礼</span>Mathieu Boutinon · EPF · CEA</footer>
 </div>
 <script>
 const I18N={
@@ -321,22 +480,22 @@ const I18N={
   "copyfail": "Copie impossible ici : l'adresse est sélectionnée, copiez-la avec Ctrl+C.",
   "eyebrow": "Apprenti ingénieur · EPF · CEA",
   "doc_title": "Mathieu Boutinon",
-  "h1": "Bonjour, je suis Mathieu.",
-  "lead": "Futur ingénieur en systèmes d'information et génie industriel. Je transforme un besoin en outil qui fonctionne, avec rigueur et sens de l'écoute.",
+  "h1": "Mathieu Boutinon",
+  "lead": "Apprenti au CEA, je développe des outils pour des équipes de recherche en chimie. Je cherche un stage de 3 mois en Europe.",
   "choose": "Choisissez un profil",
   "dev_t": "Développement d'outils",
   "dev_d": "Je conçois des applications web pour des utilisateurs non informaticiens : interface claire, code fiable, sécurité dès la conception. Avec une démo interactive.",
-  "dev_go": "Voir le profil développement →",
+  "dev_go": "Voir le profil développement",
   "pm_t": "Gestion de projet",
   "pm_d": "Je mène des projets numériques de la demande à la livraison : cadrage du besoin, planification, suivi des risques, accompagnement des utilisateurs.",
-  "pm_go": "Voir le profil gestion de projet →",
+  "pm_go": "Voir le profil gestion de projet",
   "f1": "EPF, cycle ingénieur SIGI",
   "f2": "Apprenti au CEA",
   "f3": "Stage de 3 mois en Europe, janvier à août 2027",
   "fig_spec_t": "Spectre synthétique décomposé en trois bandes",
   "fig_spec_d": "Trois bandes colorées qui se recouvrent et leur somme en noir",
   "axis_x": "Longueur d'onde (nm)",
-  "fig_cap": "Un spectre mesuré est la somme de plusieurs bandes. Retrouver chaque bande, c'est la désommation : le cœur de Photolys.",
+  "fig_cap": "Un spectre mesuré est la somme de plusieurs bandes. Retrouver la part de chacune, c'est la désommation : le cœur de Photolys.",
   "proof_h": "En quelques chiffres",
   "n1": "−55 %",
   "l1": "d'erreur d'estimation grâce à la fusion de capteurs (filtre de Kalman), projet UGV-IA",
@@ -345,7 +504,31 @@ const I18N={
   "n3": "35 pas",
   "l3": "pour atteindre l'objectif avec l'agent entraîné, contre 151 pour un agent aléatoire",
   "n4": "2",
-  "l4": "laboratoires du CEA, en alternance depuis 2022"
+  "l4": "laboratoires du CEA, en alternance depuis 2022",
+  "cb1": "Titulaire",
+  "cv1": "Mathieu Boutinon",
+  "cb2": "Formation",
+  "cv2": "Ingénieur SIGI, EPF",
+  "cb3": "Alternance",
+  "cv3": "CEA, laboratoire de recherche",
+  "cb4": "Recherche",
+  "cv4": "Stage de 3 mois en Europe",
+  "cb5": "Fenêtre",
+  "cv5": "18 janvier au 29 août 2027",
+  "cb6": "Hors écran",
+  "cv6": "Aïkido, 2e dan",
+  "ik_h": "Hors écran",
+  "ik_p1": "Je pratique l'aïkido et l'iaïdo, 2e dan dans les deux disciplines. Depuis 2025, je préside un club d'aïkido et je suis instructeur BF, spécialisé jeunesse.",
+  "ik_p2": "En aïkido, on apprend à accompagner le mouvement de l'autre plutôt qu'à s'y opposer. C'est aussi ma façon d'aborder un besoin : écouter d'abord, puis agir.",
+  "ik_t1": "Aïkido",
+  "ik_v1": "2e dan",
+  "ik_t2": "Iaïdo",
+  "ik_v2": "2e dan",
+  "ik_t3": "Club",
+  "ik_v3": "Président depuis 2025",
+  "ik_t4": "Encadrement",
+  "ik_v4": "Instructeur BF, jeunesse",
+  "ik_alt": "Cercle tracé au pinceau (ensō) contenant le caractère japonais « voie »"
  },
  "en": {
   "nav_home": "Home",
@@ -361,22 +544,22 @@ const I18N={
   "copyfail": "Copying is not available here: the address is selected, copy it with Ctrl+C.",
   "eyebrow": "Engineering apprentice · EPF · CEA",
   "doc_title": "Mathieu Boutinon",
-  "h1": "Hello, I'm Mathieu.",
-  "lead": "Future engineer in information systems and industrial engineering. I turn a need into a tool that works, with rigour and a listening ear.",
+  "h1": "Mathieu Boutinon",
+  "lead": "Apprentice at CEA, I build tools for chemistry research teams. I am looking for a 3-month internship in Europe.",
   "choose": "Choose a profile",
   "dev_t": "Tool development",
   "dev_d": "I build web applications for non-technical users: clear interface, reliable code, security from the start. With an interactive demo.",
-  "dev_go": "See the development profile →",
+  "dev_go": "See the development profile",
   "pm_t": "Project management",
   "pm_d": "I lead digital projects from request to delivery: framing the need, planning, tracking risks, supporting users.",
-  "pm_go": "See the project management profile →",
+  "pm_go": "See the project management profile",
   "f1": "EPF, SIGI engineering degree",
   "f2": "Apprentice at CEA",
   "f3": "3-month internship in Europe, January to August 2027",
   "fig_spec_t": "Synthetic spectrum split into three bands",
   "fig_spec_d": "Three overlapping coloured bands and their sum in black",
   "axis_x": "Wavelength (nm)",
-  "fig_cap": "A measured spectrum is the sum of several bands. Recovering each band is unmixing: the core of Photolys.",
+  "fig_cap": "A measured spectrum is the sum of several bands. Recovering the share of each one is unmixing: the core of Photolys.",
   "proof_h": "In a few figures",
   "n1": "−55%",
   "l1": "estimation error through sensor fusion (Kalman filter), UGV-IA project",
@@ -385,7 +568,31 @@ const I18N={
   "n3": "35 steps",
   "l3": "to reach the goal with the trained agent, versus 151 for a random agent",
   "n4": "2",
-  "l4": "CEA laboratories, work-study since 2022"
+  "l4": "CEA laboratories, work-study since 2022",
+  "cb1": "Holder",
+  "cv1": "Mathieu Boutinon",
+  "cb2": "Degree",
+  "cv2": "SIGI engineer, EPF",
+  "cb3": "Work-study",
+  "cv3": "CEA, research laboratory",
+  "cb4": "Looking for",
+  "cv4": "3-month internship in Europe",
+  "cb5": "Window",
+  "cv5": "18 January to 29 August 2027",
+  "cb6": "Off screen",
+  "cv6": "Aikido, 2nd dan",
+  "ik_h": "Off screen",
+  "ik_p1": "I practise aikido and iaido, 2nd dan in both. Since 2025 I have been president of an aikido club and a BF instructor specialised in youth.",
+  "ik_p2": "In aikido, you learn to follow the other person's movement rather than oppose it. That is also how I approach a need: listen first, then act.",
+  "ik_t1": "Aikido",
+  "ik_v1": "2nd dan",
+  "ik_t2": "Iaido",
+  "ik_v2": "2nd dan",
+  "ik_t3": "Club",
+  "ik_v3": "President since 2025",
+  "ik_t4": "Coaching",
+  "ik_v4": "BF instructor, youth",
+  "ik_alt": "Brush-drawn circle (enso) containing the Japanese character for 'way'"
  }
 };
 let lang="fr";
@@ -491,7 +698,7 @@ function injectHelp(){
   var b=document.getElementById("brief");
   if(!b){b=document.createElement("aside");b.id="brief";b.className="brief";b.setAttribute("aria-labelledby","brief-t");var first=main.querySelector(":scope > section");main.insertBefore(b,first);}
   b.innerHTML='<h2 id="brief-t">'+tx("brief_t")+'</h2><ul>'+BRIEF[PAGE][L()].map(function(x){return "<li>"+x+"</li>";}).join("")+'</ul>';
-  document.querySelectorAll(".proof > div").forEach(function(d,i){var h=d.querySelector(".help");if(!h){h=document.createElement("small");h.className="help";d.appendChild(h);}h.textContent="→ "+(HELP[PAGE][L()][i]||"");});
+  document.querySelectorAll(".proof > div").forEach(function(d,i){var h=d.querySelector(".help");if(!h){h=document.createElement("small");h.className="help";d.appendChild(h);}h.textContent=""+(HELP[PAGE][L()][i]||"");});
 }
 function sections(){var out=[];document.querySelectorAll("main > section[id]").forEach(function(s){var h=s.querySelector("h2")||s.querySelector(".label");if(h&&h.textContent.trim())out.push({id:s.id,label:h.textContent.trim()});});return out;}
 function buildToc(){
