@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mathieu Boutinon · Développement</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Shippori+Mincho+B1:wght@700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700;800&display=swap&text=%E4%B8%80%E4%B8%89%E4%BA%8C%E5%8F%96%E5%90%88%E5%9B%9B%E5%B1%85%E6%8A%80%E6%AE%B5%E6%B0%97%E7%A4%BC%E9%81%93">
 <style>
 /* Layout: texte aligné à gauche, démo spectrale comme pièce centrale, sections sobres séparées par des filets. */
 :root{
@@ -303,10 +304,22 @@ footer{padding-bottom:84px}
 footer::before{content:"";position:absolute;inset:0 calc(-1*clamp(12px,2vw,24px));z-index:-1;pointer-events:none;background-image:var(--stitch);background-position:left bottom;-webkit-mask-image:linear-gradient(transparent 0,#000 100%);mask-image:linear-gradient(transparent 0,#000 100%)}
 html:root[data-tint] footer::before,html:root[data-contrast="high"] footer::before,html:root[data-font] footer::before,html:root[data-calm] footer::before,html:root[data-focus] footer::before,html:root[data-simple] footer::before{display:none}
 @media print{footer::before{display:none}}
+
+/* iteration 1 */
+.hubtop h1{max-width:none;font-size:clamp(3rem,8.2vw,6.2rem)}
+.hubtop .lead{font-size:clamp(1.3rem,2.5vw,1.85rem);font-weight:600;line-height:1.28;max-width:46ch;color:var(--fg)}
+.sheet svg.narrow{display:none}
+@media (max-width:700px){.sheet svg.wide{display:none}.sheet svg.narrow{display:block;min-width:0}.sheet .chartwrap{overflow-x:visible}}
+.enso.will path{opacity:0}.enso.will.go path{opacity:1}
+.proofsec .proof{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+@media (max-width:760px){.proofsec .proof{grid-template-columns:1fr 1fr}.proofsec .proof div:nth-child(3):last-child{grid-column:1/-1}}
+#profils{margin-top:8px}
+@media (max-width:760px){section{padding-block:30px 40px;gap:20px}}
+.btn.primary.li{background:var(--fg);color:var(--bg)}
 @media print{.hubtop::before,.hero::before{display:none}section>h2::after{display:none}}
 
 /* ===== Japon, touches dosées : vagues, washi, nuit d'encre, ensō animé ===== */
-:root{--wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='24' viewBox='0 0 48 24' fill='none' stroke='%232338D8' stroke-opacity='.45' stroke-width='1.2'%3E%3Cg%3E%3Ccircle cx='0' cy='12' r='20'/%3E%3Ccircle cx='0' cy='12' r='14'/%3E%3Ccircle cx='0' cy='12' r='8'/%3E%3Ccircle cx='48' cy='12' r='20'/%3E%3Ccircle cx='48' cy='12' r='14'/%3E%3Ccircle cx='48' cy='12' r='8'/%3E%3Ccircle cx='24' cy='24' r='20'/%3E%3Ccircle cx='24' cy='24' r='14'/%3E%3Ccircle cx='24' cy='24' r='8'/%3E%3C/g%3E%3C/svg%3E");--washi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.035 .9' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .55 -.18'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+:root{--wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='24' viewBox='0 0 48 24' fill='none' stroke='%232338D8' stroke-opacity='.45' stroke-width='1.2'%3E%3Cg%3E%3Ccircle cx='0' cy='12' r='20'/%3E%3Ccircle cx='0' cy='12' r='14'/%3E%3Ccircle cx='0' cy='12' r='8'/%3E%3Ccircle cx='48' cy='12' r='20'/%3E%3Ccircle cx='48' cy='12' r='14'/%3E%3Ccircle cx='48' cy='12' r='8'/%3E%3Ccircle cx='24' cy='24' r='20'/%3E%3Ccircle cx='24' cy='24' r='14'/%3E%3Ccircle cx='24' cy='24' r='8'/%3E%3C/g%3E%3C/svg%3E");--washi:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.035 .9' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .38 -.12'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='24' viewBox='0 0 48 24' fill='none' stroke='%238EA2FF' stroke-opacity='.4' stroke-width='1.2'%3E%3Cg%3E%3Ccircle cx='0' cy='12' r='20'/%3E%3Ccircle cx='0' cy='12' r='14'/%3E%3Ccircle cx='0' cy='12' r='8'/%3E%3Ccircle cx='48' cy='12' r='20'/%3E%3Ccircle cx='48' cy='12' r='14'/%3E%3Ccircle cx='48' cy='12' r='8'/%3E%3Ccircle cx='24' cy='24' r='20'/%3E%3Ccircle cx='24' cy='24' r='14'/%3E%3Ccircle cx='24' cy='24' r='8'/%3E%3C/g%3E%3C/svg%3E");--washi:none}}
 :root[data-theme="dark"]{--wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='24' viewBox='0 0 48 24' fill='none' stroke='%238EA2FF' stroke-opacity='.4' stroke-width='1.2'%3E%3Cg%3E%3Ccircle cx='0' cy='12' r='20'/%3E%3Ccircle cx='0' cy='12' r='14'/%3E%3Ccircle cx='0' cy='12' r='8'/%3E%3Ccircle cx='48' cy='12' r='20'/%3E%3Ccircle cx='48' cy='12' r='14'/%3E%3Ccircle cx='48' cy='12' r='8'/%3E%3Ccircle cx='24' cy='24' r='20'/%3E%3Ccircle cx='24' cy='24' r='14'/%3E%3Ccircle cx='24' cy='24' r='8'/%3E%3C/g%3E%3C/svg%3E");--washi:none}
 footer::after{content:"";position:absolute;left:0;right:0;top:0;height:26px;opacity:.5;transform:translateY(-100%);z-index:-1;pointer-events:none;background-image:var(--wave);background-position:left bottom;-webkit-mask-image:linear-gradient(transparent,#000);mask-image:linear-gradient(transparent,#000)}
@@ -421,12 +434,67 @@ html:root[data-contrast="high"][data-theme="dark"]{--bg:#000000;--surface:#00000
   .draw path.band{stroke-dasharray:none!important;stroke-dashoffset:0!important;animation:none!important}
 }
 @media (max-width:640px){header.top nav>a{display:none}header.top{gap:8px 12px}.dockbtn .lbl{display:none}.dockbtn{padding:0 10px}}
+
+/* iteration 2 : lisibilité mobile, sens des kanji, contrastes */
+.tags span,.lang button,th,.out,.legend,.legend2,.note{font-size:.875rem}
+.intro,.card p,.skills p,.dojo p{color:var(--fg)}
+.btn:hover{color:#14100C}
+.hero h1{max-width:22ch}
+.lang button{min-width:40px;min-height:40px;padding:0 8px}
+footer a{display:inline-block;padding-block:10px}
+/* kanji : traduction visible et repère de l'info-bulle */
+.kjcap{display:block;font:500 .875rem/1.35 var(--font-body);letter-spacing:0;text-transform:none}
+.path .kjcap{margin-top:-6px;padding-right:72px;opacity:.9}
+.sheet figcaption .kjcap{margin-top:6px;color:var(--fg)}
+.ensofig{margin:0;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.dojo dt [data-kj],.rei[data-kj]{text-decoration:underline dotted 1.5px;text-underline-offset:5px}
+.step .mono .arn{font-family:var(--font-display);font-size:1.6rem;margin-left:8px;vertical-align:.35em;color:var(--fg)}
+@media (min-width:641px){header.top nav{gap:4px 14px}}
+/* schémas : version liste sur mobile, mêmes textes que le SVG */
+.figlist,.figlist-note{display:none}
+@media (max-width:640px){
+  header.top{gap:8px;padding-block:8px}
+  header.top .brand{font-size:clamp(1.05rem,4.6vw,1.5rem);gap:8px}
+  header.top .kamon{width:28px;height:28px}
+  header.top nav{margin-left:auto;gap:4px}
+  header.top .lang{margin-left:0}
+  .hero{padding-block:28px 36px;gap:18px}
+  .card{padding:18px}
+  .step{padding:16px}
+  .step .mono [lang="ja"]{font-size:2rem}
+  .skills>div{padding:12px 0}
+  .path{padding:24px;min-height:0}
+  footer{padding-bottom:72px}
+  .timeline li{grid-template-columns:minmax(0,1fr);gap:2px;padding-block:12px}
+  .hubtop::after,.hero::after{top:4px!important;width:40px!important;box-shadow:0 0 0 8px rgba(243,239,224,.06)!important}
+  .fig-alt svg,.fig-alt .figsvg{display:none}
+  .figlist{display:flex;flex-direction:column}
+  .figlist li{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;padding:10px 0;border-bottom:2px solid var(--line)}
+  .figlist li:last-child{border-bottom:none}
+  .figlist li::before{content:"";flex:none;width:10px;height:10px;background:var(--c1);align-self:center}
+  .figlist li.k2::before{background:var(--c2)}.figlist li.k3::before{background:var(--c3)}
+  .figlist li.ms::before{background:var(--fg);transform:rotate(45deg) scale(.85)}
+  .figlist b{font-weight:700}
+  .figlist span,.figlist i{color:var(--muted);font-size:.875rem;font-style:normal}
+  .figlist .ar{color:var(--fg)}
+  .figlist-note{display:block;margin-top:10px;font-size:.875rem;color:var(--muted)}
+}
 </style>
-<meta name="description" content="Mathieu Boutinon, apprenti ingénieur EPF et CEA : développement d'outils web et gestion de projet. Stage de 3 mois en Europe, janvier à août 2027.">
-<meta name="theme-color" content="#0A6F68">
+<meta name="description" content="Mathieu Boutinon : outils logiciels pour la recherche, IA appliquée et pilotage de projet. Cycle ingénieur SIGI à l'EPF, au CEA depuis 2022.">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="ecb85b27-28e9-4427-bc3a-584ab753adf6"></script>
+<meta name="theme-color" content="#F2F5FB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A1230" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="Mathieu Boutinon">
-<meta property="og:description" content="Développement d'outils web et gestion de projet. Stage de 3 mois en Europe, janvier à août 2027.">
+<meta property="og:description" content="Outils logiciels pour la recherche, IA appliquée et pilotage de projet.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://mboutinon972.github.io/developpement.html">
+<meta property="og:image" content="https://mboutinon972.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Mathieu Boutinon : outils logiciels pour la recherche, IA appliquée, pilotage de projet">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23F2F5FB' stroke='%230E1B3D' stroke-width='2'/%3E%3Crect x='7' y='8' width='18' height='5' fill='%232338D8'/%3E%3Crect x='7' y='13.5' width='18' height='5' fill='%23E5490B'/%3E%3Crect x='7' y='19' width='18' height='5' fill='%230B8A62'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@400;600&display=swap">
 <script>
@@ -447,6 +515,7 @@ if(p.fs)h.style.fontSize=p.fs+"%";
     <a href="#realisations" data-i18n="nav_work"></a>
     <a href="#parcours" data-i18n="nav_path"></a>
     <a href="#contact" data-i18n="nav_contact"></a>
+    <a href="cv/CV_Mathieu_Boutinon_Dev_FR.pdf" data-cv="Dev" data-i18n="cv_link" target="_blank" rel="noopener"></a>
     <span class="lang" role="group" aria-label="Langue / Language">
       <button type="button" id="lang-fr" aria-pressed="true">FR</button>
       <button type="button" id="lang-en" aria-pressed="false">EN</button>
@@ -481,9 +550,9 @@ if(p.fs)h.style.fontSize=p.fs+"%";
     <h2 data-i18n="offer_h"></h2>
     <p class="intro" data-i18n="offer_intro"></p>
     <div class="steps">
-      <div class="step"><span class="mono" data-kj="n1"><span lang="ja">一</span></span><h3 data-i18n="s1_t"></h3><p data-i18n="s1_d"></p></div>
-      <div class="step"><span class="mono" data-kj="n2"><span lang="ja">二</span></span><h3 data-i18n="s2_t"></h3><p data-i18n="s2_d"></p></div>
-      <div class="step"><span class="mono" data-kj="n3"><span lang="ja">三</span></span><h3 data-i18n="s3_t"></h3><p data-i18n="s3_d"></p></div>
+      <div class="step"><span class="mono" data-kj="n1"><span lang="ja">一</span><span class="arn" aria-hidden="true">1</span></span><h3 data-i18n="s1_t"></h3><p data-i18n="s1_d"></p></div>
+      <div class="step"><span class="mono" data-kj="n2"><span lang="ja">二</span><span class="arn" aria-hidden="true">2</span></span><h3 data-i18n="s2_t"></h3><p data-i18n="s2_d"></p></div>
+      <div class="step"><span class="mono" data-kj="n3"><span lang="ja">三</span><span class="arn" aria-hidden="true">3</span></span><h3 data-i18n="s3_t"></h3><p data-i18n="s3_d"></p></div>
     </div>
   </section>
 
@@ -521,8 +590,8 @@ if(p.fs)h.style.fontSize=p.fs+"%";
     <h2 data-i18n="inside_h"></h2>
     <p class="intro" data-i18n="inside_i"></p>
     <div class="figs">
-      <figure class="fig" style="margin:0"><svg viewBox="0 0 560 140" role="img" aria-labelledby="plt"><title id="plt" data-i18n="fig_pipe_t"></title><defs><marker id="ah1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs><rect x="8" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="60.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp1"></text><text x="60.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp1s"></text><rect x="118" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="170.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp2"></text><text x="170.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp2s"></text><rect x="228" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c2)" stroke-width="1.6"/><text x="280.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp3"></text><text x="280.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp3s"></text><rect x="338" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c2)" stroke-width="1.6"/><text x="390.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp4"></text><text x="390.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp4s"></text><rect x="448" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c3)" stroke-width="1.6"/><text x="500.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp5"></text><text x="500.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp5s"></text><line x1="112" y1="72" x2="118" y2="72" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah1)"/><line x1="222" y1="72" x2="228" y2="72" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah1)"/><line x1="332" y1="72" x2="338" y2="72" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah1)"/><line x1="442" y1="72" x2="448" y2="72" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah1)"/><text x="8" y="26" font-size="11" class="t-muted t-mono" data-i18n="pp_in"></text><text x="552" y="26" text-anchor="end" font-size="11" class="t-muted t-mono" data-i18n="pp_out"></text><text x="8" y="132" font-size="11" class="t-muted" data-i18n="pp_note"></text></svg></figure>
-      <figure class="fig" style="margin:0"><svg viewBox="0 0 560 220" role="img" aria-labelledby="ugt"><title id="ugt" data-i18n="fig_ugv_t"></title><defs><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs><rect x="8" y="20" width="120" height="52" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="68.0" y="50.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_cam"></text><rect x="8" y="84" width="120" height="52" rx="6" fill="var(--surface)" stroke="var(--c2)" stroke-width="1.6"/><text x="68.0" y="114.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_imu"></text><rect x="8" y="148" width="120" height="52" rx="6" fill="var(--surface)" stroke="var(--c3)" stroke-width="1.6"/><text x="68.0" y="178.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_goal"></text><rect x="190" y="20" width="150" height="52" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="265.0" y="43.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_yolo"></text><text x="265.0" y="59.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="u_yolo_s"></text><rect x="190" y="84" width="150" height="52" rx="6" fill="var(--surface)" stroke="var(--c2)" stroke-width="1.6"/><text x="265.0" y="107.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_kal"></text><text x="265.0" y="123.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="u_kal_s"></text><rect x="190" y="148" width="150" height="52" rx="6" fill="var(--surface)" stroke="var(--c3)" stroke-width="1.6"/><text x="265.0" y="171.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_ppo"></text><text x="265.0" y="187.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="u_ppo_s"></text><line x1="128" y1="46" x2="188" y2="46" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><line x1="128" y1="110" x2="188" y2="110" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><line x1="128" y1="174" x2="188" y2="174" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><rect x="402" y="70" width="150" height="80" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="477.0" y="107.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_sys"></text><text x="477.0" y="123.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="u_sys_s"></text><line x1="340" y1="46" x2="400" y2="96" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><line x1="340" y1="110" x2="400" y2="110" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><line x1="340" y1="174" x2="400" y2="124" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/></svg></figure>
+      <figure class="fig fig-alt" style="margin:0"><svg viewBox="0 0 560 140" role="img" aria-labelledby="plt"><title id="plt" data-i18n="fig_pipe_t"></title><defs><marker id="ah1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs><rect x="8" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="60.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp1"></text><text x="60.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp1s"></text><rect x="118" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="170.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp2"></text><text x="170.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp2s"></text><rect x="228" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c2)" stroke-width="1.6"/><text x="280.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp3"></text><text x="280.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp3s"></text><rect x="338" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c2)" stroke-width="1.6"/><text x="390.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp4"></text><text x="390.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp4s"></text><rect x="448" y="40" width="104" height="64" rx="6" fill="var(--surface)" stroke="var(--c3)" stroke-width="1.6"/><text x="500.0" y="69.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="pp5"></text><text x="500.0" y="85.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="pp5s"></text><line x1="112" y1="72" x2="118" y2="72" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah1)"/><line x1="222" y1="72" x2="228" y2="72" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah1)"/><line x1="332" y1="72" x2="338" y2="72" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah1)"/><line x1="442" y1="72" x2="448" y2="72" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah1)"/><text x="8" y="26" font-size="11" class="t-muted t-mono" data-i18n="pp_in"></text><text x="552" y="26" text-anchor="end" font-size="11" class="t-muted t-mono" data-i18n="pp_out"></text><text x="8" y="132" font-size="11" class="t-muted" data-i18n="pp_note"></text></svg><ol class="figlist"><li><i data-i18n="pp_in"></i><b data-i18n="pp1"></b><span data-i18n="pp1s"></span></li><li><b data-i18n="pp2"></b><span data-i18n="pp2s"></span></li><li class="k2"><b data-i18n="pp3"></b><span data-i18n="pp3s"></span></li><li class="k2"><b data-i18n="pp4"></b><span data-i18n="pp4s"></span></li><li class="k3"><i data-i18n="pp_out"></i><b data-i18n="pp5"></b><span data-i18n="pp5s"></span></li></ol><p class="figlist-note" data-i18n="pp_note"></p></figure>
+      <figure class="fig fig-alt" style="margin:0"><svg viewBox="0 0 560 220" role="img" aria-labelledby="ugt"><title id="ugt" data-i18n="fig_ugv_t"></title><defs><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs><rect x="8" y="20" width="120" height="52" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="68.0" y="50.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_cam"></text><rect x="8" y="84" width="120" height="52" rx="6" fill="var(--surface)" stroke="var(--c2)" stroke-width="1.6"/><text x="68.0" y="114.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_imu"></text><rect x="8" y="148" width="120" height="52" rx="6" fill="var(--surface)" stroke="var(--c3)" stroke-width="1.6"/><text x="68.0" y="178.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_goal"></text><rect x="190" y="20" width="150" height="52" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="265.0" y="43.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_yolo"></text><text x="265.0" y="59.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="u_yolo_s"></text><rect x="190" y="84" width="150" height="52" rx="6" fill="var(--surface)" stroke="var(--c2)" stroke-width="1.6"/><text x="265.0" y="107.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_kal"></text><text x="265.0" y="123.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="u_kal_s"></text><rect x="190" y="148" width="150" height="52" rx="6" fill="var(--surface)" stroke="var(--c3)" stroke-width="1.6"/><text x="265.0" y="171.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_ppo"></text><text x="265.0" y="187.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="u_ppo_s"></text><line x1="128" y1="46" x2="188" y2="46" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><line x1="128" y1="110" x2="188" y2="110" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><line x1="128" y1="174" x2="188" y2="174" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><rect x="402" y="70" width="150" height="80" rx="6" fill="var(--surface)" stroke="var(--c1)" stroke-width="1.6"/><text x="477.0" y="107.0" text-anchor="middle" font-size="12.5" font-weight="600" class="t-fg" data-i18n="u_sys"></text><text x="477.0" y="123.0" text-anchor="middle" font-size="10.5" class="t-muted" data-i18n="u_sys_s"></text><line x1="340" y1="46" x2="400" y2="96" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><line x1="340" y1="110" x2="400" y2="110" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/><line x1="340" y1="174" x2="400" y2="124" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ah2)"/></svg><ul class="figlist"><li><b data-i18n="u_cam"></b><b class="ar" aria-hidden="true">→</b><b data-i18n="u_yolo"></b><span data-i18n="u_yolo_s"></span></li><li class="k2"><b data-i18n="u_imu"></b><b class="ar" aria-hidden="true">→</b><b data-i18n="u_kal"></b><span data-i18n="u_kal_s"></span></li><li class="k3"><b data-i18n="u_goal"></b><b class="ar" aria-hidden="true">→</b><b data-i18n="u_ppo"></b><span data-i18n="u_ppo_s"></span></li><li><b class="ar" aria-hidden="true">→</b><b data-i18n="u_sys"></b><span data-i18n="u_sys_s"></span></li></ul></figure>
     </div>
   </section>
   <section id="realisations">
@@ -551,7 +620,7 @@ if(p.fs)h.style.fontSize=p.fs+"%";
       <li><span class="mono">2018</span><span data-i18n="p4_d"></span></li>
     </ul>
     <h2 data-i18n="beyond_h"></h2>
-    <p class="intro" data-i18n="beyond_d"></p>
+    <p class="intro"><span data-i18n="beyond_d"></span> <a href="index.html#hors-ecran" data-i18n="beyond_link"></a></p>
   </section>
 
   <section id="contact">
@@ -560,28 +629,32 @@ if(p.fs)h.style.fontSize=p.fs+"%";
       <p class="intro" data-i18n="contact_p"></p>
       <span class="mail" id="mail">mathieuboutinon972@gmail.com</span>
       <div class="actions">
-        <button type="button" class="btn primary" id="copy" data-i18n="copy"></button>
-        <a class="btn ghost" href="mailto:mathieuboutinon972@gmail.com" data-i18n="mailto"></a>
+        <a class="btn primary" href="https://www.linkedin.com/in/mathieu-boutinon/" target="_blank" rel="noopener" data-umami-event="linkedin" data-i18n="linkedin"></a>
+        <a class="btn ghost" href="cv/CV_Mathieu_Boutinon_Dev_FR.pdf" data-cv="Dev" data-i18n="cv_btn" target="_blank" rel="noopener"></a>
+        <button type="button" class="btn ghost" id="copy" data-i18n="copy" data-umami-event="copie-adresse"></button>
+        <a class="btn ghost" href="mailto:mathieuboutinon972@gmail.com" data-i18n="mailto" data-umami-event="messagerie"></a>
       </div>
       <p class="status" id="status" role="status"></p>
     </div>
   </section>
 </main>
-<footer><span class="rei" lang="ja" aria-hidden="true" data-kj="rei">礼</span><a href="index.html" data-i18n="nav_home"></a> · <a href="projet.html" data-i18n="nav_pm"></a> · Mathieu Boutinon · EPF · CEA</footer>
+<footer><span class="rei" lang="ja" aria-hidden="true" data-kj="rei">礼</span><a href="index.html" data-i18n="nav_home"></a> · <a href="projet.html" data-i18n="nav_pm"></a> · Mathieu Boutinon · EPF · CEA<br><small data-i18n="privacy"></small></footer>
 </div>
 
 <script>
 const I18N = {
   fr: {
+    cv_link:"CV (PDF)", cv_btn:"Télécharger mon CV",
+    privacy:"Mesure d'audience anonyme, sans cookie (Umami).",
     nav_home:"Accueil", proof_h:"En quelques chiffres", n1:"−55 %", l1:"d'erreur d'estimation par fusion de capteurs (filtre de Kalman), projet UGV-IA", n2:"88,2 %", l2:"de confiance moyenne de détection d'objets (YOLOv8)", n3:"35 pas", l3:"pour atteindre l'objectif avec l'agent entraîné, contre 151 pour un agent aléatoire", n4:"8", l4:"langages pratiqués, de HTML et JavaScript à Python, SQL et C",
     inside_h:"Sous le capot", inside_i:"Deux schémas pour comprendre comment je structure un outil : la chaîne de traitement d'un outil d'analyse, et l'architecture du projet UGV-IA.",
     fig_pipe_t:"Chaîne de traitement type d'un outil d'analyse spectrale", pp_in:"Entrée", pp_out:"Sortie", pp1:"Import", pp1s:"fichier de spectre", pp2:"Validation", pp2s:"entrées contrôlées", pp3:"Calcul", pp3s:"régression ridge", pp4:"Visualisation", pp4s:"graphique", pp5:"Résultat", pp5s:"part des bandes", pp_note:"Chaque étape est testable séparément, et les entrées sont validées avant tout calcul.",
     fig_ugv_t:"Architecture du projet UGV-IA", u_cam:"Caméra", u_imu:"Capteurs", u_goal:"Objectif", u_yolo:"Détection", u_yolo_s:"YOLOv8", u_kal:"Estimation", u_kal_s:"filtre de Kalman", u_ppo:"Navigation", u_ppo_s:"renforcement (PPO)", u_sys:"Véhicule", u_sys_s:"SQL chiffrée, démo web",
  nav_pm:"Profil gestion de projet", nav_offer:"Offre", nav_demo:"Démo", nav_work:"Réalisations", nav_path:"Parcours", nav_contact:"Contact",
-    eyebrow:"Apprenti ingénieur · EPF · CEA",
+    eyebrow:"Systèmes d'information · outils pour la recherche",
     h1:"Je crée des outils applicatifs qui simplifient le quotidien.",
     lead:"J'écoute le besoin, je construis une interface claire et un code fiable, et je pense à la sécurité dès la conception.",
-    avail:"Disponible pour un stage de 3 mois, de janvier à août 2027",
+    avail:"Ouvert aux projets de R&D, d'outils internes et d'IA appliquée",
     cta_demo:"Essayer la démo", cta_contact:"Me contacter",
     offer_h:"Ce que je propose", offer_intro:"Trois temps, que je reprends pour chaque outil.",
     s1_t:"J'écoute", s1_d:"Je pars du quotidien de l'utilisateur et je reformule son besoin avant d'écrire du code.",
@@ -609,22 +682,25 @@ const I18N = {
     p3_d:"Baccalauréat STL, physique-chimie de laboratoire, mention Bien.",
     p4_d:"Stage d'observation en laboratoire de recherche pluridisciplinaire.",
     beyond_h:"Au-delà du code",
-    beyond_d:"Je préside depuis 2025 un club d'aïkido de 76 adhérents et je suis instructeur BF, spécialisé jeunesse (2e dan d'aïkido et d'iaïdo). J'y ai appris à expliquer simplement et à faire progresser des débutants, ce que je retrouve quand je mets un outil entre les mains de ses utilisateurs.",
+    beyond_d:"Président d'un club d'aïkido de 76 adhérents et titulaire du Brevet Fédéral Spécialité Jeunes, j'y ai appris à expliquer simplement et à faire progresser des débutants.",
+    beyond_link:"Lire la suite sur l'accueil",
     contact_h:"Contact",
-    contact_p:"Je cherche un stage de 3 mois entre janvier et août 2027, en Europe. Écrivez-moi pour échanger sur vos besoins.",
-    copy:"Copier l'adresse", mailto:"Ouvrir ma messagerie",
+    contact_p:"Vous avez un besoin d'outil, de traitement de données ou de pilotage de projet ? Écrivez-moi pour en parler.",
+    copy:"Copier l'adresse", mailto:"Ouvrir ma messagerie", linkedin:"Mon profil LinkedIn",
     copied:"Adresse copiée.", copyfail:"Copie impossible ici : l'adresse est sélectionnée, copiez-la avec Ctrl+C."
   },
   en: {
+    cv_link:"CV (PDF)", cv_btn:"Download my CV",
+    privacy:"Anonymous, cookie-free audience measurement (Umami).",
     nav_home:"Home", proof_h:"In a few figures", n1:"−55%", l1:"estimation error through sensor fusion (Kalman filter), UGV-IA project", n2:"88.2%", l2:"average confidence in object detection (YOLOv8)", n3:"35 steps", l3:"to reach the goal with the trained agent, versus 151 for a random agent", n4:"8", l4:"languages in use, from HTML and JavaScript to Python, SQL and C",
     inside_h:"Under the hood", inside_i:"Two diagrams showing how I structure a tool: the processing chain of an analysis tool, and the architecture of the UGV-IA project.",
     fig_pipe_t:"Typical processing chain of a spectral analysis tool", pp_in:"Input", pp_out:"Output", pp1:"Import", pp1s:"spectrum file", pp2:"Validation", pp2s:"inputs checked", pp3:"Computation", pp3s:"ridge regression", pp4:"Visualisation", pp4s:"chart", pp5:"Result", pp5s:"band shares", pp_note:"Each step can be tested on its own, and inputs are validated before any computation.",
     fig_ugv_t:"UGV-IA project architecture", u_cam:"Camera", u_imu:"Sensors", u_goal:"Goal", u_yolo:"Detection", u_yolo_s:"YOLOv8", u_kal:"Estimation", u_kal_s:"Kalman filter", u_ppo:"Navigation", u_ppo_s:"RL (PPO)", u_sys:"Vehicle", u_sys_s:"encrypted SQL, web demo",
  nav_pm:"Project management profile", nav_offer:"Offer", nav_demo:"Demo", nav_work:"Work", nav_path:"Background", nav_contact:"Contact",
-    eyebrow:"Engineering apprentice · EPF · CEA",
+    eyebrow:"Information systems · tools for research",
     h1:"I build application tools that make everyday life easier.",
     lead:"I listen to the need, build a clear interface and reliable code, and think about security from the start.",
-    avail:"Available for a 3-month internship, January to August 2027",
+    avail:"Open to R&D, internal tools and applied AI projects",
     cta_demo:"Try the demo", cta_contact:"Get in touch",
     offer_h:"What I offer", offer_intro:"Three steps, repeated for every tool.",
     s1_t:"I listen", s1_d:"I start from the user's daily routine and restate their need before writing any code.",
@@ -652,15 +728,16 @@ const I18N = {
     p3_d:"Baccalauréat in Laboratory Science and Technology (physics-chemistry), with honours.",
     p4_d:"Observation internship in a multidisciplinary research laboratory.",
     beyond_h:"Beyond code",
-    beyond_d:"Since 2025 I have been president of an aikido club with 76 members and I am a BF instructor specialised in youth (2nd dan aikido and iaido). It taught me to explain things simply and to help beginners progress, which I bring to putting a tool in its users' hands.",
+    beyond_d:"As president of a 76-member aikido club and holder of the Brevet Fédéral youth specialty (French federal instructor certificate), I learned to explain things simply and to help beginners progress.",
+    beyond_link:"Read more on the home page",
     contact_h:"Contact",
-    contact_p:"I am looking for a 3-month internship between January and August 2027 in Europe. Write to me to talk about your needs.",
-    copy:"Copy address", mailto:"Open my mail app",
+    contact_p:"Need a tool, data processing or project management? Write to me to talk it through.",
+    copy:"Copy address", mailto:"Open my mail app", linkedin:"My LinkedIn profile",
     copied:"Address copied.", copyfail:"Copying is not available here: the address is selected, copy it with Ctrl+C."
   }
 };
 
-let lang = "fr";
+let lang = /^fr/i.test(navigator.language || "fr") ? "fr" : "en";
 try { const s = localStorage.getItem("lang"); if (s === "fr" || s === "en") lang = s; } catch (e) {}
 const t = k => (I18N[lang] && I18N[lang][k]) || k;
 
@@ -802,8 +879,8 @@ var T={fr:{toc:"Sommaire",toc_t:"Sommaire de la page",a11y:"Accessibilité",a11y
 var PAGE=(location.pathname.split("/").pop()||"index.html").replace(".html","");
 if(["index","projet","developpement"].indexOf(PAGE)<0)PAGE=document.querySelector("#demo")?"developpement":(document.querySelector("#demarche")?"projet":"index");
 var BRIEF={
- index:{fr:["Je m'appelle Mathieu. Je suis étudiant ingénieur.","Je cherche un stage de 3 mois, en Europe, de janvier à août 2027.","Je sais faire deux choses : créer des outils web et mener des projets.","Choisissez la page qui vous intéresse."],
-        en:["My name is Mathieu. I am an engineering student.","I am looking for a 3-month internship in Europe, from January to August 2027.","I can do two things: build web tools and run projects.","Pick the page you are interested in."]},
+ index:{fr:["Je m'appelle Mathieu. Je suis étudiant ingénieur.","Je conçois des outils pour des équipes de recherche et je mène les projets qui les font vivre.","Je sais faire deux choses : créer des outils web et mener des projets.","Choisissez la page qui vous intéresse."],
+        en:["My name is Mathieu. I am an engineering student.","I design tools for research teams and lead the projects that bring them to life.","I can do two things: build web tools and run projects.","Pick the page you are interested in."]},
  developpement:{fr:["Je crée des outils pour des personnes qui ne sont pas informaticiennes.","J'écoute d'abord leur besoin. Ensuite je construis un outil simple et sûr.","La démo montre un exemple : on retrouve les parts de trois courbes mélangées.","J'ai aussi travaillé sur un véhicule qui se conduit grâce à l'intelligence artificielle."],
         en:["I build tools for people who are not computer specialists.","I listen to their need first. Then I build a simple and safe tool.","The demo shows an example: we find the share of three mixed curves.","I also worked on a vehicle that drives itself using artificial intelligence."]},
  projet:{fr:["Je mène des projets du début à la fin.","D'abord, je comprends le besoin. Ensuite, je planifie le travail.","Puis je suis l'avancement avec l'équipe.","À la fin, je livre l'outil et j'aide à l'utiliser."],
@@ -966,6 +1043,11 @@ window.addEventListener("scroll",hide,{passive:true});
 new MutationObserver(function(){prep();hide();}).observe(H,{attributes:true,attributeFilter:["lang"]});
 prep();setTimeout(prep,500);
 })();
+</script>
+<script>
+/* lien CV : PDF dans la langue active */
+(function(){var h=document.documentElement;function up(){var l=(h.lang||"fr").slice(0,2)==="en"?"EN":"FR";document.querySelectorAll("a[data-cv]").forEach(function(a){a.href="cv/CV_Mathieu_Boutinon_"+a.dataset.cv+"_"+l+".pdf";a.setAttribute("data-umami-event","cv-"+a.dataset.cv.toLowerCase()+"-"+l.toLowerCase());});}
+new MutationObserver(up).observe(h,{attributes:true,attributeFilter:["lang"]});up();})();
 </script>
 </body>
 </html>
