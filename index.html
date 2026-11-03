@@ -149,18 +149,18 @@ section.proofsec{padding-block:0;border-top:none}
 /* ===== Identité : feuille de mesure d'ingénieur (papier millimétré, encre marine, trois bandes) ===== */
 :root{
   --bg:#F2F5FB; --surface:#FFFFFF; --fg:#0E1B3D; --muted:#44506E; --line:#C5CDE0; --grid:rgba(35,56,216,.075);
-  --accent:#2338D8; --accent-fg:#FFFFFF; --accent-soft:#E1E6FB;
-  --c1:#2338D8; --c2:#E5490B; --c3:#0B8A62;
+  --accent:#1B3A8C; --accent-fg:#FFFFFF; --accent-soft:#E1E6FB;
+  --c1:#1B3A8C; --c2:#E5490B; --c3:#4B5FE0;
   --font-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",Impact,sans-serif;
   --font-body:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;
   --font-mono:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0A1230; --surface:#101C48; --fg:#E8EDFF; --muted:#AAB6DD; --line:#2B3B7A; --grid:rgba(142,162,255,.09);
-  --accent:#8EA2FF; --accent-fg:#0A1230; --accent-soft:#17265E; --c1:#8EA2FF; --c2:#FF8A4C; --c3:#3DD6A7;color-scheme:dark}}
+  --accent:#8EA2FF; --accent-fg:#0A1230; --accent-soft:#17265E; --c1:#8EA2FF; --c2:#FF8A4C; --c3:#A9B5FF;color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0A1230; --surface:#101C48; --fg:#E8EDFF; --muted:#AAB6DD; --line:#2B3B7A; --grid:rgba(142,162,255,.09);
-  --accent:#8EA2FF; --accent-fg:#0A1230; --accent-soft:#17265E; --c1:#8EA2FF; --c2:#FF8A4C; --c3:#3DD6A7;color-scheme:dark}
+  --accent:#8EA2FF; --accent-fg:#0A1230; --accent-soft:#17265E; --c1:#8EA2FF; --c2:#FF8A4C; --c3:#A9B5FF;color-scheme:dark}
 body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.6;
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;background-position:-1px -1px}
 h1,h2,h3{font-family:var(--font-display);font-weight:800;text-transform:uppercase;letter-spacing:.005em;line-height:.95}
@@ -490,6 +490,20 @@ footer a{display:inline-block;padding-block:10px}
   .figlist .ar{color:var(--fg)}
   .figlist-note{display:block;margin-top:10px;font-size:.875rem;color:var(--muted)}
 }
+
+/* ===== Identité v3 : kamon E3 + monogramme M dans le B ===== */
+:root{--bg:#F2F5FB;--surface:#FFFFFF;--fg:#0E1B3D;--muted:#3F4B6B;--line:#C5CDE0;--grid:rgba(27,58,140,.075);
+  --accent:#1B3A8C;--accent-fg:#FFFFFF;--accent-soft:#E1E7F8;--c1:#1B3A8C;--c2:#E5490B;--c3:#4B5FE0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A1230;--surface:#101C48;--fg:#E8EDFF;--muted:#AAB6DD;--line:#2B3B7A;--grid:rgba(142,162,255,.09);
+  --accent:#8EA2FF;--accent-fg:#0A1230;--accent-soft:#17265E;--c1:#6C7BE8;--c2:#FF8A4C;--c3:#A9B5FF}}
+:root[data-theme="dark"]{--bg:#0A1230;--surface:#101C48;--fg:#E8EDFF;--muted:#AAB6DD;--line:#2B3B7A;--grid:rgba(142,162,255,.09);
+  --accent:#8EA2FF;--accent-fg:#0A1230;--accent-soft:#17265E;--c1:#6C7BE8;--c2:#FF8A4C;--c3:#A9B5FF}
+.brand::before{content:none!important;display:none!important}
+.brand .mono-b{width:36px;height:36px;flex:none;color:var(--fg)}
+.e3deco{position:absolute;right:max(16px,2vw);bottom:18px;top:auto;width:clamp(90px,13vw,170px);height:auto;color:var(--accent);opacity:.4;pointer-events:none;z-index:-1}
+@media (max-width:720px){.e3deco{display:none}}
+@media print{.e3deco{display:none}}
 </style>
 <meta name="description" content="Mathieu Boutinon : outils logiciels pour la recherche, IA appliquée et pilotage de projet. Cycle ingénieur SIGI à l'EPF, au CEA depuis 2022.">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="ecb85b27-28e9-4427-bc3a-584ab753adf6"></script>
@@ -506,7 +520,9 @@ footer a{display:inline-block;padding-block:10px}
 <meta property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23F2F5FB' stroke='%230E1B3D' stroke-width='2'/%3E%3Crect x='7' y='8' width='18' height='5' fill='%232338D8'/%3E%3Crect x='7' y='13.5' width='18' height='5' fill='%23E5490B'/%3E%3Crect x='7' y='19' width='18' height='5' fill='%230B8A62'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="alternate icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@400;600&display=swap">
 <script>
 (function(){try{var p=JSON.parse(localStorage.getItem("a11y")||"{}"),h=document.documentElement;
@@ -517,7 +533,7 @@ if(p.fs)h.style.fontSize=p.fs+"%";
 <body>
 <div class="wrap">
 <header class="top">
-  <a class="brand" href="index.html"><svg class="kamon" viewBox="0 0 34 34" aria-hidden="true" focusable="false"><defs><clipPath id="kc"><circle cx="17" cy="17" r="12"/></clipPath></defs><circle class="r" cx="17" cy="17" r="15"/><g clip-path="url(#kc)"><rect class="a" x="4" y="5" width="26" height="7"/><rect class="b" x="4" y="13.5" width="26" height="7"/><rect class="c" x="4" y="22" width="26" height="7"/></g></svg>Mathieu Boutinon</a>
+  <a class="brand" href="index.html"><svg class="mono-b" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M24,12 H58 Q78,12 78,30 Q78,43 65,49 Q83,54 83,69 Q83,88 60,88 H24 Z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M36,60 V26 L49,46 L62,26 V60" fill="none" stroke="var(--bg)" stroke-width="7"/><path d="M33.0,83 L33.0,83.0 L33.5,83.0 L34.0,82.9 L34.4,82.9 L34.9,82.9 L35.4,82.8 L35.9,82.7 L36.3,82.5 L36.8,82.3 L37.3,82.1 L37.8,81.7 L38.2,81.2 L38.7,80.6 L39.2,79.8 L39.7,78.9 L40.1,77.8 L40.6,76.5 L41.1,75.1 L41.6,73.7 L42.0,72.1 L42.5,70.6 L43.0,69.1 L43.5,67.8 L44.0,66.6 L44.4,65.8 L44.9,65.2 L45.4,65.1 L45.9,65.2 L46.3,65.8 L46.8,66.6 L47.3,67.8 L47.8,69.1 L48.2,70.6 L48.7,72.1 L49.2,73.7 L49.7,75.1 L50.1,76.5 L50.6,77.8 L51.1,78.9 L51.6,79.8 L52.0,80.6 L52.5,81.2 L53.0,81.7 L53.5,82.1 L54.0,82.3 L54.4,82.5 L54.9,82.7 L55.4,82.8 L55.9,82.9 L56.3,82.9 L56.8,82.9 L57.3,83.0 L57.8,83.0 L58.2,83.0 L58.7,83.0 L59.2,83.0 L59.7,83.0 L60.1,83.0 L60.6,83.0 L61.1,83.0 L61.6,83.0 L62.0,83.0 L62.5,83.0 L63.0,83.0 L63.5,83.0 L64.0,83.0 L64.4,83.0 L64.9,83.0 L65.4,83.0 L65.9,83.0 L66.3,83.0 L66.8,83.0 L67.3,83.0 L67.8,83.0 L68.2,83.0 L68.7,83.0 L69.2,83.0 L69.7,83.0 L70.1,83.0 L70.6,83.0 L71.1,83.0 L71.6,83.0 L72.0,83.0 L72.5,83.0 L73.0,83.0 L73.0,83 Z" fill="#6C7BE8"/><path d="M33.0,83 L33.0,83.0 L33.5,83.0 L34.0,83.0 L34.4,83.0 L34.9,83.0 L35.4,83.0 L35.9,83.0 L36.3,83.0 L36.8,83.0 L37.3,83.0 L37.8,83.0 L38.2,83.0 L38.7,83.0 L39.2,83.0 L39.7,83.0 L40.1,83.0 L40.6,82.9 L41.1,82.9 L41.6,82.9 L42.0,82.8 L42.5,82.7 L43.0,82.6 L43.5,82.5 L44.0,82.3 L44.4,82.1 L44.9,81.8 L45.4,81.4 L45.9,81.0 L46.3,80.5 L46.8,79.9 L47.3,79.2 L47.8,78.5 L48.2,77.7 L48.7,76.8 L49.2,76.0 L49.7,75.1 L50.1,74.2 L50.6,73.4 L51.1,72.8 L51.6,72.2 L52.0,71.7 L52.5,71.5 L53.0,71.4 L53.5,71.5 L54.0,71.7 L54.4,72.2 L54.9,72.8 L55.4,73.4 L55.9,74.2 L56.3,75.1 L56.8,76.0 L57.3,76.8 L57.8,77.7 L58.2,78.5 L58.7,79.2 L59.2,79.9 L59.7,80.5 L60.1,81.0 L60.6,81.4 L61.1,81.8 L61.6,82.1 L62.0,82.3 L62.5,82.5 L63.0,82.6 L63.5,82.7 L64.0,82.8 L64.4,82.9 L64.9,82.9 L65.4,82.9 L65.9,83.0 L66.3,83.0 L66.8,83.0 L67.3,83.0 L67.8,83.0 L68.2,83.0 L68.7,83.0 L69.2,83.0 L69.7,83.0 L70.1,83.0 L70.6,83.0 L71.1,83.0 L71.6,83.0 L72.0,83.0 L72.5,83.0 L73.0,83.0 L73.0,83 Z" fill="#A9B5FF"/><path d="M33.0,83 L33.0,83.0 L33.5,83.0 L34.0,83.0 L34.4,83.0 L34.9,83.0 L35.4,83.0 L35.9,83.0 L36.3,83.0 L36.8,83.0 L37.3,83.0 L37.8,83.0 L38.2,83.0 L38.7,83.0 L39.2,83.0 L39.7,83.0 L40.1,83.0 L40.6,83.0 L41.1,83.0 L41.6,83.0 L42.0,83.0 L42.5,83.0 L43.0,83.0 L43.5,83.0 L44.0,83.0 L44.4,83.0 L44.9,83.0 L45.4,83.0 L45.9,83.0 L46.3,83.0 L46.8,82.9 L47.3,82.9 L47.8,82.9 L48.2,82.9 L48.7,82.8 L49.2,82.7 L49.7,82.7 L50.1,82.5 L50.6,82.4 L51.1,82.3 L51.6,82.1 L52.0,81.8 L52.5,81.6 L53.0,81.3 L53.5,81.0 L54.0,80.6 L54.4,80.2 L54.9,79.7 L55.4,79.3 L55.9,78.8 L56.3,78.4 L56.8,77.9 L57.3,77.5 L57.8,77.1 L58.2,76.8 L58.7,76.5 L59.2,76.3 L59.7,76.2 L60.1,76.1 L60.6,76.2 L61.1,76.3 L61.6,76.5 L62.0,76.8 L62.5,77.1 L63.0,77.5 L63.5,77.9 L64.0,78.4 L64.4,78.8 L64.9,79.3 L65.4,79.7 L65.9,80.2 L66.3,80.6 L66.8,81.0 L67.3,81.3 L67.8,81.6 L68.2,81.8 L68.7,82.1 L69.2,82.3 L69.7,82.4 L70.1,82.5 L70.6,82.7 L71.1,82.7 L71.6,82.8 L72.0,82.9 L72.5,82.9 L73.0,82.9 L73.0,83 Z" fill="#FF8A4C"/><path d="M33.0,83 L33.0,83.0 L33.5,83.0 L34.0,82.9 L34.4,82.9 L34.9,82.9 L35.4,82.8 L35.9,82.7 L36.3,82.5 L36.8,82.3 L37.3,82.1 L37.8,81.7 L38.2,81.2 L38.7,80.6 L39.2,79.8 L39.7,78.8 L40.1,77.7 L40.6,76.5 L41.1,75.1 L41.6,73.5 L42.0,71.9 L42.5,70.3 L43.0,68.7 L43.5,67.2 L44.0,65.9 L44.4,64.8 L44.9,64.0 L45.4,63.5 L45.9,63.2 L46.3,63.2 L46.8,63.5 L47.3,63.9 L47.8,64.5 L48.2,65.1 L48.7,65.8 L49.2,66.4 L49.7,66.9 L50.1,67.3 L50.6,67.6 L51.1,67.9 L51.6,68.0 L52.0,68.2 L52.5,68.3 L53.0,68.4 L53.5,68.5 L54.0,68.7 L54.4,68.9 L54.9,69.2 L55.4,69.5 L55.9,69.9 L56.3,70.4 L56.8,70.8 L57.3,71.3 L57.8,71.8 L58.2,72.3 L58.7,72.7 L59.2,73.2 L59.7,73.7 L60.1,74.1 L60.6,74.6 L61.1,75.1 L61.6,75.6 L62.0,76.1 L62.5,76.6 L63.0,77.1 L63.5,77.7 L64.0,78.2 L64.4,78.7 L64.9,79.2 L65.4,79.7 L65.9,80.1 L66.3,80.6 L66.8,80.9 L67.3,81.3 L67.8,81.6 L68.2,81.8 L68.7,82.1 L69.2,82.3 L69.7,82.4 L70.1,82.5 L70.6,82.7 L71.1,82.7 L71.6,82.8 L72.0,82.9 L72.5,82.9 L73.0,82.9 L73.0,83" fill="none" stroke="#E8EDFF" stroke-width="1.7" stroke-linejoin="round"/></svg>Mathieu Boutinon</a>
   <nav aria-label="Navigation">
     <a href="developpement.html" data-i18n="nav_dev"></a>
     <a href="projet.html" data-i18n="nav_pm"></a>
@@ -532,7 +548,7 @@ if(p.fs)h.style.fontSize=p.fs+"%";
 </header>
 
 <main id="top">
-  <div class="hubtop">
+  <div class="hubtop"><svg class="e3deco" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2.2"/><line x1="96.5" y1="50.0" x2="99.8" y2="50.0" stroke="currentColor" stroke-width="1"/><line x1="94.9" y1="62.0" x2="98.1" y2="62.9" stroke="currentColor" stroke-width="1"/><line x1="90.3" y1="73.2" x2="93.1" y2="74.9" stroke="currentColor" stroke-width="1"/><line x1="82.9" y1="82.9" x2="85.2" y2="85.2" stroke="currentColor" stroke-width="1"/><line x1="73.2" y1="90.3" x2="74.9" y2="93.1" stroke="currentColor" stroke-width="1"/><line x1="62.0" y1="94.9" x2="62.9" y2="98.1" stroke="currentColor" stroke-width="1"/><line x1="50.0" y1="96.5" x2="50.0" y2="99.8" stroke="currentColor" stroke-width="1"/><line x1="38.0" y1="94.9" x2="37.1" y2="98.1" stroke="currentColor" stroke-width="1"/><line x1="26.8" y1="90.3" x2="25.1" y2="93.1" stroke="currentColor" stroke-width="1"/><line x1="17.1" y1="82.9" x2="14.8" y2="85.2" stroke="currentColor" stroke-width="1"/><line x1="9.7" y1="73.2" x2="6.9" y2="74.9" stroke="currentColor" stroke-width="1"/><line x1="5.1" y1="62.0" x2="1.9" y2="62.9" stroke="currentColor" stroke-width="1"/><line x1="3.5" y1="50.0" x2="0.2" y2="50.0" stroke="currentColor" stroke-width="1"/><line x1="5.1" y1="38.0" x2="1.9" y2="37.1" stroke="currentColor" stroke-width="1"/><line x1="9.7" y1="26.7" x2="6.9" y2="25.1" stroke="currentColor" stroke-width="1"/><line x1="17.1" y1="17.1" x2="14.8" y2="14.8" stroke="currentColor" stroke-width="1"/><line x1="26.7" y1="9.7" x2="25.1" y2="6.9" stroke="currentColor" stroke-width="1"/><line x1="38.0" y1="5.1" x2="37.1" y2="1.9" stroke="currentColor" stroke-width="1"/><line x1="50.0" y1="3.5" x2="50.0" y2="0.2" stroke="currentColor" stroke-width="1"/><line x1="62.0" y1="5.1" x2="62.9" y2="1.9" stroke="currentColor" stroke-width="1"/><line x1="73.2" y1="9.7" x2="74.9" y2="6.9" stroke="currentColor" stroke-width="1"/><line x1="82.9" y1="17.1" x2="85.2" y2="14.8" stroke="currentColor" stroke-width="1"/><line x1="90.3" y1="26.7" x2="93.1" y2="25.1" stroke="currentColor" stroke-width="1"/><line x1="94.9" y1="38.0" x2="98.1" y2="37.1" stroke="currentColor" stroke-width="1"/><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width=".8"/><line x1="50" x2="50" y1="12" y2="88" stroke="currentColor" stroke-width=".7" stroke-dasharray="3 1.6"/><line x1="12" x2="88" y1="50" y2="50" stroke="currentColor" stroke-width=".7" stroke-dasharray="3 1.6"/><circle cx="50.0" cy="29.0" r="10.2" fill="#E5490B" stroke="currentColor" stroke-width="2.0"/><circle cx="68.2" cy="39.5" r="10.2" fill="none" stroke="currentColor" stroke-width="2.0"/><circle cx="68.2" cy="60.5" r="10.2" fill="none" stroke="currentColor" stroke-width="2.0"/><circle cx="50.0" cy="71.0" r="10.2" fill="none" stroke="currentColor" stroke-width="2.0"/><circle cx="31.8" cy="60.5" r="10.2" fill="none" stroke="currentColor" stroke-width="2.0"/><circle cx="31.8" cy="39.5" r="10.2" fill="none" stroke="currentColor" stroke-width="2.0"/><circle cx="50" cy="50" r="2.6" fill="currentColor"/></svg>
     <p class="label" data-i18n="eyebrow"></p>
     <h1 data-i18n="h1"></h1>
     <p class="lead" data-i18n="lead"></p>
